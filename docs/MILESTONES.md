@@ -82,8 +82,9 @@ evidence.
 
 | Item | Status | What's involved |
 |---|---|---|
-| 5.1 App skeleton and sidebar | ⬜ | Page layout, sidebar filters, load processed data |
-| 5.2 Price tiles and main chart | ⬜ | `st.metric` tiles, chart with event markers |
+| 5.1 App skeleton and sidebar | ⬜ | Page layout, load processed data; sidebar with meat selector (beef, pork, chicken), year selector ("All years" or one year), nominal vs inflation-adjusted, event markers on/off |
+| 5.2 Price tiles and all-years view | ⬜ | `st.metric` tiles for the selected meat, full price history chart with event markers (see D11) |
+| 5.2b Single-year view | ⬜ | When one year is picked: month-by-month chart, change from the year before, events that happened that year |
 | 5.3 "Who gets the dollar" and verdict sections | ⬜ | Stacked bars, findings, explanations |
 | 5.4 Methods and data page | ⬜ | How everything was done, with source links |
 
@@ -101,6 +102,11 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Design change, meat selector and year drill-down
+- **Done:** recorded decision D11 (pick one meat, see all years, then isolate
+  any year) and added the single-year view to Milestone 5.
+- **Next:** still item 1.1. Monthly data supports both views.
 
 ### 2026-10-26: Item 0.3, project structure and docs
 - **Done:** created the folder layout, README, this milestone plan, the decision
