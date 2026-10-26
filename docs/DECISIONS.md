@@ -215,3 +215,103 @@ Format: **what we decided**, **why**, and **what we considered instead**.
   stay missing, because an average across many months would hide real movement.
 - **Considered instead:** leaving a visible gap (honest but breaks charts and
   calculations); dropping the month from every series (shifts the timeline).
+
+## D19. Stay focused on meat; add other groceries as context only (2026-10-26)
+
+- **Decided:** the project stays focused on beef, pork and chicken, and the repo
+  stays `meat-prices`. Other grocery categories (produce, cereals and bakery,
+  dairy, beverages, packaged foods) are added as context only: one data item
+  (1.7) and one comparison chart in the app (5.2d).
+- **Why:** notebook 01 showed beef rose about 63% since 2015 against about 42%
+  for overall prices, while pork and chicken breast rose less than inflation.
+  Comparing meat with the rest of the grocery cart tests whether beef is unusual
+  or whether all food rose the same way. But a full "rising food prices" project
+  would need a cause investigation for every category, each with different
+  drivers. The project's strength is depth: the drought → herd → beef price
+  chain, and who gets each dollar, which also connects to my agriculture work.
+- **Considered instead:** renaming to `rising-food-prices` and broadening the
+  objective. Rejected for now; the notebook-per-source structure would support
+  it as a later phase. The app's title may be sharpened later (for example,
+  "Why did beef get so expensive?") without renaming the repo.
+
+## D20. Always show more than one baseline year for "change since" figures (2026-10-26)
+
+- **Decided:** wherever the app states a percentage change, it shows it from
+  both 2015 and 2019 (the last year before COVID), or lets the user pick the
+  starting year.
+- **Why:** the starting year changes the story. Since 2015, chicken breast rose
+  less than inflation (+23% vs +42%); since 2019, it rose slightly more (+39% vs
+  +32%), because 2015–2019 was a cheap stretch for chicken and pork. Beef is the
+  outlier either way. Showing both keeps anyone from claiming a baseline was
+  chosen to make a point.
+
+## D21. ERS spreads: CSV files, historical plus recent, reviewed before combining (2026-10-26)
+
+- **Decided:** download four ERS CSV files: the historical file (1970 to early
+  2026) and the three recent 24-month files (beef, pork, and the summary file
+  for chicken). Notebook 02 is split in two: Part 1 downloads and takes an
+  inventory of every data item; Part 2 combines them after we review the
+  inventory together.
+- **Why:**
+  - The historical file was last updated in February 2026, so on its own it
+    stops months short of the BLS data. The recent files bring it up to
+    September 2026, and the months where they overlap let us check the files
+    agree.
+  - CSV rather than Excel: the CSVs are already in a long, tidy layout (one row
+    per item per month), so less reshaping and fewer chances for error.
+  - Reviewing first: ERS names the same measure slightly differently in
+    different files, so matching names is a judgment call worth making
+    deliberately, not in code we haven't looked at.
+- **Considered instead:** the historical file alone (too old); the Excel
+  versions (multi-row headers, more cleanup).
+
+## D22. Keep three values per meat and calculate the spreads ourselves (2026-10-26)
+
+- **"Three values per meat"** means the three price stages for each of beef,
+  pork and chicken (farm, wholesale, retail), not three data sources. See "Key
+  terms" under ERS in `docs/DATA_SOURCES.md`.
+- **Decided:** from the ERS files we keep only the retail value, wholesale value
+  and net farm value (beef and pork; chicken has no farm value), and calculate
+  everything else with ERS's definitions:
+  - farm-to-wholesale spread = wholesale − net farm (roughly the packer)
+  - wholesale-to-retail spread = retail − wholesale (roughly the store)
+  - farmer's share = net farm ÷ retail
+- Where the historical and recent files overlap, the **recent** file is used
+  (newer, includes any revisions). For chicken's recent months, wholesale =
+  retail − published spread.
+- **Chicken's January–March 2026 stays a gap** (no ERS file covers it), per
+  D18's two-month limit, and will be noted on the methods page.
+- **Why:** three names to match per meat instead of about ten; the same formula
+  for every month from 2015 to 2026; and a built-in check, since our results can
+  be compared with the spreads and shares ERS publishes.
+- **Result:** the historical and recent files agree to within 0.05 cents where
+  they overlap, and our calculations match ERS's published figures to within
+  0.1, except one mislabeled column (D23).
+
+## D23. Use our calculated pork farm-to-wholesale spread, not the published column (2026-10-26)
+
+- **Decided:** ignore the "Pork price spread: farm to wholesale" column in ERS's
+  recent pork file and use our calculated value.
+- **Why:** in that file the column holds the *percent* share (for example 16.2
+  in October 2024) instead of cents per pound. It's identical to the "farm-
+  wholesale spread share of retail value" column in every month. ERS's own
+  figures show the correct value: farm-to-retail (385.7) minus wholesale-to-
+  retail (305.8) = 79.9 cents, which matches our wholesale − net farm
+  calculation. The historical file doesn't have the problem.
+- **Evidence:** "Investigating the pork mismatch" in
+  `notebooks/02_ers_price_spreads.ipynb`.
+- **Possible follow-up:** report the mislabeled column to ERS.
+
+## D24. Cattle herd and slaughter data start in 2010, not 2015 (2026-10-26)
+
+- **Decided:** NASS cattle inventory and cow slaughter are downloaded from 2010,
+  five years earlier than the price data (D3).
+- **Why:** the cattle cycle is slow. Ranchers sold off cows in the 2011–2013
+  drought (mainly Texas and the southern Plains), rebuilt the herd from about
+  2014 to 2019, then sold off again. Without the earlier years, the herd chart
+  would start in the middle of a rebuild and we couldn't judge whether the
+  recent sell-off is unusual. It also gives the lag analysis in item 4.4 room
+  to look back several years.
+- **Focus on cows:** cow slaughter, not total cattle slaughter, is the sell-off
+  signal. Steers and heifers are slaughtered every year as normal business;
+  cows are the breeding herd, so each cow slaughtered means fewer calves later.

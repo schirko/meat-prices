@@ -40,8 +40,20 @@ series of Jupyter notebooks that show every step of the analysis.
 | Cattle inventory | USDA National Agricultural Statistics Service (NASS) | Supply side |
 | Event timeline | Curated from news and USDA reports, with citations | Annotating charts, testing events |
 
-Details on each source, including how it was downloaded, are in
-[docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
+**Key terms.** The price spreads follow one pound of meat through three stages:
+the **farm** (what the rancher or hog farmer is paid), **wholesale** (what the
+meatpacker gets) and **retail** (what shoppers pay). The gaps between them are
+the spreads, and each stage's share of the retail price shows who gets each
+dollar. Chicken has only the wholesale and retail stages.
+
+**Who are these agencies?** BLS (Bureau of Labor Statistics) is part of the
+Department of Labor and measures prices and inflation. ERS (Economic Research
+Service) and NASS (National Agricultural Statistics Service) are part of the U.S.
+Department of Agriculture: ERS is its research agency, and NASS runs its farm
+surveys, including cattle counts.
+
+Details on each agency and source, including how each data set was downloaded,
+are in [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
 
 ## Project layout
 

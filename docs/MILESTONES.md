@@ -33,9 +33,9 @@ exactly how, so anyone can repeat it.
 |---|---|---|---|
 | 1.1 BLS retail meat prices | ✅ | `01_bls_retail_prices.ipynb` | Register for a free BLS API key, find the right series IDs for beef, pork and chicken, pull monthly prices 2015 to now, save raw data |
 | 1.2 BLS Consumer Price Index | ✅ | same notebook | Pull CPI (all items) for the same months, used later for inflation adjustment |
-| 1.3 USDA ERS meat price spreads | ⬜ | `02_ers_price_spreads.ipynb` | Download the ERS spreadsheet, find the beef, pork and broiler tables, reshape to one tidy table |
-| 1.4 USDA NASS cattle inventory | ⬜ | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year |
-| 1.5 Beef cow slaughter | ⬜ | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
+| 1.3 USDA ERS meat price spreads | 🔄 | `02_ers_price_spreads.ipynb` | Part 1: download the historical file plus the three recent files (CSV), standardize and take an inventory of data items. Part 2: choose items, match names across files, check overlap, combine 2015 to now (D21) |
+| 1.4 USDA NASS cattle inventory | 🔄 | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year from 2010 (D24). Part 1: download and inventory; Part 2: chosen series, coverage, first chart |
+| 1.5 Beef cow slaughter | 🔄 | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
 | 1.6 Drought data | ⬜ | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the main cattle states, and the share of cattle in drought areas (see D17) |
 | 1.7 Grocery category CPIs (context) | ⬜ | `05_grocery_categories.ipynb` | BLS CPI indexes for food at home and its categories (produce, cereals and bakery, dairy, beverages, other/packaged foods, meats). Same API and key as notebook 01 (see D19) |
 
@@ -91,7 +91,7 @@ evidence.
 | 5.2c "All meats" view | ⬜ | All three meats on one chart as an index (Jan 2015 = 100), for all years or one year (see D13) |
 | 5.2d "Meat vs. the rest of the grocery cart" | ⬜ | Indexed chart (2015 = 100) of the chosen meats against grocery categories (see D19) |
 | 5.3 "Who gets the dollar" and verdict sections | ⬜ | Stacked bars, findings, explanations |
-| 5.4 Methods and data page | ⬜ | How everything was done, with source links |
+| 5.4 Methods and data page | ⬜ | How everything was done, with source links. Includes a plain-language "Who publishes this data" section on BLS, ERS, NASS and AMS, and a "Key terms" section on the three price stages and spreads (both from `docs/DATA_SOURCES.md`) |
 
 ---
 
@@ -107,6 +107,41 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Item 1.3 started
+- **Done:** notebook 02 Part 1 written: downloads four ERS CSV files,
+  standardizes their three slightly different layouts, and lists every data item
+  with units and date range (D21).
+- **Next:** Scott runs Part 1; we review the inventory together and choose
+  which items to keep, then write Part 2.
+- **Bug found and fixed (from Scott's question about the inventory):** beef
+  retail value appeared to be missing 10 of 24 recent months. The months
+  weren't missing: ERS writes values of 1,000 or more with a thousands comma
+  (`1,011.3`), which the loader turned into missing values. The loader now
+  strips the comma first.
+
+### 2026-10-26: Item 1.3, Part 2 written
+- **Done:** notebook 02 Part 2 maps three values per meat across files,
+  confirms the historical and recent files agree (within 0.05 cents), combines
+  them, calculates spreads and shares (D22), checks them against ERS's published
+  figures, and saves `data/processed/ers_price_spreads_monthly.csv`.
+- **Found:** a mislabeled column in ERS's recent pork file (percent stored as
+  cents), handled by using our calculation (D23). Chicken's 2025 units label
+  change is only a relabel. Chicken has no data for January–March 2026.
+- **First finding:** beef's farmer share fell from about 52% (2015) to 43%
+  (2019), then rose to about 54% (2025), while the packer share shrank to under
+  5%. Consistent with scarce cattle (D17).
+- **Next:** Scott runs notebook 02; then item 1.4/1.5, NASS cattle inventory
+  and cow slaughter.
+
+### 2026-10-26: Docs, key terms; items 1.4 and 1.5 started
+- **Done:** added "Key terms: the three price stages" to DATA_SOURCES.md and the
+  README ("three values per meat" = farm, wholesale and retail for each meat,
+  not three data sources). NASS API key registered and stored in `.env`.
+  Notebook 03 Part 1 written: checks row counts, downloads cattle inventory and
+  monthly cattle slaughter from 2010 (D24), and lists every series.
+- **Next:** Scott runs notebook 02 Part 2 and notebook 03 Part 1; we choose the
+  herd and cow slaughter series together.
 
 ### 2026-10-26: Items 1.1 and 1.2 complete
 - **Done:** notebook 01 downloads BLS prices and CPI (Jan 2015 to Sep 2026),
