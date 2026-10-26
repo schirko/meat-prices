@@ -103,5 +103,33 @@ Format: **what we decided**, **why**, and **what we considered instead**.
 - **Changes:** replaces the mockup's "show all three meats on one chart"
   checkboxes with a meat selector. Comparing meats side by side moves to its own
   section (see open question below).
-- **Open question:** whether to keep an "All meats" comparison option in the
-  selector, or only in the verdict section.
+- **Resolved:** an "All meats" option is added to the selector. See D13.
+
+## D12. Public repo, deployed on Streamlit Community Cloud (2026-10-26)
+
+- **Decided:** the GitHub repository is public, and the app will be deployed on
+  Streamlit Community Cloud once there is a working version.
+- **Why:** employers can read the code, notebooks and docs, and use the live
+  app, from one link. Streamlit Community Cloud is free and deploys directly
+  from the GitHub repo.
+- **Consequences:**
+  - Nothing secret is ever committed. API keys stay in `.env` (see D10).
+  - The deployed app reads the processed data files in `data/processed/` and
+    does not call the BLS or USDA APIs. The live app therefore needs no API
+    keys, loads faster, and keeps working if an API is down. Data is refreshed
+    by re-running the notebooks and committing the new processed files.
+
+## D13. "All meats" option compares percentage change, not dollars (2026-10-26)
+
+- **Decided:** the meat selector gets a fourth option, "All meats". It shows the
+  three meats on one chart as percentage change from a starting point (an index
+  where January 2015 = 100), not as dollars per pound. The year selector works
+  the same way in this view. Picking one meat still shows dollars per pound.
+- **Why:** the question "did beef rise faster than pork and chicken?" needs all
+  three on one chart. But beef costs several times more per pound than chicken,
+  so in dollars the chicken line sits flat near the bottom and its changes are
+  hard to see. Indexing puts all three on the same scale, so the steepest line
+  is the one that rose fastest.
+- **Considered instead:** dollars on one chart (misleading, as above); keeping
+  the comparison only in the verdict section (hides the most interesting
+  comparison until the end).

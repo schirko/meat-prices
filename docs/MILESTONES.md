@@ -94,7 +94,7 @@ evidence.
 
 | Item | Status | What's involved |
 |---|---|---|
-| 6.1 Deploy | ⬜ | Streamlit Community Cloud (free) |
+| 6.1 Deploy | ⬜ | Streamlit Community Cloud (free), from the public GitHub repo; app reads committed processed data, no API keys needed (see D12) |
 | 6.2 Portfolio polish | ⬜ | README screenshots, link from GitHub profile and résumé |
 
 ---
