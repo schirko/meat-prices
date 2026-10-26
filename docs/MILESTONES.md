@@ -24,17 +24,19 @@ Status key: ✅ done · 🔄 in progress · ⬜ not started
 
 ---
 
-## Milestone 1: Get the data ⬜
+## Milestone 1: Get the data 🔄
 
 **Goal:** download every data set into `data/raw/`, with a notebook that shows
 exactly how, so anyone can repeat it.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 1.1 BLS retail meat prices | ⬜ | `01_bls_retail_prices.ipynb` | Register for a free BLS API key, find the right series IDs for beef, pork and chicken, pull monthly prices 2015 to now, save raw data |
-| 1.2 BLS Consumer Price Index | ⬜ | same notebook | Pull CPI (all items) for the same months, used later for inflation adjustment |
+| 1.1 BLS retail meat prices | 🔄 | `01_bls_retail_prices.ipynb` | Register for a free BLS API key, find the right series IDs for beef, pork and chicken, pull monthly prices 2015 to now, save raw data |
+| 1.2 BLS Consumer Price Index | 🔄 | same notebook | Pull CPI (all items) for the same months, used later for inflation adjustment |
 | 1.3 USDA ERS meat price spreads | ⬜ | `02_ers_price_spreads.ipynb` | Download the ERS spreadsheet, find the beef, pork and broiler tables, reshape to one tidy table |
 | 1.4 USDA NASS cattle inventory | ⬜ | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year |
+| 1.5 Beef cow slaughter | ⬜ | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
+| 1.6 Drought data | ⬜ | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the main cattle states, and the share of cattle in drought areas (see D17) |
 
 ---
 
@@ -44,8 +46,8 @@ exactly how, so anyone can repeat it.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 2.1 Combine and clean | ⬜ | `04_clean_and_combine.ipynb` | Match dates across sources, handle missing months, standardize units (cents vs dollars, per pound) |
-| 2.2 Exploratory charts | ⬜ | `05_explore.ipynb` | First charts of each meat, early observations |
+| 2.1 Combine and clean | ⬜ | `05_clean_and_combine.ipynb` | Match dates across sources, fill single missing months with the neighbor average (D18), standardize units (cents vs dollars, per pound) |
+| 2.2 Exploratory charts | ⬜ | `06_explore.ipynb` | First charts of each meat, early observations |
 
 ---
 
@@ -56,8 +58,8 @@ statistical tests.
 
 | Item | Status | Notebook / file | What's involved |
 |---|---|---|---|
-| 3.1 Research and record events | ⬜ | `data/processed/events.csv` | Date, event, which meats it affected, source link |
-| 3.2 Overlay events on prices | ⬜ | `06_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
+| 3.1 Research and record events | ⬜ | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (fact-checkers found them no more common than usual; check before including), Mexican cattle import suspensions, screwworm (2026) |
+| 3.2 Overlay events on prices | ⬜ | `07_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
 
 ---
 
@@ -68,11 +70,11 @@ evidence.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 4.1 Inflation-adjusted prices | ⬜ | `07_inflation_adjusted.ipynb` | Convert prices to today's dollars using CPI; compare meat to overall inflation |
-| 4.2 Who gets the dollar | ⬜ | `08_price_spreads.ipynb` | Farm, packer and retail shares over time |
-| 4.3 Did prices shift at each event? | ⬜ | `09_event_tests.ipynb` | Changepoint detection and/or interrupted time series |
-| 4.4 Supply side | ⬜ | `10_supply.ipynb` | Herd size vs. beef price |
-| 4.5 Verdict | ⬜ | `11_verdict.ipynb` | Pull findings together into plain-language conclusions |
+| 4.1 Inflation-adjusted prices | ⬜ | `08_inflation_adjusted.ipynb` | Convert prices to today's dollars using CPI; compare meat to overall inflation |
+| 4.2 Who gets the dollar | ⬜ | `09_price_spreads.ipynb` | Farm, packer and retail shares over time |
+| 4.3 Did prices shift at each event? | ⬜ | `10_event_tests.ipynb` | Changepoint detection and/or interrupted time series |
+| 4.4 Supply side: drought → herd → price | ⬜ | `11_supply.ipynb` | Trace the chain in D17: did drought come first, then cow sell-offs, then a smaller herd, then higher beef prices? Measure the time lag between each step |
+| 4.5 Verdict | ⬜ | `12_verdict.ipynb` | Pull findings together into plain-language conclusions |
 
 ---
 
@@ -103,6 +105,14 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Items 1.1 and 1.2 started
+- **Done:** BLS API key registered and stored in `.env`. Notebook
+  `01_bls_retail_prices.ipynb` written: downloads six candidate meat series plus
+  CPI, saves the raw response, builds a tidy table, checks coverage and charts
+  the candidates. Decisions D14 (matplotlib in notebooks) and D15 (pending).
+- **Next:** Scott runs the notebook; together we review the results, fill in
+  "What it means", and choose one series per meat (D15).
 
 ### 2026-10-26: Design decisions D12 and D13
 - **Done:** recorded the public repo / Streamlit Cloud plan (D12) and the
