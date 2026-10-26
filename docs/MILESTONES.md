@@ -31,8 +31,8 @@ exactly how, so anyone can repeat it.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 1.1 BLS retail meat prices | 🔄 | `01_bls_retail_prices.ipynb` | Register for a free BLS API key, find the right series IDs for beef, pork and chicken, pull monthly prices 2015 to now, save raw data |
-| 1.2 BLS Consumer Price Index | 🔄 | same notebook | Pull CPI (all items) for the same months, used later for inflation adjustment |
+| 1.1 BLS retail meat prices | ✅ | `01_bls_retail_prices.ipynb` | Register for a free BLS API key, find the right series IDs for beef, pork and chicken, pull monthly prices 2015 to now, save raw data |
+| 1.2 BLS Consumer Price Index | ✅ | same notebook | Pull CPI (all items) for the same months, used later for inflation adjustment |
 | 1.3 USDA ERS meat price spreads | ⬜ | `02_ers_price_spreads.ipynb` | Download the ERS spreadsheet, find the beef, pork and broiler tables, reshape to one tidy table |
 | 1.4 USDA NASS cattle inventory | ⬜ | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year |
 | 1.5 Beef cow slaughter | ⬜ | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
@@ -58,7 +58,7 @@ statistical tests.
 
 | Item | Status | Notebook / file | What's involved |
 |---|---|---|---|
-| 3.1 Research and record events | ⬜ | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (fact-checkers found them no more common than usual; check before including), Mexican cattle import suspensions, screwworm (2026) |
+| 3.1 Research and record events | ⬜ | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (widely given as the reason chicken prices rose; fact-checkers found them no more common than usual; test against the price data), Colorado bird-flu culls (2022, 2024) and cage-free egg law (2025) (these involve egg-laying hens; check whether they show up in meat-chicken prices at all), Mexican cattle import suspensions, screwworm (2026) |
 | 3.2 Overlay events on prices | ⬜ | `07_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
 
 ---
@@ -105,6 +105,16 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Items 1.1 and 1.2 complete
+- **Done:** notebook 01 downloads BLS prices and CPI (Jan 2015 to Sep 2026),
+  checks coverage, lists missing months and compares each candidate with
+  inflation. Chose one series per meat (D15). Found October 2025 missing from
+  every series, to be filled with a neighbor average (D18).
+- **First finding:** since the 2015 average, ground beef is up about 63%,
+  overall prices (CPI) about 42%, chicken breast about 23% and pork chops about
+  9%. Beef is the only meat that clearly outran inflation.
+- **Next:** item 1.3, USDA ERS meat price spreads.
 
 ### 2026-10-26: Items 1.1 and 1.2 started
 - **Done:** BLS API key registered and stored in `.env`. Notebook

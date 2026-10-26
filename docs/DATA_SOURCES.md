@@ -18,9 +18,21 @@ This page is filled in as each data set is added in Milestone 1.
   notebook to download)
 - **Series ID format:** `APU` = average price, not seasonally adjusted; `0000` =
   U.S. city average; the rest is the item code.
-- **Series used:** _pending decision D15_
-- **Limits:** national averages only; prices are what stores charge, so sales
-  and coupons are not fully reflected. _More to add after reviewing the data._
+- **Series used (decision D15):**
+
+  | Meat | Series ID | Item |
+  |---|---|---|
+  | Beef | APU0000703112 | Ground beef, 100% beef, per lb |
+  | Pork | APU0000FD3101 | All pork chops, per lb |
+  | Chicken | APU0000FF1101 | Chicken breast, boneless, per lb |
+
+- **Coverage:** January 2015 to September 2026 (as of the 2026-10-26 download).
+  **October 2025 is missing from every BLS series**, most likely because of the
+  federal government shutdown. Filled during cleaning with the average of
+  September and November 2025 (D18).
+- **Limits:** national averages only, no regional detail in the series we use;
+  prices are what stores charge, so loyalty discounts and coupons are not fully
+  reflected; one cut per meat stands in for that meat as a whole.
 
 ## BLS Consumer Price Index (Item 1.2)
 

@@ -143,15 +143,24 @@ Format: **what we decided**, **why**, and **what we considered instead**.
   where interactivity (hover, zoom) is useful, and Plotly works well in
   Streamlit.
 
-## D15. One BLS series per meat (pending, notebook 01)
+## D15. One BLS series per meat (2026-10-26)
 
-- **To decide** after reviewing the coverage check and candidate charts in
+- **Decided:**
+  - **Beef:** APU0000703112, ground beef, 100% beef
+  - **Pork:** APU0000FD3101, all pork chops
+  - **Chicken:** APU0000FF1101, chicken breast, boneless
+  - **CPI:** CUUR0000SA0, all items, not seasonally adjusted
+- **Why:** each chosen series is complete from January 2015 to September 2026
+  except October 2025 (missing from every series; see D18). Ground beef and
+  chicken breast are the cuts most households buy and the prices most often
+  quoted in the news. All pork chops is the broadest pork measure, and the three
+  pork cuts moved together, so the choice mattered little. The CPI series is not
+  seasonally adjusted to match the meat prices.
+- **Ruled out:** bone-in pork chops (stopped after May 2026); whole chicken
+  (also missing May 2020, and fewer people buy it); boneless pork chops (no
+  advantage over all pork chops).
+- **Evidence:** coverage table, missing-months table and candidate charts in
   `notebooks/01_bls_retail_prices.ipynb`.
-- **Candidates:** ground beef (APU0000703112); all pork chops (APU0000FD3101),
-  bone-in chops (APU0000704211), boneless chops (APU0000704212); whole chicken
-  (APU0000706111), boneless chicken breast (APU0000FF1101).
-- **CPI series:** CUUR0000SA0 (all items, not seasonally adjusted), chosen to
-  match the meat prices, which are also not seasonally adjusted.
 
 ## D16. Drop `ruptures` for now (2026-10-26)
 
@@ -167,3 +176,42 @@ Format: **what we decided**, **why**, and **what we considered instead**.
 - **Considered instead:** installing Microsoft C++ Build Tools (several GB, and
   every future user of the repo would need it too); downgrading Python (affects
   the whole environment for one optional package).
+
+## D17. Treat drought as a root cause of the beef price rise (2026-10-26)
+
+- **Decided:** the analysis will trace one cause chain in detail:
+  **drought → less grazing and costlier hay → ranchers sell off cows → smaller
+  herd → fewer cattle to market → higher beef prices.** We add drought data
+  (U.S. Drought Monitor) and beef cow slaughter (NASS) to Milestone 1, and test
+  the chain step by step in Milestone 4.
+- **Why:** the drought years around 2020–2022 are a likely root cause of the
+  beef price rise, rather than a one-time shock like a plant closure. It also
+  explains why beef prices stay high: a cow sold off can't be replaced quickly.
+  Rebuilding the herd takes years, because a heifer kept back for breeding takes
+  roughly two years before her first calf reaches market.
+- **What to look for:** each step should show up *after* the one before it,
+  with a delay. Drought first, then a spike in cow slaughter, then a falling herd
+  count, then rising prices. Measuring those delays is the analysis.
+- **Fits the comparison in D2:** pork and chicken don't depend on pasture, and
+  they rose far less than beef. That supports drought and the cattle herd as
+  beef-specific causes.
+- **Caution:** timing lining up isn't proof of cause. The app will present this
+  as the evidence for the chain, alongside other factors (packing capacity,
+  imports, demand).
+
+## D18. Fill single missing months with the average of their neighbors (2026-10-26)
+
+- **Decided:** when a month is missing from a BLS series, fill it with the
+  average of the month before and the month after. Filled values are flagged in
+  a column (`is_filled`) so they can be identified, and the app's methods page
+  will say which months were filled. Applied in Milestone 2 (cleaning), not in
+  the raw data.
+- **Why:** notebook 01 found the same month missing from every series,
+  including the CPI, most likely because of the late-2025 federal government
+  shutdown. A gap would break the line on every chart and leave holes in
+  month-over-month calculations. A one-month average is a small, honest fix:
+  prices don't usually jump and fall back within a single month.
+- **Limit:** only for gaps of one month (or two in a row at most). Longer gaps
+  stay missing, because an average across many months would hide real movement.
+- **Considered instead:** leaving a visible gap (honest but breaks charts and
+  calculations); dropping the month from every series (shifts the timeline).

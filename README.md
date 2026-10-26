@@ -9,7 +9,10 @@ chain.
 The finished product is a Streamlit app built for a general audience, backed by a
 series of Jupyter notebooks that show every step of the analysis.
 
-> **Status:** Milestone 0 (project setup) complete. See
+> **Status:** Milestone 1 (getting the data) in progress: BLS retail prices and
+> CPI done. First finding: since 2015, ground beef is up about 63%, well ahead of
+> overall inflation (about 42%), while pork and chicken breast rose less than
+> inflation. See
 > [docs/MILESTONES.md](docs/MILESTONES.md) for the full plan and progress.
 
 ---
