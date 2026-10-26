@@ -1,0 +1,17 @@
+# Data
+pandas
+requests
+python-dotenv
+openpyxl
+
+# Notebooks and charts
+jupyter
+plotly
+matplotlib
+
+# Analysis (Milestone 4)
+statsmodels
+# ruptures removed: no prebuilt Windows package for Python 3.14 (see docs/DECISIONS.md, D16)
+
+# App (Milestone 5)
+streamlit
