@@ -152,3 +152,18 @@ Format: **what we decided**, **why**, and **what we considered instead**.
   (APU0000706111), boneless chicken breast (APU0000FF1101).
 - **CPI series:** CUUR0000SA0 (all items, not seasonally adjusted), chosen to
   match the meat prices, which are also not seasonally adjusted.
+
+## D16. Drop `ruptures` for now (2026-10-26)
+
+- **Decided:** removed the `ruptures` changepoint library from
+  `requirements.txt`.
+- **Why:** it has no ready-made Windows package for Python 3.14, so pip tried to
+  compile it from source and failed ("Microsoft Visual C++ 14.0 or greater is
+  required"). Because one package failed, pip installed none of the others.
+- **Plan for Milestone 4:** event testing (D6) will use interrupted time series
+  in `statsmodels`, which installs cleanly. If we still want automatic
+  changepoint detection, we'll revisit then: check for a newer `ruptures`
+  release, or write a simple changepoint search ourselves.
+- **Considered instead:** installing Microsoft C++ Build Tools (several GB, and
+  every future user of the repo would need it too); downgrading Python (affects
+  the whole environment for one optional package).

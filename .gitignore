@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets
+.env
+
+# Raw data is re-downloaded by the notebooks (see docs/DECISIONS.md, D9)
+data/raw/*
+!data/raw/.gitkeep
+
+# PyCharm (keep shared settings out of the repo)
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
