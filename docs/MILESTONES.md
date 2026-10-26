@@ -37,6 +37,7 @@ exactly how, so anyone can repeat it.
 | 1.4 USDA NASS cattle inventory | ⬜ | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year |
 | 1.5 Beef cow slaughter | ⬜ | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
 | 1.6 Drought data | ⬜ | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the main cattle states, and the share of cattle in drought areas (see D17) |
+| 1.7 Grocery category CPIs (context) | ⬜ | `05_grocery_categories.ipynb` | BLS CPI indexes for food at home and its categories (produce, cereals and bakery, dairy, beverages, other/packaged foods, meats). Same API and key as notebook 01 (see D19) |
 
 ---
 
@@ -46,8 +47,8 @@ exactly how, so anyone can repeat it.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 2.1 Combine and clean | ⬜ | `05_clean_and_combine.ipynb` | Match dates across sources, fill single missing months with the neighbor average (D18), standardize units (cents vs dollars, per pound) |
-| 2.2 Exploratory charts | ⬜ | `06_explore.ipynb` | First charts of each meat, early observations |
+| 2.1 Combine and clean | ⬜ | `06_clean_and_combine.ipynb` | Match dates across sources, fill single missing months with the neighbor average (D18), standardize units (cents vs dollars, per pound) |
+| 2.2 Exploratory charts | ⬜ | `07_explore.ipynb` | First charts of each meat, early observations |
 
 ---
 
@@ -59,7 +60,7 @@ statistical tests.
 | Item | Status | Notebook / file | What's involved |
 |---|---|---|---|
 | 3.1 Research and record events | ⬜ | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (widely given as the reason chicken prices rose; fact-checkers found them no more common than usual; test against the price data), Colorado bird-flu culls (2022, 2024) and cage-free egg law (2025) (these involve egg-laying hens; check whether they show up in meat-chicken prices at all), Mexican cattle import suspensions, screwworm (2026) |
-| 3.2 Overlay events on prices | ⬜ | `07_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
+| 3.2 Overlay events on prices | ⬜ | `08_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
 
 ---
 
@@ -70,11 +71,11 @@ evidence.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 4.1 Inflation-adjusted prices | ⬜ | `08_inflation_adjusted.ipynb` | Convert prices to today's dollars using CPI; compare meat to overall inflation |
-| 4.2 Who gets the dollar | ⬜ | `09_price_spreads.ipynb` | Farm, packer and retail shares over time |
-| 4.3 Did prices shift at each event? | ⬜ | `10_event_tests.ipynb` | Changepoint detection and/or interrupted time series |
-| 4.4 Supply side: drought → herd → price | ⬜ | `11_supply.ipynb` | Trace the chain in D17: did drought come first, then cow sell-offs, then a smaller herd, then higher beef prices? Measure the time lag between each step |
-| 4.5 Verdict | ⬜ | `12_verdict.ipynb` | Pull findings together into plain-language conclusions |
+| 4.1 Inflation-adjusted prices | ⬜ | `09_inflation_adjusted.ipynb` | Convert prices to today's dollars using CPI; compare meat to overall inflation |
+| 4.2 Who gets the dollar | ⬜ | `10_price_spreads.ipynb` | Farm, packer and retail shares over time |
+| 4.3 Did prices shift at each event? | ⬜ | `11_event_tests.ipynb` | Changepoint detection and/or interrupted time series |
+| 4.4 Supply side: drought → herd → price | ⬜ | `12_supply.ipynb` | Trace the chain in D17: did drought come first, then cow sell-offs, then a smaller herd, then higher beef prices? Measure the time lag between each step |
+| 4.5 Verdict | ⬜ | `13_verdict.ipynb` | Pull findings together into plain-language conclusions |
 
 ---
 
@@ -88,6 +89,7 @@ evidence.
 | 5.2 Price tiles and all-years view | ⬜ | `st.metric` tiles for the selected meat, full price history chart with event markers (see D11) |
 | 5.2b Single-year view | ⬜ | When one year is picked: month-by-month chart, change from the year before, events that happened that year |
 | 5.2c "All meats" view | ⬜ | All three meats on one chart as an index (Jan 2015 = 100), for all years or one year (see D13) |
+| 5.2d "Meat vs. the rest of the grocery cart" | ⬜ | Indexed chart (2015 = 100) of the chosen meats against grocery categories (see D19) |
 | 5.3 "Who gets the dollar" and verdict sections | ⬜ | Stacked bars, findings, explanations |
 | 5.4 Methods and data page | ⬜ | How everything was done, with source links |
 
