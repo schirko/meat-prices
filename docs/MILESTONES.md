@@ -82,9 +82,10 @@ evidence.
 
 | Item | Status | What's involved |
 |---|---|---|
-| 5.1 App skeleton and sidebar | ⬜ | Page layout, load processed data; sidebar with meat selector (beef, pork, chicken), year selector ("All years" or one year), nominal vs inflation-adjusted, event markers on/off |
+| 5.1 App skeleton and sidebar | ⬜ | Page layout, load processed data; sidebar with meat selector (beef, pork, chicken, all meats), year selector ("All years" or one year), nominal vs inflation-adjusted, event markers on/off |
 | 5.2 Price tiles and all-years view | ⬜ | `st.metric` tiles for the selected meat, full price history chart with event markers (see D11) |
 | 5.2b Single-year view | ⬜ | When one year is picked: month-by-month chart, change from the year before, events that happened that year |
+| 5.2c "All meats" view | ⬜ | All three meats on one chart as an index (Jan 2015 = 100), for all years or one year (see D13) |
 | 5.3 "Who gets the dollar" and verdict sections | ⬜ | Stacked bars, findings, explanations |
 | 5.4 Methods and data page | ⬜ | How everything was done, with source links |
 
@@ -102,6 +103,11 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Design decisions D12 and D13
+- **Done:** recorded the public repo / Streamlit Cloud plan (D12) and the
+  "All meats" indexed comparison (D13); added item 5.2c.
+- **Next:** item 1.1, once the BLS API key is activated.
 
 ### 2026-10-26: Design change, meat selector and year drill-down
 - **Done:** recorded decision D11 (pick one meat, see all years, then isolate

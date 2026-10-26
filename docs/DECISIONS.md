@@ -133,3 +133,22 @@ Format: **what we decided**, **why**, and **what we considered instead**.
 - **Considered instead:** dollars on one chart (misleading, as above); keeping
   the comparison only in the verdict section (hides the most interesting
   comparison until the end).
+
+## D14. Matplotlib in notebooks, Plotly in the app (2026-10-26)
+
+- **Decided:** notebook charts use matplotlib; the Streamlit app uses Plotly.
+- **Why:** GitHub displays notebooks with their saved output, but it can't show
+  Plotly's interactive charts, so they appear blank to anyone browsing the repo.
+  Matplotlib charts are saved as images and show up everywhere. The app is
+  where interactivity (hover, zoom) is useful, and Plotly works well in
+  Streamlit.
+
+## D15. One BLS series per meat (pending, notebook 01)
+
+- **To decide** after reviewing the coverage check and candidate charts in
+  `notebooks/01_bls_retail_prices.ipynb`.
+- **Candidates:** ground beef (APU0000703112); all pork chops (APU0000FD3101),
+  bone-in chops (APU0000704211), boneless chops (APU0000704212); whole chicken
+  (APU0000706111), boneless chicken breast (APU0000FF1101).
+- **CPI series:** CUUR0000SA0 (all items, not seasonally adjusted), chosen to
+  match the meat prices, which are also not seasonally adjusted.
