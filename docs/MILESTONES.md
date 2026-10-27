@@ -41,25 +41,25 @@ exactly how, so anyone can repeat it.
 
 ---
 
-## Milestone 2: Clean and explore 🔄
+## Milestone 2: Clean and explore ✅
 
 **Goal:** one tidy monthly data set, and a first look at the patterns.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
 | 2.1 Combine and clean | ✅ | `06_clean_and_combine.ipynb` | Build `master_monthly.csv` (Jan 2010 to latest month): fill single missing months (D18), inflation-adjusted prices in latest-month dollars, herd repeated per month, all sources joined; generate `docs/DATA_DICTIONARY.md` (D27) |
-| 2.2 Exploratory charts | ⬜ | `07_explore.ipynb` | First charts of each meat, early observations |
+| 2.2 Exploratory charts | ✅ | `07_explore.ipynb` | Seven charts from the master table: nominal vs real prices, all meats rebased, the full drought → slaughter → herd → price chain, a first look at delays, who gets the beef dollar in real cents, seasonality, a single-year prototype; ends with questions for Milestone 4 |
 
 ---
 
-## Milestone 3: Event timeline ⬜
+## Milestone 3: Event timeline 🔄
 
 **Goal:** a cited, dated table of events that can go on charts and into
 statistical tests.
 
 | Item | Status | Notebook / file | What's involved |
 |---|---|---|---|
-| 3.1 Research and record events | ⬜ | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (widely given as the reason chicken prices rose; fact-checkers found them no more common than usual; test against the price data), Colorado bird-flu culls (2022, 2024) and cage-free egg law (2025) (these involve egg-laying hens; check whether they show up in meat-chicken prices at all), Mexican cattle import suspensions, screwworm (2026) |
+| 3.1 Research and record events | 🔄 | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (widely given as the reason chicken prices rose; fact-checkers found them no more common than usual; test against the price data), Colorado bird-flu culls (2022, 2024) and cage-free egg law (2025) (these involve egg-laying hens; check whether they show up in meat-chicken prices at all), Mexican cattle import suspensions, screwworm (2026) |
 | 3.2 Overlay events on prices | ⬜ | `08_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
 
 ---
@@ -107,6 +107,29 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Milestone 2 complete; item 3.1 drafted
+- **Done:** notebook 07 run in full on Scott's machine, completing Milestone 2.
+  Drafted `data/processed/events.csv` with 16 sourced events (drought periods,
+  plant fire and closures, COVID shutdowns, the JBS cyberattack, feed costs,
+  bird flu, Mexican cattle import suspensions, screwworm, the 2025 shutdown) and
+  three popular explanations to test (2022 plant fires, Colorado culls,
+  cage-free law). Decision D28 records the format and inclusion rules.
+- **Next:** Scott reviews the event list (additions, removals, dates); then
+  item 3.2, overlaying the events on the prices.
+
+### 2026-10-26: Item 2.2 written
+- **Done:** notebook 07 written and run on the real master table; findings and
+  a list of questions for Milestone 4 written in.
+- **Findings:** the drought → sell-off → herd → price chain shows up in both
+  cycles (2011–2019 and 2020–2026). Drought and cow slaughter rise together in
+  the same year (correlation +0.58, yearly); a shrinking herd goes with a
+  rising real beef price the same year and the next (−0.59, −0.55). Since 2019
+  the rancher's part of retail beef rose about 185 real cents per pound, the
+  store's about 64, and the packer's fell about 65. Seasonal swings are small
+  (about ±2%). A first monthly test of the drought delay gave no clear signal,
+  so yearly values are used instead (explained in the notebook).
+- **Next:** Scott runs notebook 07; then Milestone 3, the event timeline.
 
 ### 2026-10-26: Item 2.1 complete
 - **Done:** notebook 06 run in full on Scott's machine: `master_monthly.csv`

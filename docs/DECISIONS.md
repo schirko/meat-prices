@@ -401,3 +401,27 @@ Format: **what we decided**, **why**, and **what we considered instead**.
     table; the notebook stops if any column lacks a description.
 - **Result (first build):** 201 months × 56 columns. Only October 2025 was
   filled; the only remaining gap is chicken's ERS data for January–March 2026.
+
+## D28. Event timeline: what goes in, and how it's recorded (2026-10-26)
+
+- **Decided:** events live in `data/processed/events.csv`, one row per event,
+  with: start and end date, how exact the date is (`day` or `month`), a short
+  description, a category (`weather`, `packing_capacity`, `trade`, `disease`,
+  `feed_costs`, `data`, `popular_claim`), the meats it could affect, the effect
+  we'd expect if it mattered, whether it's a **popular explanation** being
+  tested, and a source link.
+- **What goes in:** events with a plausible, specific link to the supply or cost
+  of beef, pork or chicken, plus the popular explanations we agreed to test (the
+  2022 plant fires, the Colorado bird-flu culls and the cage-free law). Every
+  event needs a source; drought periods come from our own drought measure (D26).
+- **Why:**
+  - **Expected effect written down in advance:** saying what each event *should*
+    do to prices before testing it keeps the analysis honest; we can't decide
+    after the fact that whatever happened was the expected effect.
+  - **Popular explanations flagged separately:** they're included to be tested,
+    not presented as causes. The app will say whether the price data supports
+    them.
+  - **Date precision recorded:** some events have an exact day, others only a
+    month; tests in Milestone 4 shouldn't treat a month-level date as exact.
+- **Not included:** general inflation (already handled by real prices) and
+  events with no clear link to these meats.

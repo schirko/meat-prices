@@ -283,3 +283,18 @@ in dollars per pound, which is why they can be compared across meats directly.
 - **Known gap:** October 2025 (government shutdown), as in all BLS series (D18).
 - **Processed output (committed):** `data/processed/cpi_grocery_categories_monthly.csv`:
   `date, series_id, group, category, value, index_2015`
+
+## Event timeline (Item 3.1)
+
+- **What it is:** a hand-researched list of dated events that could have
+  affected meat prices, plus popular explanations to test (D28)
+- **File (committed):** `data/processed/events.csv`
+- **Columns:** `event_id, start_date, end_date, date_precision, event,
+  category, meats, expected_effect, popular_explanation, source_name,
+  source_url, notes`. `meats` is semicolon-separated; `end_date` is empty for
+  one-day or ongoing events.
+- **Sources:** news, USDA and fact-checking sources, one link per event; drought
+  periods come from this project's drought measure (notebook 04).
+- **Limits:** the list is curated, so it reflects judgment about what's
+  relevant; a few dates are known only to the month (see `date_precision` and
+  `notes`).
