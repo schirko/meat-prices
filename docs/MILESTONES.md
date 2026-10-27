@@ -34,8 +34,8 @@ exactly how, so anyone can repeat it.
 | 1.1 BLS retail meat prices | ✅ | `01_bls_retail_prices.ipynb` | Register for a free BLS API key, find the right series IDs for beef, pork and chicken, pull monthly prices 2015 to now, save raw data |
 | 1.2 BLS Consumer Price Index | ✅ | same notebook | Pull CPI (all items) for the same months, used later for inflation adjustment |
 | 1.3 USDA ERS meat price spreads | ✅ | `02_ers_price_spreads.ipynb` | Part 1: download the historical file plus the three recent files (CSV), standardize and take an inventory of data items. Part 2: choose items, match names across files, check overlap, combine 2015 to now (D21) |
-| 1.4 USDA NASS cattle inventory | 🔄 | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year from 2010 (D24). Part 1: download and inventory; Part 2: chosen series, coverage, first chart |
-| 1.5 Beef cow slaughter | 🔄 | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
+| 1.4 USDA NASS cattle inventory | ✅ | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year from 2010 (D24). Part 1: download and inventory; Part 2: chosen series, coverage, first chart |
+| 1.5 Beef cow slaughter | ✅ | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
 | 1.6 Drought data | 🔄 | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the states holding 75% of beef cows, weighted by 2019 beef cows; % in severe drought or worse and DSCI, monthly from 2010 (D26) |
 | 1.7 Grocery category CPIs (context) | ⬜ | `05_grocery_categories.ipynb` | BLS CPI indexes for food at home and its categories (produce, cereals and bakery, dairy, beverages, other/packaged foods, meats). Same API and key as notebook 01 (see D19) |
 
@@ -164,6 +164,24 @@ Newest first. One entry per finished item.
   remain near their low, so no rebuild yet. Caveat: the decline began around
   2018 as the normal cycle turned; the drought accelerated it.
 - **Next:** Scott runs notebook 03 in full; then item 1.6, drought data.
+
+### 2026-10-26: Item 1.6 started
+- **Done:** agreed the drought method together (D26): states holding 75% of
+  U.S. beef cows, weighted by their January 1, 2019 beef cows; % of area in
+  severe drought or worse (D2–D4) as the headline and DSCI for statistics;
+  monthly from 2010. Notebook 04 written: downloads state beef cows (NASS) and
+  weekly drought statistics (U.S. Drought Monitor), checks them, builds the
+  cattle-country measures, charts drought against cow slaughter, and saves two
+  processed files. Added the Drought Monitor to the agencies table.
+- **Next:** Scott runs notebook 03 (Part 2) and then notebook 04; we fill in the
+  findings together.
+
+### 2026-10-26: Items 1.4 and 1.5 complete
+- **Done:** notebook 03 run in full on Scott's machine: herd complete for
+  2010–2026 (51 rows), slaughter complete for January 2010 to September 2026
+  (603 rows), results match the test run. Saved `nass_herd_jan1.csv` and
+  `nass_slaughter_monthly.csv`.
+- **Next:** run notebook 04 (drought).
 
 ### 2026-10-26: Items 1.1 and 1.2 complete
 - **Done:** notebook 01 downloads BLS prices and CPI (Jan 2015 to Sep 2026),
