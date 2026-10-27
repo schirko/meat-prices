@@ -24,7 +24,7 @@ Status key: ✅ done · 🔄 in progress · ⬜ not started
 
 ---
 
-## Milestone 1: Get the data 🔄
+## Milestone 1: Get the data ✅
 
 **Goal:** download every data set into `data/raw/`, with a notebook that shows
 exactly how, so anyone can repeat it.
@@ -36,8 +36,8 @@ exactly how, so anyone can repeat it.
 | 1.3 USDA ERS meat price spreads | ✅ | `02_ers_price_spreads.ipynb` | Part 1: download the historical file plus the three recent files (CSV), standardize and take an inventory of data items. Part 2: choose items, match names across files, check overlap, combine 2015 to now (D21) |
 | 1.4 USDA NASS cattle inventory | ✅ | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year from 2010 (D24). Part 1: download and inventory; Part 2: chosen series, coverage, first chart |
 | 1.5 Beef cow slaughter | ✅ | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
-| 1.6 Drought data | 🔄 | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the states holding 75% of beef cows, weighted by 2019 beef cows; % in severe drought or worse and DSCI, monthly from 2010 (D26) |
-| 1.7 Grocery category CPIs (context) | 🔄 | `05_grocery_categories.ipynb` | BLS CPI indexes for food at home and its categories (produce, cereals and bakery, dairy, beverages, other/packaged foods, meats). Same API and key as notebook 01 (see D19) |
+| 1.6 Drought data | ✅ | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the states holding 75% of beef cows, weighted by 2019 beef cows; % in severe drought or worse and DSCI, monthly from 2010 (D26) |
+| 1.7 Grocery category CPIs (context) | ✅ | `05_grocery_categories.ipynb` | BLS CPI indexes for food at home and its categories (produce, cereals and bakery, dairy, beverages, other/packaged foods, meats). Same API and key as notebook 01 (see D19) |
 
 ---
 
@@ -91,7 +91,7 @@ evidence.
 | 5.2c "All meats" view | ⬜ | All three meats on one chart as an index (Jan 2015 = 100), for all years or one year (see D13) |
 | 5.2d "Meat vs. the rest of the grocery cart" | ⬜ | Indexed chart (2015 = 100) of the chosen meats against grocery categories (see D19) |
 | 5.3 "Who gets the dollar" and verdict sections | ⬜ | Stacked bars, findings, explanations |
-| 5.4 Methods and data page | ⬜ | How everything was done, with source links. Includes a plain-language "Who publishes this data" section on BLS, ERS, NASS and AMS, and a "Key terms" section on the three price stages and spreads (both from `docs/DATA_SOURCES.md`) |
+| 5.4 Methods and data page | ⬜ | How everything was done, with source links. Includes a plain-language "Who publishes this data" section on BLS, ERS, NASS and AMS, and "Key terms" sections on the three price stages and spreads, and on price indexes and rebasing (all from `docs/DATA_SOURCES.md`) |
 
 ---
 
@@ -107,6 +107,31 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Milestone 1 complete
+- **Done:** notebooks 04 and 05 run in full on Scott's machine. The drought
+  table now starts in January 2010 (stray December 2009 week removed). Every
+  data source is downloaded, checked and saved to `data/processed/`:
+  `ers_price_spreads_monthly.csv`, `nass_herd_jan1.csv`,
+  `nass_slaughter_monthly.csv`, `drought_cattle_country_monthly.csv`,
+  `drought_state_weights.csv`, `cpi_grocery_categories_monthly.csv`. BLS meat
+  prices and CPI are still read from notebook 01's raw download; Milestone 2
+  brings them into a processed table.
+- **Next:** Milestone 2, item 2.1: clean and combine everything into one
+  monthly table.
+
+### 2026-10-26: Item 1.7, first run reviewed
+- **Done:** notebook 05 ran on Scott's machine: all 15 series returned, each
+  complete except October 2025. Added a "price indexes and rebasing" explanation
+  (index levels vs. prices, with a worked example from the real data) to the
+  notebook and a Key terms section in DATA_SOURCES.md. Findings written in.
+- **Findings:** beef and veal rose about 59% since 2015 (67% since 2019), more
+  than any grocery category and more than all items (42%). Groceries overall
+  (food at home, +33%) rose *less* than general inflation since 2015. Eating out
+  rose 56%. Beef broke away from everything else from 2024, when the herd hit
+  its low. Eggs show the baseline effect (D20): −2% since 2015, +37% since 2019.
+- **Next:** Scott re-runs notebooks 04 and 05 so their outputs are saved; then
+  Milestone 2.
 
 ### 2026-10-26: Item 1.7 started
 - **Done:** notebook 05 written: downloads 15 BLS CPI series in one request
