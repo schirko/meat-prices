@@ -342,3 +342,35 @@ Format: **what we decided**, **why**, and **what we considered instead**.
     the fall), so the 12-month total shows the trend without the seasons.
 - **Coverage:** herd complete for 2010–2026; slaughter complete for every month
   from January 2010 to September 2026. No suppressed values.
+
+## D26. Drought in cattle country: beef-cow-weighted, fixed 2019 weights (2026-10-26)
+
+- **Decided:**
+  - **Source:** U.S. Drought Monitor statistics service, weekly percent of
+    each state's area in each drought category, cumulative format.
+  - **States:** the states that together hold at least 75% of U.S. beef cows
+    on January 1, 2019 (from NASS).
+  - **Weights:** each state's share of those states' beef cows on January 1,
+    2019, fixed for every year.
+  - **Measures:** % of area in severe drought or worse (D2–D4) as the headline
+    for the app; DSCI (Drought Severity and Coverage Index, 0–500) for the
+    statistics in Milestone 4. The lower 48 states as a whole are kept for
+    comparison.
+  - **Period:** January 2010 onward (matches D24); weekly values averaged to
+    months.
+- **Why:**
+  - Drought only matters for beef where the cattle are: drought in Texas
+    affects far more cows than drought in Nevada.
+  - **Fixed 2019 weights:** 2019 was the herd's peak before the drought. If
+    each year used its own herd, a state that lost cows *because of* drought
+    would count less afterwards, understating the drought.
+  - **D2–D4 headline:** one plain-English number ("40% of cattle country was in
+    severe drought"). **DSCI for statistics:** combines coverage and severity
+    in one number, and is the Drought Monitor's own standard index.
+  - **DSCI calculated ourselves:** with cumulative percentages, DSCI equals
+    D0 + D1 + D2 + D3 + D4, the same as weighting each category 1 (D0) to 5
+    (D4). This avoids a second download and is easy to check.
+  - Essentially the same idea as USDA's "cattle in drought" statistic, but
+    built transparently from public data.
+- **Considered instead:** all 48 states unweighted (dominated by states with
+  few cattle); each year's own weights (understates drought, as above).

@@ -16,6 +16,7 @@ throughout the notebooks, so here is who they are:
 | **ERS** | Economic Research Service | Department of Agriculture (USDA) | Meat price spreads: who gets each retail dollar (item 1.3) |
 | **NASS** | National Agricultural Statistics Service | Department of Agriculture (USDA) | Cattle herd counts and cow slaughter (items 1.4, 1.5) |
 | **AMS** | Agricultural Marketing Service | Department of Agriculture (USDA) | Not used directly; ERS gets its wholesale and farm prices from AMS |
+| **USDM** | U.S. Drought Monitor | National Drought Mitigation Center (University of Nebraska–Lincoln), with USDA and NOAA | Weekly drought maps and statistics by state (item 1.6) |
 
 **BLS** collects prices across the economy. Its average retail prices come from the same
 store-by-store survey used to build the Consumer Price Index, the standard measure of
@@ -33,6 +34,13 @@ how many are slaughtered, crop production and more.
 
 **AMS** reports daily and weekly market prices for livestock and wholesale meat, among
 other things. We don't download from AMS ourselves; its prices reach us through ERS.
+
+**The U.S. Drought Monitor** isn't a single agency: it's produced jointly by the National
+Drought Mitigation Center at the University of Nebraska–Lincoln, USDA and NOAA (the
+National Oceanic and Atmospheric Administration). Each week, experts combine rainfall,
+soil moisture, streamflow and local reports into one map that classifies every area from
+D0 (abnormally dry) to D4 (exceptional drought). USDA uses it to decide drought disaster
+aid for ranchers.
 
 ---
 
@@ -176,3 +184,32 @@ other things. We don't download from AMS ourselves; its prices reach us through 
   - `data/processed/nass_slaughter_monthly.csv`: `date, beef_cows_slaughtered,
     heifers_slaughtered, steers_slaughtered, heifer_share_pct,
     beef_cows_slaughtered_12mo`
+
+## U.S. Drought Monitor (Item 1.6)
+
+- **Publisher:** National Drought Mitigation Center (University of Nebraska–Lincoln),
+  with USDA and NOAA
+- **What it is:** weekly percent of each state's area in each drought category,
+  D0 (abnormally dry) to D4 (exceptional drought)
+- **Access:** statistics web service, no key:
+  `https://usdmdataservices.unl.edu/api/StateStatistics/GetDroughtSeverityStatisticsByAreaPercent?aoi=<state FIPS>&startdate=M/D/YYYY&enddate=M/D/YYYY&statisticsType=1`
+  (`USStatistics` with `aoi=conus` for the lower 48). JSON when requested with
+  `Accept: application/json`, otherwise CSV.
+- **Format used:** `statisticsType=1`, cumulative ("traditional"): each column
+  is that category *or worse*, so D2 = % in severe drought or worse.
+- **Notebook:** `notebooks/04_drought.ipynb`
+- **Raw files:** `data/raw/drought_YYYYMMDD/` (not committed), including the NASS
+  state beef cow counts used for the weights
+- **Method (D26):** states holding at least 75% of U.S. beef cows on January 1,
+  2019, weighted by those 2019 beef cows; weekly values averaged to months; DSCI
+  = D0 + D1 + D2 + D3 + D4 (cumulative).
+- **Checks in the notebook:** every week must satisfy D0 ≥ D1 ≥ D2 ≥ D3 ≥ D4,
+  and all values must be between 0 and 100.
+- **Processed outputs (committed):**
+  - `data/processed/drought_cattle_country_monthly.csv`: `date,
+    cattle_d2_plus_pct, cattle_dsci, conus_d2_plus_pct, conus_dsci`
+  - `data/processed/drought_state_weights.csv`: the states used, their 2019
+    beef cows and weights
+- **Limits:** drought maps measure dryness, not pasture or hay conditions
+  directly; weights reflect where cows were in 2019, not where they moved
+  afterwards.

@@ -36,7 +36,7 @@ exactly how, so anyone can repeat it.
 | 1.3 USDA ERS meat price spreads | ✅ | `02_ers_price_spreads.ipynb` | Part 1: download the historical file plus the three recent files (CSV), standardize and take an inventory of data items. Part 2: choose items, match names across files, check overlap, combine 2015 to now (D21) |
 | 1.4 USDA NASS cattle inventory | 🔄 | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year from 2010 (D24). Part 1: download and inventory; Part 2: chosen series, coverage, first chart |
 | 1.5 Beef cow slaughter | 🔄 | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
-| 1.6 Drought data | ⬜ | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the main cattle states, and the share of cattle in drought areas (see D17) |
+| 1.6 Drought data | 🔄 | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the states holding 75% of beef cows, weighted by 2019 beef cows; % in severe drought or worse and DSCI, monthly from 2010 (D26) |
 | 1.7 Grocery category CPIs (context) | ⬜ | `05_grocery_categories.ipynb` | BLS CPI indexes for food at home and its categories (produce, cereals and bakery, dairy, beverages, other/packaged foods, meats). Same API and key as notebook 01 (see D19) |
 
 ---
