@@ -9,10 +9,18 @@ chain.
 The finished product is a Streamlit app built for a general audience, backed by a
 series of Jupyter notebooks that show every step of the analysis.
 
-> **Status:** Milestone 1 (getting the data) in progress: BLS retail prices and
-> CPI done. First finding: since 2015, ground beef is up about 63%, well ahead of
-> overall inflation (about 42%), while pork and chicken breast rose less than
-> inflation. See
+> **Status:** Milestone 1 (getting the data) complete; Milestone 2 (clean and
+> combine) next. Early findings:
+> - Since 2015, ground beef is up about 63%, well ahead of overall inflation
+>   (about 42%); pork and chicken breast rose less than inflation, and groceries
+>   as a whole (+33%) rose less than prices in general.
+> - The U.S. beef cow herd fell 13% from its 2019 peak to 2026 after a drought-
+>   driven sell-off that peaked in 2022; ranchers' share of the retail beef
+>   dollar rose to about 54% in 2025.
+> - Beef broke away from every other grocery category from 2024, as the herd
+>   reached its low.
+>
+> See
 > [docs/MILESTONES.md](docs/MILESTONES.md) for the full plan and progress.
 
 ---
@@ -53,7 +61,9 @@ Department of Agriculture: ERS is its research agency, and NASS runs its farm
 surveys, including cattle counts.
 
 Details on each agency and source, including how each data set was downloaded,
-are in [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md).
+are in [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md). Everything is combined into
+one monthly table, `data/processed/master_monthly.csv`, described column by
+column in [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md).
 
 ## Project layout
 

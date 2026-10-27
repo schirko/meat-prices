@@ -44,6 +44,34 @@ aid for ranchers.
 
 ---
 
+## Key terms: price indexes and rebasing
+
+**A price index is not a price.** The Consumer Price Index (CPI) and its categories are
+**index levels**: numbers with no units (no dollars, no pounds) that compare the cost of
+the same basket of goods with a **reference period**, where the index was set to 100. For
+most CPI series that's the average of 1982–1984. For example, all items averaged **237.0
+in 2015**, meaning the typical basket cost 2.37 times its 1982–84 cost.
+
+Because each index measures change since its own reference period (and not every series
+uses the same one), two categories' index levels can't be compared directly. Beef and
+veal's 2015 level of 322.5 vs. all items' 237.0 doesn't mean beef was "more expensive";
+it means beef had risen more since 1982–84.
+
+**Rebasing** gives every series the same starting point so they can share one chart:
+
+> rescaled value = (this month's value ÷ that series' 2015 average) × 100
+
+Every series then averages 100 in 2015, and any later value reads directly as a percent
+of 2015: 159 means 59% more than 2015, 90 means 10% less. The shape of each line doesn't
+change; only the starting point moves. We use the **2015 average** rather than a single
+month so one unusual month can't skew the starting point. The same method is used for
+the app's "All meats" view (D13) and the grocery comparison (notebook 05).
+
+The **average retail prices** from BLS (item 1.1) are different: those are real prices
+in dollars per pound, which is why they can be compared across meats directly.
+
+---
+
 ## BLS average retail prices (Item 1.1)
 
 - **Publisher:** U.S. Bureau of Labor Statistics
@@ -220,3 +248,38 @@ aid for ranchers.
 - **Limits:** drought maps measure dryness, not pasture or hay conditions
   directly; weights reflect where cows were in 2019, not where they moved
   afterwards.
+
+## BLS CPI grocery categories (Item 1.7)
+
+- **Publisher:** U.S. Bureau of Labor Statistics
+- **What it is:** Consumer Price Index for each part of the grocery cart, used as
+  context for the meat prices (D19). Indexes, not dollar prices.
+- **Access:** same BLS API v2 and key as item 1.1, one request for all series
+- **Notebook:** `notebooks/05_grocery_categories.ipynb`
+- **Raw file:** `data/raw/bls_cpi_categories_YYYYMMDD.json` (not committed)
+- **Series (all `CUUR0000…`: all urban consumers, U.S. city average, not
+  seasonally adjusted):**
+
+  | Group | Series ID | Category |
+  |---|---|---|
+  | Overall | CUUR0000SA0 | All items |
+  | Overall | CUUR0000SAF11 | Food at home |
+  | Overall | CUUR0000SEFV | Food away from home |
+  | Grocery category | CUUR0000SAF111 | Cereals and bakery products |
+  | Grocery category | CUUR0000SAF112 | Meats, poultry, fish and eggs |
+  | Grocery category | CUUR0000SEFJ | Dairy and related products |
+  | Grocery category | CUUR0000SAF113 | Fruits and vegetables |
+  | Grocery category | CUUR0000SAF1131 | Fresh fruits and vegetables |
+  | Grocery category | CUUR0000SEFM | Processed fruits and vegetables |
+  | Grocery category | CUUR0000SAF114 | Nonalcoholic beverages and beverage materials |
+  | Grocery category | CUUR0000SAF115 | Other food at home (mostly packaged foods) |
+  | Protein detail | CUUR0000SEFC | Beef and veal |
+  | Protein detail | CUUR0000SEFD | Pork |
+  | Protein detail | CUUR0000SEFF | Poultry |
+  | Protein detail | CUUR0000SEFH | Eggs |
+
+- **Rescaling:** each series divided by its own 2015 average × 100, so all
+  categories start near 100 and can be compared.
+- **Known gap:** October 2025 (government shutdown), as in all BLS series (D18).
+- **Processed output (committed):** `data/processed/cpi_grocery_categories_monthly.csv`:
+  `date, series_id, group, category, value, index_2015`

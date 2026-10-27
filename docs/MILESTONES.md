@@ -41,13 +41,13 @@ exactly how, so anyone can repeat it.
 
 ---
 
-## Milestone 2: Clean and explore ⬜
+## Milestone 2: Clean and explore 🔄
 
 **Goal:** one tidy monthly data set, and a first look at the patterns.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 2.1 Combine and clean | ⬜ | `06_clean_and_combine.ipynb` | Match dates across sources, fill single missing months with the neighbor average (D18), standardize units (cents vs dollars, per pound) |
+| 2.1 Combine and clean | 🔄 | `06_clean_and_combine.ipynb` | Build `master_monthly.csv` (Jan 2010 to latest month): fill single missing months (D18), inflation-adjusted prices in latest-month dollars, herd repeated per month, all sources joined; generate `docs/DATA_DICTIONARY.md` (D27) |
 | 2.2 Exploratory charts | ⬜ | `07_explore.ipynb` | First charts of each meat, early observations |
 
 ---
@@ -107,6 +107,16 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Item 2.1 written
+- **Done:** agreed the master table design together (D27). Notebook 06 builds
+  `master_monthly.csv` (201 months × 56 columns), fills October 2025 and flags
+  it, adds inflation-adjusted prices, checks every column, and generates
+  `docs/DATA_DICTIONARY.md`. Tested on the real data from Milestone 1.
+- **First finding:** in September 2026 dollars, ground beef is up about 15%
+  since 2015, while pork chops are down about 23% and chicken breast about 13%:
+  beef is the only meat that got more expensive in real terms.
+- **Next:** Scott runs notebook 06; then item 2.2, exploratory charts.
 
 ### 2026-10-26: Milestone 1 complete
 - **Done:** notebooks 04 and 05 run in full on Scott's machine. The drought
