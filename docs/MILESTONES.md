@@ -47,7 +47,7 @@ exactly how, so anyone can repeat it.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 2.1 Combine and clean | 🔄 | `06_clean_and_combine.ipynb` | Build `master_monthly.csv` (Jan 2010 to latest month): fill single missing months (D18), inflation-adjusted prices in latest-month dollars, herd repeated per month, all sources joined; generate `docs/DATA_DICTIONARY.md` (D27) |
+| 2.1 Combine and clean | ✅ | `06_clean_and_combine.ipynb` | Build `master_monthly.csv` (Jan 2010 to latest month): fill single missing months (D18), inflation-adjusted prices in latest-month dollars, herd repeated per month, all sources joined; generate `docs/DATA_DICTIONARY.md` (D27) |
 | 2.2 Exploratory charts | ⬜ | `07_explore.ipynb` | First charts of each meat, early observations |
 
 ---
@@ -107,6 +107,13 @@ evidence.
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-10-26: Item 2.1 complete
+- **Done:** notebook 06 run in full on Scott's machine: `master_monthly.csv`
+  (201 months × 56 columns) and `docs/DATA_DICTIONARY.md` generated, all
+  checks as expected (only October 2025 filled; only chicken's ERS January–March
+  2026 still empty).
+- **Next:** item 2.2, exploratory charts.
 
 ### 2026-10-26: Item 2.1 written
 - **Done:** agreed the master table design together (D27). Notebook 06 builds
