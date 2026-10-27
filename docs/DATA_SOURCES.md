@@ -204,7 +204,14 @@ aid for ranchers.
   2019, weighted by those 2019 beef cows; weekly values averaged to months; DSCI
   = D0 + D1 + D2 + D3 + D4 (cumulative).
 - **Checks in the notebook:** every week must satisfy D0 ≥ D1 ≥ D2 ≥ D3 ≥ D4,
-  and all values must be between 0 and 100.
+  and all values must be between 0 and 100. Both passed for all 878 weeks in
+  every area (first download, 2026-10-26).
+- **States used (2019 weights):** TX, OK, MO, NE, SD, KS, MT, KY, ND, AR, IA, TN,
+  FL, CO, WY, AL, VA: 17 states holding 76.2% of U.S. beef cows. Texas has the
+  largest weight (0.19).
+- **Response fields:** `mapDate`, `stateAbbreviation`, `none`, `d0`–`d4`,
+  `validStart`, `validEnd`, `statisticFormatID`. The week starting December 29,
+  2009 is returned for a January 1, 2010 start date and is dropped.
 - **Processed outputs (committed):**
   - `data/processed/drought_cattle_country_monthly.csv`: `date,
     cattle_d2_plus_pct, cattle_dsci, conus_d2_plus_pct, conus_dsci`

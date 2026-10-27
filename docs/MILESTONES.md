@@ -183,6 +183,19 @@ Newest first. One entry per finished item.
   `nass_slaughter_monthly.csv`.
 - **Next:** run notebook 04 (drought).
 
+### 2026-10-26: Item 1.6, first run reviewed
+- **Done:** notebook 04 ran on Scott's machine: 17 states hold 76.2% of U.S.
+  beef cows (Texas weight 0.19), 878 weeks per area, both data checks 100%.
+  Findings written into the notebook. Fix: the first 2010 map starts on
+  December 29, 2009, which created a stray 2009 month; now dropped.
+- **Findings:** two major droughts in cattle country (2011–2013, peak 63% in
+  severe drought or worse in September 2012; 2020–2023, worst in 2022 at about
+  35% on average), each followed by a cow sell-off that ended when the drought
+  eased. A new drought in 2026 (about 44% in the spring) has not, so far, been
+  followed by more cow slaughter: an open question for item 4.4.
+- **Next:** Scott re-runs notebook 04 (to save its outputs and the corrected
+  table); then item 1.7, grocery category CPIs.
+
 ### 2026-10-26: Items 1.1 and 1.2 complete
 - **Done:** notebook 01 downloads BLS prices and CPI (Jan 2015 to Sep 2026),
   checks coverage, lists missing months and compares each candidate with
