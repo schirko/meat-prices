@@ -37,7 +37,7 @@ exactly how, so anyone can repeat it.
 | 1.4 USDA NASS cattle inventory | ✅ | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year from 2010 (D24). Part 1: download and inventory; Part 2: chosen series, coverage, first chart |
 | 1.5 Beef cow slaughter | ✅ | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
 | 1.6 Drought data | 🔄 | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the states holding 75% of beef cows, weighted by 2019 beef cows; % in severe drought or worse and DSCI, monthly from 2010 (D26) |
-| 1.7 Grocery category CPIs (context) | ⬜ | `05_grocery_categories.ipynb` | BLS CPI indexes for food at home and its categories (produce, cereals and bakery, dairy, beverages, other/packaged foods, meats). Same API and key as notebook 01 (see D19) |
+| 1.7 Grocery category CPIs (context) | 🔄 | `05_grocery_categories.ipynb` | BLS CPI indexes for food at home and its categories (produce, cereals and bakery, dairy, beverages, other/packaged foods, meats). Same API and key as notebook 01 (see D19) |
 
 ---
 
@@ -108,48 +108,47 @@ evidence.
 
 Newest first. One entry per finished item.
 
-### 2026-10-26: Item 1.3 started
-- **Done:** notebook 02 Part 1 written: downloads four ERS CSV files,
-  standardizes their three slightly different layouts, and lists every data item
-  with units and date range (D21).
-- **Next:** Scott runs Part 1; we review the inventory together and choose
-  which items to keep, then write Part 2.
-- **Bug found and fixed (from Scott's question about the inventory):** beef
-  retail value appeared to be missing 10 of 24 recent months. The months
-  weren't missing: ERS writes values of 1,000 or more with a thousands comma
-  (`1,011.3`), which the loader turned into missing values. The loader now
-  strips the comma first.
+### 2026-10-26: Item 1.7 started
+- **Done:** notebook 05 written: downloads 15 BLS CPI series in one request
+  (all items, food at home, food away from home, eight grocery categories, and
+  beef, pork, poultry and eggs), checks coverage, rescales every series to its
+  2015 average = 100, compares changes since 2015 and 2019 (D20), charts meat
+  against the rest of the grocery cart and saves
+  `cpi_grocery_categories_monthly.csv`. Reordered this log so the newest entry
+  is first, as intended.
+- **Next:** Scott runs notebook 05; we fill in the findings together. That
+  completes Milestone 1.
 
-### 2026-10-26: Item 1.3, Part 2 written
-- **Done:** notebook 02 Part 2 maps three values per meat across files,
-  confirms the historical and recent files agree (within 0.05 cents), combines
-  them, calculates spreads and shares (D22), checks them against ERS's published
-  figures, and saves `data/processed/ers_price_spreads_monthly.csv`.
-- **Found:** a mislabeled column in ERS's recent pork file (percent stored as
-  cents), handled by using our calculation (D23). Chicken's 2025 units label
-  change is only a relabel. Chicken has no data for January–March 2026.
-- **First finding:** beef's farmer share fell from about 52% (2015) to 43%
-  (2019), then rose to about 54% (2025), while the packer share shrank to under
-  5%. Consistent with scarce cattle (D17).
-- **Next:** Scott runs notebook 02; then item 1.4/1.5, NASS cattle inventory
-  and cow slaughter.
+### 2026-10-26: Item 1.6, first run reviewed
+- **Done:** notebook 04 ran on Scott's machine: 17 states hold 76.2% of U.S.
+  beef cows (Texas weight 0.19), 878 weeks per area, both data checks 100%.
+  Findings written into the notebook. Fix: the first 2010 map starts on
+  December 29, 2009, which created a stray 2009 month; now dropped.
+- **Findings:** two major droughts in cattle country (2011–2013, peak 63% in
+  severe drought or worse in September 2012; 2020–2023, worst in 2022 at about
+  35% on average), each followed by a cow sell-off that ended when the drought
+  eased. A new drought in 2026 (about 44% in the spring) has not, so far, been
+  followed by more cow slaughter: an open question for item 4.4.
+- **Next:** Scott re-runs notebook 04 (to save its outputs and the corrected
+  table); then item 1.7, grocery category CPIs.
 
-### 2026-10-26: Docs, key terms; items 1.4 and 1.5 started
-- **Done:** added "Key terms: the three price stages" to DATA_SOURCES.md and the
-  README ("three values per meat" = farm, wholesale and retail for each meat,
-  not three data sources). NASS API key registered and stored in `.env`.
-  Notebook 03 Part 1 written: checks row counts, downloads cattle inventory and
-  monthly cattle slaughter from 2010 (D24), and lists every series.
-- **Next:** Scott runs notebook 02 Part 2 and notebook 03 Part 1; we choose the
-  herd and cow slaughter series together.
+### 2026-10-26: Items 1.4 and 1.5 complete
+- **Done:** notebook 03 run in full on Scott's machine: herd complete for
+  2010–2026 (51 rows), slaughter complete for January 2010 to September 2026
+  (603 rows), results match the test run. Saved `nass_herd_jan1.csv` and
+  `nass_slaughter_monthly.csv`.
+- **Next:** run notebook 04 (drought).
 
-### 2026-10-26: Item 1.3 complete
-- **Done:** notebook 02 run in full on Scott's machine. All results match the
-  test run: files agree in the overlap, 10 of 11 checks within 0.1, the pork
-  column error confirmed (D23), coverage complete for beef and pork (141
-  months), chicken missing Jan–Mar 2026 as expected.
-  `data/processed/ers_price_spreads_monthly.csv` saved (2,808 rows).
-- **Next:** notebook 03 Part 1 (NASS).
+### 2026-10-26: Item 1.6 started
+- **Done:** agreed the drought method together (D26): states holding 75% of
+  U.S. beef cows, weighted by their January 1, 2019 beef cows; % of area in
+  severe drought or worse (D2–D4) as the headline and DSCI for statistics;
+  monthly from 2010. Notebook 04 written: downloads state beef cows (NASS) and
+  weekly drought statistics (U.S. Drought Monitor), checks them, builds the
+  cattle-country measures, charts drought against cow slaughter, and saves two
+  processed files. Added the Drought Monitor to the agencies table.
+- **Next:** Scott runs notebook 03 (Part 2) and then notebook 04; we fill in the
+  findings together.
 
 ### 2026-10-26: Items 1.4 and 1.5, Part 2 written
 - **Done:** chose six NASS series together (D25). Notebook 03 Part 2 builds the
@@ -165,36 +164,48 @@ Newest first. One entry per finished item.
   2018 as the normal cycle turned; the drought accelerated it.
 - **Next:** Scott runs notebook 03 in full; then item 1.6, drought data.
 
-### 2026-10-26: Item 1.6 started
-- **Done:** agreed the drought method together (D26): states holding 75% of
-  U.S. beef cows, weighted by their January 1, 2019 beef cows; % of area in
-  severe drought or worse (D2–D4) as the headline and DSCI for statistics;
-  monthly from 2010. Notebook 04 written: downloads state beef cows (NASS) and
-  weekly drought statistics (U.S. Drought Monitor), checks them, builds the
-  cattle-country measures, charts drought against cow slaughter, and saves two
-  processed files. Added the Drought Monitor to the agencies table.
-- **Next:** Scott runs notebook 03 (Part 2) and then notebook 04; we fill in the
-  findings together.
+### 2026-10-26: Item 1.3 complete
+- **Done:** notebook 02 run in full on Scott's machine. All results match the
+  test run: files agree in the overlap, 10 of 11 checks within 0.1, the pork
+  column error confirmed (D23), coverage complete for beef and pork (141
+  months), chicken missing Jan–Mar 2026 as expected.
+  `data/processed/ers_price_spreads_monthly.csv` saved (2,808 rows).
+- **Next:** notebook 03 Part 1 (NASS).
 
-### 2026-10-26: Items 1.4 and 1.5 complete
-- **Done:** notebook 03 run in full on Scott's machine: herd complete for
-  2010–2026 (51 rows), slaughter complete for January 2010 to September 2026
-  (603 rows), results match the test run. Saved `nass_herd_jan1.csv` and
-  `nass_slaughter_monthly.csv`.
-- **Next:** run notebook 04 (drought).
+### 2026-10-26: Docs, key terms; items 1.4 and 1.5 started
+- **Done:** added "Key terms: the three price stages" to DATA_SOURCES.md and the
+  README ("three values per meat" = farm, wholesale and retail for each meat,
+  not three data sources). NASS API key registered and stored in `.env`.
+  Notebook 03 Part 1 written: checks row counts, downloads cattle inventory and
+  monthly cattle slaughter from 2010 (D24), and lists every series.
+- **Next:** Scott runs notebook 02 Part 2 and notebook 03 Part 1; we choose the
+  herd and cow slaughter series together.
 
-### 2026-10-26: Item 1.6, first run reviewed
-- **Done:** notebook 04 ran on Scott's machine: 17 states hold 76.2% of U.S.
-  beef cows (Texas weight 0.19), 878 weeks per area, both data checks 100%.
-  Findings written into the notebook. Fix: the first 2010 map starts on
-  December 29, 2009, which created a stray 2009 month; now dropped.
-- **Findings:** two major droughts in cattle country (2011–2013, peak 63% in
-  severe drought or worse in September 2012; 2020–2023, worst in 2022 at about
-  35% on average), each followed by a cow sell-off that ended when the drought
-  eased. A new drought in 2026 (about 44% in the spring) has not, so far, been
-  followed by more cow slaughter: an open question for item 4.4.
-- **Next:** Scott re-runs notebook 04 (to save its outputs and the corrected
-  table); then item 1.7, grocery category CPIs.
+### 2026-10-26: Item 1.3, Part 2 written
+- **Done:** notebook 02 Part 2 maps three values per meat across files,
+  confirms the historical and recent files agree (within 0.05 cents), combines
+  them, calculates spreads and shares (D22), checks them against ERS's published
+  figures, and saves `data/processed/ers_price_spreads_monthly.csv`.
+- **Found:** a mislabeled column in ERS's recent pork file (percent stored as
+  cents), handled by using our calculation (D23). Chicken's 2025 units label
+  change is only a relabel. Chicken has no data for January–March 2026.
+- **First finding:** beef's farmer share fell from about 52% (2015) to 43%
+  (2019), then rose to about 54% (2025), while the packer share shrank to under
+  5%. Consistent with scarce cattle (D17).
+- **Next:** Scott runs notebook 02; then item 1.4/1.5, NASS cattle inventory
+  and cow slaughter.
+
+### 2026-10-26: Item 1.3 started
+- **Done:** notebook 02 Part 1 written: downloads four ERS CSV files,
+  standardizes their three slightly different layouts, and lists every data item
+  with units and date range (D21).
+- **Next:** Scott runs Part 1; we review the inventory together and choose
+  which items to keep, then write Part 2.
+- **Bug found and fixed (from Scott's question about the inventory):** beef
+  retail value appeared to be missing 10 of 24 recent months. The months
+  weren't missing: ERS writes values of 1,000 or more with a thousands comma
+  (`1,011.3`), which the loader turned into missing values. The loader now
+  strips the comma first.
 
 ### 2026-10-26: Items 1.1 and 1.2 complete
 - **Done:** notebook 01 downloads BLS prices and CPI (Jan 2015 to Sep 2026),
