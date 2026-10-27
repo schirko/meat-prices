@@ -153,4 +153,26 @@ other things. We don't download from AMS ourselves; its prices reach us through 
   to avoid disclosing individual operations, `(NA)` = not available, `(Z)` =
   less than half the unit shown. Codes become missing values; the original
   text is kept in `value_raw`.
-- **Series used:** _to be chosen after the inventory in notebook 03 Part 1_
+- **Series used (decision D25):**
+
+  | Table | NASS series (`short_desc`) | Column |
+  |---|---|---|
+  | Herd, Jan 1 | CATTLE, INCL CALVES - INVENTORY | `all_cattle` |
+  | Herd, Jan 1 | CATTLE, COWS, BEEF - INVENTORY | `beef_cows` |
+  | Herd, Jan 1 | CATTLE, HEIFERS, GE 500 LBS, BEEF REPLACEMENT - INVENTORY | `beef_replacement_heifers` |
+  | Slaughter, monthly | CATTLE, COWS, (EXCL MILK), SLAUGHTER, COMMERCIAL, FI - SLAUGHTERED, MEASURED IN HEAD | `beef_cows_slaughtered` |
+  | Slaughter, monthly | CATTLE, HEIFERS, SLAUGHTER, COMMERCIAL, FI - SLAUGHTERED, MEASURED IN HEAD | `heifers_slaughtered` |
+  | Slaughter, monthly | CATTLE, STEERS, SLAUGHTER, COMMERCIAL, FI - SLAUGHTERED, MEASURED IN HEAD | `steers_slaughtered` |
+
+  Only rows with `domain_desc` = TOTAL are used (national totals).
+- **Coverage:** herd every January 1 from 2010 to 2026; slaughter every month
+  from January 2010 to September 2026. No suppressed (`(D)`) values.
+- **Limits:** the July 1 inventory is incomplete (no report in 2013, 2016,
+  2024), so only January is used; FI slaughter excludes the small share of
+  cattle slaughtered in plants without federal inspection.
+- **Processed outputs (committed):**
+  - `data/processed/nass_herd_jan1.csv`: `year, reference_date, all_cattle,
+    beef_cows, beef_replacement_heifers` (head)
+  - `data/processed/nass_slaughter_monthly.csv`: `date, beef_cows_slaughtered,
+    heifers_slaughtered, steers_slaughtered, heifer_share_pct,
+    beef_cows_slaughtered_12mo`

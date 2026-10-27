@@ -315,3 +315,30 @@ Format: **what we decided**, **why**, and **what we considered instead**.
 - **Focus on cows:** cow slaughter, not total cattle slaughter, is the sell-off
   signal. Steers and heifers are slaughtered every year as normal business;
   cows are the breeding herd, so each cow slaughtered means fewer calves later.
+
+## D25. Six NASS series: January 1 herd and federally inspected slaughter (2026-10-26)
+
+- **Decided:**
+  - **Herd (January 1 inventory):** all cattle including calves; beef cows;
+    beef replacement heifers (500 lb and over).
+  - **Slaughter (monthly, federally inspected):** beef cows (cows excluding
+    milk cows); heifers; steers.
+  - **Calculated:** heifer share of slaughter = heifers ÷ (heifers + steers);
+    beef cows slaughtered over the latest 12 months; and, per year, beef cows
+    slaughtered as a % of the January 1 beef cow herd.
+- **Why:**
+  - **January 1, not July 1:** NASS skipped its July cattle report in 2013,
+    2016 and 2024, so January is the only complete yearly series.
+  - **Beef cows, not all cows:** dairy cows are culled for different reasons
+    (milk prices, herd turnover) and don't belong to the beef breeding herd.
+  - **Replacement heifers:** young females held back to become cows. A rising
+    count is the first sign ranchers are rebuilding; a low count means they
+    aren't.
+  - **Heifer share of slaughter:** a standard industry signal. Heifers can be
+    kept for breeding or slaughtered; a high share means the herd is shrinking.
+  - **Federally inspected (FI):** the only slaughter version NASS splits into
+    cows, heifers and steers, and it covers almost all commercial slaughter.
+  - **Rolling 12-month total:** cow slaughter is seasonal (more cows culled in
+    the fall), so the 12-month total shows the trend without the seasons.
+- **Coverage:** herd complete for 2010–2026; slaughter complete for every month
+  from January 2010 to September 2026. No suppressed values.

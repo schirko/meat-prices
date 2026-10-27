@@ -33,7 +33,7 @@ exactly how, so anyone can repeat it.
 |---|---|---|---|
 | 1.1 BLS retail meat prices | ✅ | `01_bls_retail_prices.ipynb` | Register for a free BLS API key, find the right series IDs for beef, pork and chicken, pull monthly prices 2015 to now, save raw data |
 | 1.2 BLS Consumer Price Index | ✅ | same notebook | Pull CPI (all items) for the same months, used later for inflation adjustment |
-| 1.3 USDA ERS meat price spreads | 🔄 | `02_ers_price_spreads.ipynb` | Part 1: download the historical file plus the three recent files (CSV), standardize and take an inventory of data items. Part 2: choose items, match names across files, check overlap, combine 2015 to now (D21) |
+| 1.3 USDA ERS meat price spreads | ✅ | `02_ers_price_spreads.ipynb` | Part 1: download the historical file plus the three recent files (CSV), standardize and take an inventory of data items. Part 2: choose items, match names across files, check overlap, combine 2015 to now (D21) |
 | 1.4 USDA NASS cattle inventory | 🔄 | `03_nass_cattle_inventory.ipynb` | Register for a free NASS API key, pull January 1 cattle inventory by year from 2010 (D24). Part 1: download and inventory; Part 2: chosen series, coverage, first chart |
 | 1.5 Beef cow slaughter | 🔄 | same notebook | Pull monthly beef cow slaughter from NASS. Ranchers selling off cows during drought shows up here first (see D17) |
 | 1.6 Drought data | ⬜ | `04_drought.ipynb` | Weekly U.S. Drought Monitor data for the main cattle states, and the share of cattle in drought areas (see D17) |
@@ -142,6 +142,28 @@ Newest first. One entry per finished item.
   monthly cattle slaughter from 2010 (D24), and lists every series.
 - **Next:** Scott runs notebook 02 Part 2 and notebook 03 Part 1; we choose the
   herd and cow slaughter series together.
+
+### 2026-10-26: Item 1.3 complete
+- **Done:** notebook 02 run in full on Scott's machine. All results match the
+  test run: files agree in the overlap, 10 of 11 checks within 0.1, the pork
+  column error confirmed (D23), coverage complete for beef and pork (141
+  months), chicken missing Jan–Mar 2026 as expected.
+  `data/processed/ers_price_spreads_monthly.csv` saved (2,808 rows).
+- **Next:** notebook 03 Part 1 (NASS).
+
+### 2026-10-26: Items 1.4 and 1.5, Part 2 written
+- **Done:** chose six NASS series together (D25). Notebook 03 Part 2 builds the
+  January 1 herd table and the monthly slaughter table (with heifer share and
+  12-month totals), checks coverage (complete), charts herd, slaughter and the
+  ground beef price together, and saves `nass_herd_jan1.csv` and
+  `nass_slaughter_monthly.csv`.
+- **First finding:** the beef cow herd fell from 31.6 million (2019) to 27.6
+  million (2026), down 13%. Beef cow slaughter peaked in 2022 at 13.2% of the
+  herd, larger than the 2011 drought sell-off (12.3%). Heifer share of slaughter
+  was near 40% in 2022–2024, the highest in the data, and replacement heifers
+  remain near their low, so no rebuild yet. Caveat: the decline began around
+  2018 as the normal cycle turned; the drought accelerated it.
+- **Next:** Scott runs notebook 03 in full; then item 1.6, drought data.
 
 ### 2026-10-26: Items 1.1 and 1.2 complete
 - **Done:** notebook 01 downloads BLS prices and CPI (Jan 2015 to Sep 2026),
