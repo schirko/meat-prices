@@ -120,18 +120,33 @@ problems before they reach the app (D29, D31).
 
 ---
 
-## Milestone 7: Publish ⬜
+## Milestone 7: Publish ✅
 
 | Item | Status | What's involved |
 |---|---|---|
 | 7.1 Deploy on the VPS | ✅ | Done another way (D36, D39): the whole project site, including the interactive explorer, is static files served by schirko.com at /scott/meat-prices/ from Scott's VPS (Coolify redeploys on push). No Streamlit service needed. |
-| 7.2 Portfolio polish | 🔄 | Done early (D32, D35): README summary with findings, two charts (`python -m src.readme_charts`), limits, tests badge, and the project site at schirko.com/scott/meat-prices (`python -m src.build_site`, D36). Left: app link and screenshots once the app exists, and the portfolio site entry. Original plan: one-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
+| 7.2 Portfolio polish | ✅ | README summary with the verdict, findings, charts, limits and tests badge; the project site at schirko.com/scott/meat-prices with the explorer, findings guide, notebooks and docs (D35, D36, D39); every page links back to the portfolio; final read-through done |
 
 ---
 
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-11-15: Project complete (Milestone 7)
+- **Done:** item 7.2, the final read-through. The README's data sources now include
+  NASS slaughter and the U.S. Drought Monitor. Its project layout includes the findings
+  guide and the site builder, and `app/` is marked as an unused placeholder (D39). Scott
+  approved the portfolio card.
+- **Status:** every milestone is complete.
+- **Keeping it current:**
+  1. `python -m src.refresh`
+  2. Run and save any notebook whose results should change.
+  3. `python -m src.build_site`
+  4. Push meat-prices, then Schirko.
+- **When new data arrives:** update the hand-written wording that depends on it (the
+  front-page verdict, the explorer's "What it means" and year notes, and the findings
+  guide). The numbers update themselves.
 
 ### 2026-11-15: Interactive explorer (Milestone 5 complete)
 - **Done:** `explore.html` on the project site, built with the rest of the site by

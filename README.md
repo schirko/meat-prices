@@ -111,7 +111,8 @@ no sudden event clearly moved beef, so beef's rise points to the shrinking herd 
 | Average retail prices per pound | U.S. Bureau of Labor Statistics (BLS) | The main price history |
 | Consumer Price Index (CPI) | BLS | Adjusting for inflation |
 | Meat price spreads (farm, wholesale, retail) | USDA Economic Research Service (ERS) | Who gets each dollar |
-| Cattle inventory | USDA National Agricultural Statistics Service (NASS) | Supply side |
+| Cattle inventory and slaughter | USDA National Agricultural Statistics Service (NASS) | Supply side: herd size and the cow sell-off |
+| Drought | U.S. Drought Monitor | Drought across cattle country, weighted by where the cows are |
 | Event timeline | Curated from news and USDA reports, with citations | Annotating charts, testing events |
 
 **Key terms.** The price spreads follow one pound of meat through three stages:
@@ -136,18 +137,21 @@ column in [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md).
 ```
 meat-prices/
 ├── .github/workflows/   Runs the tests on every push (GitHub Actions)
-├── app/                 Streamlit app (Milestone 5)
+├── app/                 Unused placeholder; the app is the site's explorer page (D39)
 ├── data/
 │   ├── raw/             Data exactly as downloaded (not committed to git)
-│   └── processed/       Cleaned data the app reads, plus REFRESH_REPORT.md
+│   └── processed/       Cleaned data the notebooks and site read, plus REFRESH_REPORT.md
 ├── deploy/              Monthly refresh script for the server
 ├── docs/
+│   ├── FINDINGS.md      Findings and methods explained in plain language
+│   ├── images/          Charts used in this README
 │   ├── MILESTONES.md    The plan, progress and what each item involves
 │   ├── DECISIONS.md     Every significant decision and why we made it
 │   ├── DATA_SOURCES.md  Where each data set comes from and how to get it
 │   └── DATA_DICTIONARY.md  Every column in the master table (generated)
 ├── notebooks/           Numbered Jupyter notebooks, one per analysis step
-├── src/                 The data pipeline: download, build, check, publish
+├── src/                 The data pipeline (download, build, check, publish) and the
+│                        site builder (build_site.py, site and explorer templates)
 ├── tests/               Data and pipeline tests (pytest)
 ├── .env.example         Template for API keys (copy to .env)
 ├── requirements.txt     Python packages (full development setup)
