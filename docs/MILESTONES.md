@@ -73,7 +73,7 @@ evidence.
 |---|---|---|---|
 | 4.1 Inflation-adjusted prices | ⬜ | `09_inflation_adjusted.ipynb` | Convert prices to today's dollars using CPI; compare meat to overall inflation |
 | 4.2 Who gets the dollar | ⬜ | `10_price_spreads.ipynb` | Farm, packer and retail shares over time |
-| 4.3 Did prices shift at each event? | ⬜ | `11_event_tests.ipynb` | Changepoint detection and/or interrupted time series |
+| 4.3 Did prices shift at each event? | ✅ | `11_event_tests.ipynb` | Forecast from the 3 years before each event, compared with what happened; gaps judged against every ordinary month (D34) |
 | 4.4 Supply side: drought → herd → price | ⬜ | `12_supply.ipynb` | Trace the chain in D17: did drought come first, then cow sell-offs, then a smaller herd, then higher beef prices? Measure the time lag between each step |
 | 4.5 Verdict | ⬜ | `13_verdict.ipynb` | Pull findings together into plain-language conclusions |
 
@@ -115,7 +115,7 @@ problems before they reach the app (D29, D31).
 | Item | Status | What's involved |
 |---|---|---|
 | 7.1 Deploy on the VPS | ⏸ | Deferred (D32): portfolio links to the GitHub repo for now. When resumed: run the Streamlit app as a service on the VPS at schirko.com/scott/meat-prices behind the web server, with HTTPS (D12, D30) |
-| 7.2 Portfolio polish | 🔄 | Done early (D32): README summary with findings, two charts (`python -m src.readme_charts`), limits and tests badge. Left: app link and screenshots once the app exists, and the portfolio site entry. Original plan: one-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
+| 7.2 Portfolio polish | 🔄 | Done early (D32, D35): README summary with findings, two charts (`python -m src.readme_charts`), limits, tests badge, and the GitHub Pages project site (`python -m src.build_site`). Left: app link and screenshots once the app exists, and the portfolio site entry. Original plan: one-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
 
 ---
 
@@ -146,6 +146,27 @@ Newest first. One entry per finished item.
   claim, only chicken moved). Beef's rise is a slow build following the herd, not a
   series of event shocks.
 - **Next:** Milestone 4, testing these patterns properly.
+
+### 2026-11-14: Event tests (item 4.3)
+- **Done:** notebook `11_event_tests.ipynb`. For each event and meat, an AR(1)-with-trend
+  model fit to the 3 years before forecasts the next 6 months; the gap between actual
+  and forecast is judged against the gaps at every ordinary month (D34). A simpler
+  forecast is run as a second opinion (they agree on 15 of 19 tests).
+- **Found:** the COVID closures clearly shifted all three meats (+11% to +17%). Chicken's
+  2022 spike was real but can't be split between feed costs and bird flu. No popular
+  claim holds up. Apart from COVID, only the May 2025 Mexican import suspension looks
+  like a step up for beef, and that one is borderline. So most of beef's rise isn't
+  explained by sudden events.
+- **Problem found and fixed:** the model's own 95% range flagged about 30% of
+  ordinary months as shifts, so it wasn't used for the verdicts.
+- **Next:** item 4.4, drought → sell-off → herd → price.
+
+### 2026-11-14: Project site on GitHub Pages (D35)
+- **Done:** `python -m src.build_site` builds a front page (summary, key numbers, the
+  two charts, findings, method, limits, links) and one HTML page per notebook in
+  `docs/`. GitHub Pages serves it at https://schirko.github.io/meat-prices/. The
+  portfolio card links there and to the repo.
+- **Next:** item 4.4. After each new notebook, rebuild the site and push.
 
 
 ### 2026-11-13: Milestone 6 items 6.1–6.4 complete

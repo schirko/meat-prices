@@ -2,6 +2,8 @@
 
 [![tests](https://github.com/schirko/meat-prices/actions/workflows/tests.yml/badge.svg)](https://github.com/schirko/meat-prices/actions/workflows/tests.yml)
 
+**Project site:** [schirko.github.io/meat-prices](https://schirko.github.io/meat-prices/), with the summary, charts and every notebook as a readable page.
+
 **Why does meat cost so much now?** This project looks at U.S. retail prices for
 beef, pork and chicken from 2015 to today. It shows where prices were before
 2020, how they climbed, which events lined up with each jump, who gets each
@@ -58,11 +60,15 @@ patterns, and the statistical tests come in Milestone 4.
 
 **Events:** 16 dated, sourced events (plant closures, drought, trade, disease, and
 three popular claims) are marked on the price charts in
-[notebook 08](notebooks/08_events.ipynb). The 2020 COVID closures stand out for all
-three meats. The popular claims don't line up with price jumps.
+[notebook 08](notebooks/08_events.ipynb), and tested in
+[notebook 11](notebooks/11_event_tests.ipynb). Notebook 11 compares the price after each
+event with a forecast of where it was heading, then checks whether the gap is bigger than
+in ordinary months. The 2020 COVID closures clearly shifted all three meats (+11% to +17%),
+and chicken's 2022 spike was real. None of the popular claims holds up. Apart from COVID,
+no sudden event clearly moved beef, so beef's rise points to the shrinking herd instead.
 
-**Still to come:** statistical tests of which events moved prices, and an
-interactive app.
+**Still to come:** testing the drought → herd → price chain directly, a final
+verdict on whether today's prices are justified, and an interactive app.
 
 ---
 
@@ -166,6 +172,7 @@ python -m src.refresh --offline            # rebuild from the saved raw files (n
 python -m src.refresh --offline --dry-run  # build and check only; change nothing
 pytest                                     # run the data and pipeline tests
 python -m src.readme_charts                # redraw the README charts and print its numbers
+python -m src.build_site                   # rebuild the project site in docs/ (charts, numbers, notebook pages)
 ```
 
 The tests check, among other things, that there is one row per month with no

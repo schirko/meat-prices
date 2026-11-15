@@ -535,3 +535,53 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   - Slow effects such as drought don't fit a three-month window.
   - The 2020–2023 drought's −16% is an example: it measures the COVID spike fading,
     not the drought.
+
+## D34. How the event tests work (item 4.3, 2026-11-14)
+
+- **Decided:**
+  - **Forecast.** For each event and each meat it affects, fit an **AR(1) model with a
+    linear trend** (statsmodels SARIMAX) to the log of the inflation-adjusted price over
+    the **36 months before** the event. Forecast the **6 months from the event's start**.
+    The effect is the average gap between actual and forecast, as a percent.
+  - **What counts as unusual.** The verdict compares the gap with the same gap computed
+    at every **ordinary month** from 2018 on. An ordinary month is one not within 6
+    months of the start of an event affecting that meat. The p-value is
+    (ordinary months with a gap at least as big + 1) / (ordinary months + 1).
+    Below 0.05 is a clear shift; 0.05–0.10 is a possible shift.
+  - **Second opinion.** A simpler forecast (last month plus the average monthly change)
+    is run the same way.
+  - **Droughts and the shutdown are left out.** Droughts act slowly through the herd
+    and are tested in item 4.4. The shutdown changed data, not prices.
+- **Why not the model's own confidence range:** a placebo run over every month found
+  it flagged 27–36% of months as shifts instead of about 5%. It assumes the model is
+  exactly right, and real prices change course more often than a 3-year trend allows.
+  Comparing with ordinary months needs no such assumption.
+- **Why not changepoint detection (the original plan):** `ruptures` can't be
+  installed on Python 3.14 (D16). Changepoint methods also find *where* breaks are
+  rather than testing dates we already have, and our events have known dates.
+- **Limits:**
+  - Overlapping events share a result (E06, E07 and E08 for chicken; E14 and E15).
+  - Beef has only 31 ordinary months, so its smallest possible p-value is about 0.03.
+  - About one of the 19 tests could be a "clear shift" by chance.
+
+## D35. Project site on GitHub Pages, built into docs/ (2026-11-14)
+
+- **Decided:** the project gets a public site at https://schirko.github.io/meat-prices/,
+  served by GitHub Pages from the `docs/` folder of the master branch.
+  `python -m src.build_site` builds it in three steps:
+  1. Redraws the summary charts.
+  2. Fills the latest numbers into `src/site_template.html` to write `docs/index.html`.
+  3. Exports every notebook, with its saved outputs, to `docs/notebooks/*.html`.
+  A `.nojekyll` file tells GitHub to serve the files as they are.
+- **Why:** Scott's portfolio card needs two links, one to the code and one to the
+  project itself. GitHub Pages is free for public repositories and needs no server, so
+  it replaces VPS hosting for now (D32). Building from the data means the headline
+  numbers can't drift out of date after a refresh. Exported notebook pages also avoid
+  GitHub's notebook viewer, which sometimes fails on large notebooks.
+- **Why `docs/` and not a separate branch:** GitHub Pages can serve `docs/` on master
+  directly, with no extra branch or workflow file. The Markdown docs in the same folder
+  are linked on GitHub instead of being turned into pages.
+- **Limits:** the findings text on the front page is written by hand in the template;
+  only the numbers update automatically. When a new analysis changes a finding, the
+  template is edited too. The notebook pages show the outputs saved in each notebook,
+  so a notebook has to be run and saved before the site is rebuilt.
