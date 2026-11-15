@@ -74,7 +74,7 @@ evidence.
 | 4.1 Inflation-adjusted prices | ⬜ | `09_inflation_adjusted.ipynb` | Convert prices to today's dollars using CPI; compare meat to overall inflation |
 | 4.2 Who gets the dollar | ⬜ | `10_price_spreads.ipynb` | Farm, packer and retail shares over time |
 | 4.3 Did prices shift at each event? | ✅ | `11_event_tests.ipynb` | Forecast from the 3 years before each event, compared with what happened; gaps judged against every ordinary month (D34) |
-| 4.4 Supply side: drought → herd → price | ⬜ | `12_supply.ipynb` | Trace the chain in D17: did drought come first, then cow sell-offs, then a smaller herd, then higher beef prices? Measure the time lag between each step |
+| 4.4 Supply side: drought → herd → price | ✅ | `12_supply_chain.ipynb` | Yearly fits (HAC errors) for each link: drought → cow sell-off rate, sell-off → herd change, herd → real price (log-log elasticity); a drought what-if; the 2026 exception (D37) |
 | 4.5 Verdict | ⬜ | `13_verdict.ipynb` | Pull findings together into plain-language conclusions |
 
 ---
@@ -123,29 +123,39 @@ problems before they reach the app (D29, D31).
 
 Newest first. One entry per finished item.
 
-### 2026-11-14: Hosting decision
-- **Done:** decided the portfolio will link to the public GitHub repo for now (D32);
-  VPS hosting (item 7.1) deferred. The README becomes the project's front door.
-- **Next:** item 3.1 event review, then 3.2.
+### 2026-11-15: The supply chain measured (item 4.4)
+- **Done:** notebook `12_supply_chain.ipynb`. It measures each link of the chain with one
+  row per year and corrected p-values (D37), then runs a drought what-if.
+- **Found:**
+  - Drought raises the cow sell-off in the same year: 10 more points of drought means
+    about 0.8 points more of the herd sold, roughly 245,000 cows.
+  - Selling more than about 9.6% of the herd in a year shrinks it, by about 1.1% per
+    extra point.
+  - A 1% smaller herd goes with about a 1.8% higher real beef price. That holds with a
+    time trend and in year-to-year changes.
+  - The herd alone predicts a +25% real price rise from 2019 to 2025; the actual rise was
+    +28%.
+  - Drought explains roughly 40% of the herd loss and about 11 points of the price rise.
+  - 2026 breaks the pattern: drought is back, but ranchers are keeping their cows.
+- **Next:** item 4.5, the verdict, with 4.1 and 4.2 folded in.
 
-### 2026-11-14: README summary and event list approved
-- **Done:** README now opens with the tests badge, a one-page summary, key findings
-  and two charts made by `python -m src.readme_charts` (item 7.2, done early).
-  GitHub Actions tests pass (green badge). Scott reviewed and approved all 16
-  events in `events.csv` as they are (item 3.1 complete).
-- **Next:** item 3.2, notebook `08_events.ipynb`, marking the events on the price charts.
+### 2026-11-15: Site moved to schirko.com (D36)
+- **Done:**
+  - GitHub Pages unpublished.
+  - `python -m src.build_site` now builds into `SITE_DIR`, the Schirko portfolio
+    folder, so the site is served at schirko.com/scott/meat-prices/.
+  - The project docs are published as pages too.
+  - The repo stays public; the site and the portfolio card link to it.
+  - The portfolio card in the Schirko project now points to the new address.
+- **Next:** item 4.4. After each new notebook,
+  rebuild the site and push the Schirko project.
 
-### 2026-11-14: Events on the price charts (Milestone 3 complete)
-- **Done:** notebook `08_events.ipynb` (item 3.2): an event timeline, each meat's price
-  with its events, a three-month "how much did the price move" screen ranked against
-  every other three-month move (D33), and the beef events on the drought → sell-off →
-  price chain.
-- **Found:** the 2020 COVID closures caused one of the biggest price moves on record for
-  all three meats, then faded. Chicken's 2022 spike lines up with feed costs and bird
-  flu together. The three popular claims came in ordinary months (or, for the fires
-  claim, only chicken moved). Beef's rise is a slow build following the herd, not a
-  series of event shocks.
-- **Next:** Milestone 4, testing these patterns properly.
+### 2026-11-14: Project site on GitHub Pages (D35)
+- **Done:** `python -m src.build_site` builds a front page (summary, key numbers, the
+  two charts, findings, method, limits, links) and one HTML page per notebook in
+  `docs/`. GitHub Pages serves it at https://schirko.github.io/meat-prices/. The
+  portfolio card links there and to the repo.
+- **Next:** item 4.4. After each new notebook, rebuild the site and push.
 
 ### 2026-11-14: Event tests (item 4.3)
 - **Done:** notebook `11_event_tests.ipynb`. For each event and meat, an AR(1)-with-trend
@@ -161,24 +171,29 @@ Newest first. One entry per finished item.
   ordinary months as shifts, so it wasn't used for the verdicts.
 - **Next:** item 4.4, drought → sell-off → herd → price.
 
-### 2026-11-14: Project site on GitHub Pages (D35)
-- **Done:** `python -m src.build_site` builds a front page (summary, key numbers, the
-  two charts, findings, method, limits, links) and one HTML page per notebook in
-  `docs/`. GitHub Pages serves it at https://schirko.github.io/meat-prices/. The
-  portfolio card links there and to the repo.
-- **Next:** item 4.4. After each new notebook, rebuild the site and push.
+### 2026-11-14: Events on the price charts (Milestone 3 complete)
+- **Done:** notebook `08_events.ipynb` (item 3.2): an event timeline, each meat's price
+  with its events, a three-month "how much did the price move" screen ranked against
+  every other three-month move (D33), and the beef events on the drought → sell-off →
+  price chain.
+- **Found:** the 2020 COVID closures caused one of the biggest price moves on record for
+  all three meats, then faded. Chicken's 2022 spike lines up with feed costs and bird
+  flu together. The three popular claims came in ordinary months (or, for the fires
+  claim, only chicken moved). Beef's rise is a slow build following the herd, not a
+  series of event shocks.
+- **Next:** Milestone 4, testing these patterns properly.
 
-### 2026-11-15: Site moved to schirko.com (D36)
-- **Done:**
-  - GitHub Pages unpublished.
-  - `python -m src.build_site` now builds into `SITE_DIR`, the Schirko portfolio
-    folder, so the site is served at schirko.com/scott/meat-prices/.
-  - The project docs are published as pages too.
-  - The repo stays public; the site and the portfolio card link to it.
-  - The portfolio card in the Schirko project now points to the new address.
-- **Next:** item 4.4. After each new notebook,
-  rebuild the site and push the Schirko project.
+### 2026-11-14: README summary and event list approved
+- **Done:** README now opens with the tests badge, a one-page summary, key findings
+  and two charts made by `python -m src.readme_charts` (item 7.2, done early).
+  GitHub Actions tests pass (green badge). Scott reviewed and approved all 16
+  events in `events.csv` as they are (item 3.1 complete).
+- **Next:** item 3.2, notebook `08_events.ipynb`, marking the events on the price charts.
 
+### 2026-11-14: Hosting decision
+- **Done:** decided the portfolio will link to the public GitHub repo for now (D32);
+  VPS hosting (item 7.1) deferred. The README becomes the project's front door.
+- **Next:** item 3.1 event review, then 3.2.
 
 ### 2026-11-13: Milestone 6 items 6.1–6.4 complete
 - **Done:** built the refresh pipeline in `src/` and the tests in `tests/`, with the

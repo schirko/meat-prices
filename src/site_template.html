@@ -31,6 +31,8 @@ body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 Inter
 a { color: var(--accent); }
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
 header { padding: 56px 0 28px; }
+.portfolio { display: inline-block; margin-bottom: 22px; font-size: 15px; font-weight: 500; text-decoration: none; }
+.portfolio:hover { text-decoration: underline; }
 .kicker { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 h1 { font-family: Fraunces, Georgia, serif; font-size: clamp(34px, 6vw, 56px); line-height: 1.08; margin: 10px 0 18px; }
 h2 { font-family: Fraunces, Georgia, serif; font-size: 28px; margin: 56px 0 12px; }
@@ -70,6 +72,7 @@ footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--lin
 <div class="wrap">
 
 <header>
+  <a class="portfolio" href="../">&larr; Scott Schirkofsky · Portfolio</a>
   <div class="kicker">Data science project · U.S. meat prices, 2015 to ${latest_month}</div>
   <h1>Why does meat cost so much now?</h1>
   <p class="lede">Beef, pork and chicken prices since 2015, the events behind each jump, and who gets each
@@ -77,6 +80,7 @@ footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--lin
   Agriculture, with every step shown in notebooks.</p>
   <div class="links">
     <a class="btn primary" href="#findings">Key findings</a>
+    <a class="btn" href="docs/FINDINGS.html">Findings and methods explained</a>
     <a class="btn" href="#notebooks">Read the analysis</a>
     <a class="btn" href="https://github.com/schirko/meat-prices">View code on GitHub</a>
   </div>
@@ -102,7 +106,9 @@ footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--lin
   <li><b>The cause is a cattle shortage, and drought started it.</b> Drought across cattle country pushed ranchers
   to sell off cows. The sell-off peaked in ${selloff_year}, when ${selloff_pct}% of the beef cow herd was slaughtered
   in one year, and the herd shrank ${herd_change}% from its ${herd_peak_year} peak. Fewer cows means fewer calves and
-  less beef for years. The same chain played out after the 2011–2013 drought.</li>
+  less beef for years. Measured link by link, a 1% smaller herd goes with about a 1.8% higher real beef price, so the
+  shrinking herd accounts for almost all of beef's real rise since 2019. Drought explains roughly 40% of the herd loss;
+  ranchers' other choices explain the rest.</li>
   <li><b>Sudden events explain little of beef's rise.</b> Of 16 dated events, only the 2020 COVID plant closures
   clearly shifted all three meats (11–17% above where prices were heading, then fading within months). For beef,
   plant fires and closures, the JBS cyberattack and screwworm show no clear shift.</li>
@@ -130,8 +136,8 @@ footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--lin
   change.</li>
 </ol>
 <p class="note"><b>Limits.</b> These are national averages; local prices differ. October 2025 is estimated because the
-government shutdown stopped price collection that month. Overlapping events can't be told apart. Testing of the
-drought → herd → price chain and a final verdict are still in progress.</p>
+government shutdown stopped price collection that month. Overlapping events can't be told apart. Few years of
+data (12–16 per link) limit how precise the measured links can be. A final verdict is still in progress.</p>
 
 <h2 id="notebooks">The analysis, step by step</h2>
 <p class="note">Each notebook explains what it's looking for, shows the code and its result, then how to read it
@@ -141,7 +147,8 @@ ${notebooks}
 </ul>
 
 <h2>More</h2>
-<p><a href="docs/DECISIONS.html">Every decision and why</a> ·
+<p><a href="docs/FINDINGS.html">Findings and methods explained</a> ·
+<a href="docs/DECISIONS.html">Every decision and why</a> ·
 <a href="docs/DATA_SOURCES.html">Data sources</a> ·
 <a href="docs/DATA_DICTIONARY.html">Column dictionary</a> ·
 <a href="docs/MILESTONES.html">Plan and progress</a></p>

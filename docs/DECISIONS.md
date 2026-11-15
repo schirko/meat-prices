@@ -623,3 +623,34 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   - `docs/index.html`, `docs/notebooks/` and `docs/.nojekyll` are removed from this repo.
   - The README charts in `docs/images/` stay.
   - Without `SITE_DIR`, the build goes to `site/` (ignored by git) for a local preview.
+
+## D37. How the supply chain is measured (item 4.4, 2026-11-15)
+
+- **Decided:** each link of the chain gets its own straight-line fit, on one row per year:
+  1. Cow sell-off rate (beef cows slaughtered ÷ January 1 herd) on drought (average share
+     of cattle country in severe drought or worse), testing same-year and previous-year
+     drought.
+  2. Herd change to the next January 1 on the sell-off rate. The break-even rate is where
+     the fitted line crosses zero.
+  3. Log real beef price on log January 1 herd, so the slope is an elasticity. Herd lags
+     of 0, 1 and 2 years are tested, plus two robustness checks: a time trend, and
+     year-to-year changes.
+
+  P-values use Newey–West (HAC) standard errors with up to 2 years of lag. A what-if
+  replaces the 2020–2023 drought with the 2015–2019 average and carries the change
+  through links 1 and 2 to the herd and the price.
+- **Why yearly, not monthly:** the herd is counted once a year, and monthly drought and
+  slaughter move so slowly that neighboring months aren't independent. Monthly fits would
+  look far more certain than the data allows. Monthly data is used only to show timing
+  (a cross-correlation chart).
+- **Why separate links rather than one big model:** each link is easy to explain and
+  check on its own chart. With 12–16 years of data, a single model with many inputs
+  would be unreliable.
+- **2026 is left out of links 1 and 2** (only 9 months of slaughter) and examined on its
+  own. Link 3 includes it: its herd is final, and its price is the 9-month average.
+- **Limits:**
+  - Few years, so sizes are approximate.
+  - Other influences (demand, imports, margins) aren't separated out.
+  - The what-if assumes the links stay fixed.
+  - A longer BLS and NASS history would strengthen link 3; it can't be downloaded from
+    this workspace.

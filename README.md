@@ -26,6 +26,11 @@ the supply chain.
   when **13.2%** of the beef cow herd was slaughtered in one year. The herd shrank
   **13% from its 2019 peak**, and fewer cows means fewer calves and less beef
   for years afterward. The same chain played out after the 2011–2013 drought.
+  [Notebook 12](notebooks/12_supply_chain.ipynb) measures each link. A 1% smaller
+  herd goes with about a **1.8% higher real beef price**, so the shrinking herd
+  accounts for almost all of beef's real rise since 2019 (+25% expected, +28%
+  actual). Drought explains **roughly 40%** of the herd loss; ranchers' other
+  choices explain the rest.
 - **Ranchers are getting a bigger share of the money.** Their share of each
   retail beef dollar rose from **43% in 2019 to 54% in 2025**. That points to scarce
   cattle, not wider packer or grocery margins, as the main driver of the latest
@@ -43,8 +48,9 @@ the supply chain.
    latest month, 56 columns). Every fix is documented, including problems found
    in the source files ([06](notebooks/06_clean_and_combine.ipynb)).
 3. **Explored** the patterns behind the findings above
-   ([07](notebooks/07_explore.ipynb)) and lined them up with a dated event list
-   ([08](notebooks/08_events.ipynb)).
+   ([07](notebooks/07_explore.ipynb)), lined them up with a dated event list
+   ([08](notebooks/08_events.ipynb)), tested the events ([11](notebooks/11_event_tests.ipynb))
+   and measured the drought → herd → price chain ([12](notebooks/12_supply_chain.ipynb)).
 4. **Automated** the pipeline. One command re-downloads, rebuilds and checks the
    data, and 23 automated tests run on every push (the badge at the top).
 
@@ -67,8 +73,8 @@ in ordinary months. The 2020 COVID closures clearly shifted all three meats (+11
 and chicken's 2022 spike was real. None of the popular claims holds up. Apart from COVID,
 no sudden event clearly moved beef, so beef's rise points to the shrinking herd instead.
 
-**Still to come:** testing the drought → herd → price chain directly, a final
-verdict on whether today's prices are justified, and an interactive app.
+**Still to come:** a final verdict on whether today's prices are justified, and
+an interactive app.
 
 ---
 

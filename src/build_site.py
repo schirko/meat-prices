@@ -42,10 +42,12 @@ NOTEBOOK_BLURBS = {
     "07": "First look at the combined data: inflation, the supply chain, who gets the dollar.",
     "08": "The 16 dated events on the price charts.",
     "11": "Testing whether prices really shifted at each event.",
+    "12": "Measuring the chain: drought, then the cow sell-off, then the herd, then the price.",
 }
 
 # Project docs published as pages: file -> page title
 DOC_PAGES = {
+    "FINDINGS.md": "Findings and methods explained",
     "DECISIONS.md": "Every decision and why",
     "DATA_SOURCES.md": "Data sources",
     "DATA_DICTIONARY.md": "Column dictionary",
@@ -54,7 +56,8 @@ DOC_PAGES = {
 
 BACK_BAR = ('<div style="font:15px system-ui,sans-serif;padding:12px 20px;border-bottom:1px solid #ddd;'
             'background:#faf8f5"><a href="../index.html" style="color:#9A3B2E;text-decoration:none">'
-            '&larr; Meat Price Explorer</a></div>')
+            '&larr; Meat Price Explorer</a> &nbsp;·&nbsp; <a href="../../" style="color:#555;text-decoration:none">'
+            'Scott Schirkofsky · Portfolio</a></div>')
 
 DOC_PAGE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
