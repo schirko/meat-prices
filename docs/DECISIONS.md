@@ -425,3 +425,76 @@ Format: **what we decided**, **why**, and **what we considered instead**.
     month; tests in Milestone 4 shouldn't treat a month-level date as exact.
 - **Not included:** general inflation (already handled by real prices) and
   events with no clear link to these meats.
+
+## D29. Add a one-command data refresh and automated tests (2026-11-13)
+
+- **Decided:** a new Milestone 6 before publishing:
+  - move the download and cleaning code from notebooks 01–06 into `src/`
+    (revised in D31: the notebooks keep their own code, and `src/` is verified
+    to reproduce their results);
+  - `python -m src.refresh` re-downloads every source and rebuilds every
+    processed file, the master table and the data dictionary;
+  - `pytest` data tests check the master table (one row per month, only known
+    gaps, filled months flagged, shares add to 100%, sensible value ranges,
+    every column documented);
+  - GitHub Actions runs the tests on every push; a monthly job on the VPS runs
+    the refresh, and new data is only used if the tests pass.
+- **Why:** the project should keep working as new months are published, not
+  be a one-time analysis. Automated checks catch problems like the ones found
+  by hand in Milestone 1 (thousands commas, a mislabeled ERS column, the
+  October 2025 gap) before they reach the app. Both are skills employers look
+  for.
+- **Notebooks stay:** they remain the readable, step-by-step record of how and
+  why each step works.
+
+## D30. Host the app on Scott's VPS, not Streamlit Community Cloud (2026-11-13)
+
+- **Decided:** the app runs on Scott's own VPS and is featured on his
+  portfolio site. This replaces the Streamlit Community Cloud plan in D12; the
+  rest of D12 still holds (public repo; the app reads committed processed data
+  and needs no API keys).
+- **Why:** all of Scott's sites and apps are hosted on his VPS, and the
+  portfolio site will link to each project. Self-hosting also makes the monthly
+  scheduled refresh (D29) simple: it runs on the same server as the app.
+- **What changes:** Milestone 7 (publish) now covers running Streamlit as a
+  service behind the web server with HTTPS.
+
+## D31. How the refresh and tests work (2026-11-13)
+
+Scott asked me to make these calls while building Milestone 6; each can be revisited.
+
+- **Notebooks keep their own code; `src/` is the production path.** Rewriting the
+  notebooks to call `src/` would have changed files Scott has already reviewed and
+  committed. Instead, `src/` was written from the notebooks' final code and **checked
+  against them**: an offline refresh from the 2026-10-26 raw files reproduced every
+  processed file and the master table exactly (largest difference about 6 × 10⁻¹⁴, i.e.
+  rounding noise). If the two ever need to change, change `src/` and the notebook
+  together. Item 6.1 is complete on this basis.
+- **Build first, publish only if the checks pass.** The refresh builds everything in a
+  temporary folder, runs the checks, and copies the files into `data/processed/` (and the
+  data dictionary into `docs/`) only if every check passes. A failed refresh leaves the
+  current data in place, so the app never shows unchecked data.
+- **Raw downloads are kept, in dated folders,** as before (D9); `--offline` rebuilds
+  from the latest saved raw files with no downloads, useful for testing and for re-running
+  after a code change.
+- **A refresh report** (`data/processed/REFRESH_REPORT.md`, committed) records which raw
+  files were used, the check results, how many months the table gained, and any **revised
+  past values** (>0.5%), since agencies sometimes revise earlier months.
+- **The same checks run in both places** (`src/checks.py`): in the refresh before
+  publishing, and in `pytest` on the committed data. Checks: one row per month from
+  January 2010; no gaps except a short list of known ones (chicken's ERS January–March
+  2026); columns start when they should (D27); values in sensible ranges (catches cents
+  read as dollars, or a percent in a cents column, as in D23); spreads and shares add up;
+  real prices match the CPI formula; filled months are flagged and rare; every column is
+  in the data dictionary.
+- **Known gaps are listed, not ignored.** A new gap fails the checks; if ERS later fills
+  a known gap, nothing fails.
+- **Pipeline unit tests** recreate the real problems found in Milestone 1 (thousands
+  commas, the mislabeled pork column, the October 2025 gap) with tiny made-up tables, so
+  each one would be caught if it came back.
+- **GitHub Actions** runs the tests on every push using Python 3.12 and a small
+  `requirements-test.txt` (pandas, requests, python-dotenv, pytest), so it's fast and
+  needs no API keys.
+- **Monthly refresh on the VPS** runs on the **20th of each month** at 06:00 (BLS and
+  USDA have published the previous month by then), via `deploy/monthly_refresh.sh`. It's
+  written now and installed in Milestone 7, when the app goes on the VPS.

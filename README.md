@@ -69,18 +69,23 @@ column in [docs/DATA_DICTIONARY.md](docs/DATA_DICTIONARY.md).
 
 ```
 meat-prices/
+├── .github/workflows/   Runs the tests on every push (GitHub Actions)
 ├── app/                 Streamlit app (Milestone 5)
 ├── data/
 │   ├── raw/             Data exactly as downloaded (not committed to git)
-│   └── processed/       Cleaned data the app reads
+│   └── processed/       Cleaned data the app reads, plus REFRESH_REPORT.md
+├── deploy/              Monthly refresh script for the server
 ├── docs/
 │   ├── MILESTONES.md    The plan, progress and what each item involves
 │   ├── DECISIONS.md     Every significant decision and why we made it
-│   └── DATA_SOURCES.md  Where each data set comes from and how to get it
+│   ├── DATA_SOURCES.md  Where each data set comes from and how to get it
+│   └── DATA_DICTIONARY.md  Every column in the master table (generated)
 ├── notebooks/           Numbered Jupyter notebooks, one per analysis step
-├── src/                 Reusable Python code shared by notebooks and app
+├── src/                 The data pipeline: download, build, check, publish
+├── tests/               Data and pipeline tests (pytest)
 ├── .env.example         Template for API keys (copy to .env)
-└── requirements.txt     Python packages
+├── requirements.txt     Python packages (full development setup)
+└── requirements-test.txt  Just what the pipeline and tests need
 ```
 
 ## How the notebooks are written
@@ -107,6 +112,27 @@ pip install -r requirements.txt
 copy .env.example .env
 # then edit .env and paste in your keys
 ```
+
+## Refreshing and testing the data
+
+Everything in `data/processed/` can be rebuilt from the official sources with one
+command. New data only replaces the current files if every data check passes, and
+each run writes `data/processed/REFRESH_REPORT.md` explaining what changed.
+
+```bash
+python -m src.refresh                      # download everything, rebuild, check, publish
+python -m src.refresh --offline            # rebuild from the saved raw files (no downloads)
+python -m src.refresh --offline --dry-run  # build and check only; change nothing
+pytest                                     # run the data and pipeline tests
+```
+
+The tests check, among other things, that there is one row per month with no
+unexpected gaps, that values are in sensible ranges, that the farm, packer and
+store shares add up to 100%, and that every column is documented. They also
+recreate the data problems found during development (thousands commas in USDA
+files, a mislabeled USDA column, a month missing during the 2025 government
+shutdown), so those can't come back unnoticed. GitHub Actions runs the tests on
+every push, and the server runs the refresh monthly.
 
 ## Author
 

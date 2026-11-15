@@ -7,6 +7,9 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
+# Tests
+.pytest_cache/
+
 # Secrets
 .env
 

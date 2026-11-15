@@ -1,0 +1,6 @@
+# Just what the tests and the refresh pipeline need (used by GitHub Actions and the VPS).
+# The full development setup is in requirements.txt.
+pandas
+requests
+python-dotenv
+pytest

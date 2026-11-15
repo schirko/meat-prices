@@ -1,0 +1,20 @@
+# Runs the data tests on every push and pull request (D29, item 6.4).
+# The tests read only committed files, so no API keys or downloads are needed.
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependencies
+        run: pip install -r requirements-test.txt
+      - name: Run tests
+        run: pytest -v

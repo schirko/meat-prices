@@ -95,18 +95,51 @@ evidence.
 
 ---
 
-## Milestone 6: Publish ⬜
+## Milestone 6: Automate and test 🔄
+
+**Goal:** the data can be refreshed with one command, and automatic checks catch
+problems before they reach the app (D29, D31).
 
 | Item | Status | What's involved |
 |---|---|---|
-| 6.1 Deploy | ⬜ | Streamlit Community Cloud (free), from the public GitHub repo; app reads committed processed data, no API keys needed (see D12) |
-| 6.2 Portfolio polish | ⬜ | README screenshots, link from GitHub profile and résumé |
+| 6.1 Pipeline code in `src/` | ✅ | `config`, `bls`, `ers`, `nass`, `drought`, `master` modules, written from the notebooks' final code and verified to reproduce every processed file exactly; notebooks keep their own code as the readable record (D31) |
+| 6.2 One-command refresh | ✅ | `python -m src.refresh` (also `--offline`, `--dry-run`): download, build in a temporary folder, check, publish only if checks pass, write `data/processed/REFRESH_REPORT.md` |
+| 6.3 Data tests | ✅ | `pytest`: 23 tests: every check in `src/checks.py` on the committed master table, the data dictionary, the events file, and unit tests recreating the Milestone 1 bugs |
+| 6.4 Run tests automatically | ✅ | `.github/workflows/tests.yml`: GitHub Actions runs the tests on every push |
+| 6.5 Scheduled refresh | 🔄 | `deploy/monthly_refresh.sh` written (20th of each month, 06:00); installed on the VPS in Milestone 7 |
+
+---
+
+## Milestone 7: Publish ⬜
+
+| Item | Status | What's involved |
+|---|---|---|
+| 7.1 Deploy on the VPS | ⬜ | Run the Streamlit app as a service on Scott's VPS behind the web server, with HTTPS; it reads the processed data, no API keys in the app (D12, D30) |
+| 7.2 Portfolio polish | ⬜ | One-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
 
 ---
 
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-11-13: Milestone 6 items 6.1–6.4 complete
+- **Done:** built the refresh pipeline in `src/` and the tests in `tests/`, with the
+  decisions recorded in D31 (Scott asked me to make the calls). An offline refresh from
+  the 2026-10-26 raw files reproduced every processed file and the master table exactly.
+  All 23 tests pass on the committed data. GitHub Actions workflow added. The VPS refresh
+  script is written and will be installed in Milestone 7.
+- **Next:** Scott runs `pytest` and `python -m src.refresh --offline --dry-run` on his
+  machine to confirm, pushes, and checks the first GitHub Actions run; then back to the
+  event list review (item 3.1).
+
+### 2026-11-13: Plan updated: automation, tests and VPS hosting
+- **Done:** reviewed what's left to reach a finished project. Added Milestone 6
+  (automate and test: shared code in `src/`, one-command refresh, `pytest` data
+  tests, GitHub Actions, monthly refresh on the VPS) per D29. Publishing moves
+  to Milestone 7 and targets Scott's VPS instead of Streamlit Community Cloud
+  (D30), with the app featured on his portfolio site.
+- **Next:** Scott reviews the event list (item 3.1); then item 3.2.
 
 ### 2026-10-26: Milestone 2 complete; item 3.1 drafted
 - **Done:** notebook 07 run in full on Scott's machine, completing Milestone 2.

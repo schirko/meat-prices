@@ -15,3 +15,6 @@ statsmodels
 
 # App (Milestone 5)
 streamlit
+
+# Tests (Milestone 6)
+pytest
