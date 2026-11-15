@@ -498,3 +498,16 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
 - **Monthly refresh on the VPS** runs on the **20th of each month** at 06:00 (BLS and
   USDA have published the previous month by then), via `deploy/monthly_refresh.sh`. It's
   written now and installed in Milestone 7, when the app goes on the VPS.
+
+## D32. Portfolio links to the GitHub repo for now; app hosting deferred (2026-11-14)
+
+- **Decided:** Scott's portfolio (schirko.com/scott) will link to this project's
+  public GitHub repository rather than a hosted app at schirko.com/scott/meat-prices.
+  Hosting the app on the VPS (Milestone 7.1, D30) is deferred, not cancelled.
+- **Why:** the app isn't built yet, and a running Streamlit app needs server setup
+  (a service plus a web-server rule for the sub-path). The repo already shows the work:
+  the README, documented decisions, notebooks with saved outputs, tests and the
+  GitHub Actions badge of passing tests.
+- **What this means:** the repo is now the project's front door, so the README's
+  one-page summary and screenshots (item 7.2) matter more, and every notebook should
+  be committed with its outputs saved so the charts show on GitHub.

@@ -8,7 +8,7 @@ Before each item starts, we write down:
 3. **Roadblocks** for the next item
 4. **How long it will take and what's involved**
 
-Status key: ✅ done · 🔄 in progress · ⬜ not started
+Status key: ✅ done · 🔄 in progress · ⬜ not started · ⏸ deferred
 
 ---
 
@@ -114,14 +114,19 @@ problems before they reach the app (D29, D31).
 
 | Item | Status | What's involved |
 |---|---|---|
-| 7.1 Deploy on the VPS | ⬜ | Run the Streamlit app as a service on Scott's VPS behind the web server, with HTTPS; it reads the processed data, no API keys in the app (D12, D30) |
-| 7.2 Portfolio polish | ⬜ | One-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
+| 7.1 Deploy on the VPS | ⏸ | Deferred (D32): portfolio links to the GitHub repo for now. When resumed: run the Streamlit app as a service on the VPS at schirko.com/scott/meat-prices behind the web server, with HTTPS (D12, D30) |
+| 7.2 Portfolio polish | 🔄 | Done early (D32): README summary with findings, two charts (`python -m src.readme_charts`), limits and tests badge. Left: app link and screenshots once the app exists, and the portfolio site entry. Original plan: one-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
 
 ---
 
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-11-14: Hosting decision
+- **Done:** decided the portfolio will link to the public GitHub repo for now (D32);
+  VPS hosting (item 7.1) deferred. The README becomes the project's front door.
+- **Next:** item 3.1 event review, then 3.2.
 
 ### 2026-11-13: Milestone 6 items 6.1–6.4 complete
 - **Done:** built the refresh pipeline in `src/` and the tests in `tests/`, with the
