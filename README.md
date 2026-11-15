@@ -1,27 +1,62 @@
 # Meat Price Explorer
 
+[![tests](https://github.com/schirko/meat-prices/actions/workflows/tests.yml/badge.svg)](https://github.com/schirko/meat-prices/actions/workflows/tests.yml)
+
 **Why does meat cost so much now?** This project looks at U.S. retail prices for
-beef, pork and chicken from 2015 to today. It shows where prices were before 2020,
-how they climbed after, which real-world events lined up with each jump, and
-whether today's prices are still justified by what is happening in the supply
-chain.
+beef, pork and chicken from 2015 to today. It shows where prices were before
+2020, how they climbed, which events lined up with each jump, who gets each
+retail dollar, and whether today's prices are justified by what is happening in
+the supply chain.
 
-The finished product is a Streamlit app built for a general audience, backed by a
-series of Jupyter notebooks that show every step of the analysis.
+![Ground beef rose 63% since 2015, ahead of all prices (42%); chicken breast rose 23% and pork chops 9%](docs/images/headline.png)
 
-> **Status:** Milestone 1 (getting the data) complete; Milestone 2 (clean and
-> combine) next. Early findings:
-> - Since 2015, ground beef is up about 63%, well ahead of overall inflation
->   (about 42%); pork and chicken breast rose less than inflation, and groceries
->   as a whole (+33%) rose less than prices in general.
-> - The U.S. beef cow herd fell 13% from its 2019 peak to 2026 after a drought-
->   driven sell-off that peaked in 2022; ranchers' share of the retail beef
->   dollar rose to about 54% in 2025.
-> - Beef broke away from every other grocery category from 2024, as the herd
->   reached its low.
->
-> See
-> [docs/MILESTONES.md](docs/MILESTONES.md) for the full plan and progress.
+## Key findings so far
+
+*Data through September 2026. "Real" means adjusted for inflation, in September 2026 dollars.*
+
+- **Beef is the outlier.** Ground beef is up **63%** since 2015, while prices in
+  general rose **42%**. That leaves beef **15% more expensive in real terms**.
+- **Pork and chicken got cheaper in real terms.** Pork chops are up only 9%
+  (**23% cheaper** after inflation) and chicken breast 23% (**13% cheaper**).
+  Groceries as a whole rose 33%, less than prices in general.
+- **The cause is a cattle shortage, and drought started it.** Drought across
+  cattle country pushed ranchers to sell off cows. The sell-off peaked in **2022**,
+  when **13.2%** of the beef cow herd was slaughtered in one year. The herd shrank
+  **13% from its 2019 peak**, and fewer cows means fewer calves and less beef
+  for years afterward. The same chain played out after the 2011–2013 drought.
+- **Ranchers are getting a bigger share of the money.** Their share of each
+  retail beef dollar rose from **43% in 2019 to 54% in 2025**. That points to scarce
+  cattle, not wider packer or grocery margins, as the main driver of the latest
+  price rise. Milestone 4 will test this formally.
+
+![Four stacked charts: drought, then the cow sell-off, then the shrinking herd, then the rising real price of ground beef](docs/images/chain.png)
+
+## How it was done
+
+1. **Collected** free public data from four agencies: retail prices and
+   inflation (BLS), price spreads (USDA ERS), cattle counts and slaughter
+   (USDA NASS), and drought (U.S. Drought Monitor). See notebooks
+   [01](notebooks/01_bls_retail_prices.ipynb) to [05](notebooks/05_grocery_categories.ipynb).
+2. **Cleaned and combined** everything into one monthly table (Jan 2010 to the
+   latest month, 56 columns). Every fix is documented, including problems found
+   in the source files ([06](notebooks/06_clean_and_combine.ipynb)).
+3. **Explored** the patterns behind the findings above
+   ([07](notebooks/07_explore.ipynb)).
+4. **Automated** the pipeline. One command re-downloads, rebuilds and checks the
+   data, and 23 automated tests run on every push (the badge at the top).
+
+**Limits.** These are national averages; local prices differ. BLS prices are
+averages across stores, not a fixed basket. October 2025 is filled in because the
+government shutdown stopped data collection that month. The findings so far show
+patterns, and the statistical tests come in Milestone 4.
+
+**Read more:** [plan and progress](docs/MILESTONES.md) ·
+[every decision and why](docs/DECISIONS.md) ·
+[data sources](docs/DATA_SOURCES.md) ·
+[column dictionary](docs/DATA_DICTIONARY.md)
+
+**Still to come:** a dated event timeline on the charts, statistical tests of
+which events moved prices, and an interactive app.
 
 ---
 
@@ -124,6 +159,7 @@ python -m src.refresh                      # download everything, rebuild, check
 python -m src.refresh --offline            # rebuild from the saved raw files (no downloads)
 python -m src.refresh --offline --dry-run  # build and check only; change nothing
 pytest                                     # run the data and pipeline tests
+python -m src.readme_charts                # redraw the README charts and print its numbers
 ```
 
 The tests check, among other things, that there is one row per month with no
@@ -132,7 +168,7 @@ store shares add up to 100%, and that every column is documented. They also
 recreate the data problems found during development (thousands commas in USDA
 files, a mislabeled USDA column, a month missing during the 2025 government
 shutdown), so those can't come back unnoticed. GitHub Actions runs the tests on
-every push, and the server runs the refresh monthly.
+every push. `deploy/monthly_refresh.sh` can run the refresh monthly on a server.
 
 ## Author
 
