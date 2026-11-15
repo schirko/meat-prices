@@ -3,6 +3,7 @@
 [![tests](https://github.com/schirko/meat-prices/actions/workflows/tests.yml/badge.svg)](https://github.com/schirko/meat-prices/actions/workflows/tests.yml)
 
 **Project site:** [schirko.com/scott/meat-prices](https://schirko.com/scott/meat-prices/), with the summary, charts, every notebook and the project docs as readable pages.
+**[Explore the data](https://schirko.com/scott/meat-prices/explore.html):** an interactive page to pick a meat, switch to inflation-adjusted prices, drill into any year, and see the events and who gets each dollar.
 
 **Why does meat cost so much now?** This project looks at U.S. retail prices for
 beef, pork and chicken from 2015 to today. It shows where prices were before
@@ -86,7 +87,7 @@ in ordinary months. The 2020 COVID closures clearly shifted all three meats (+11
 and chicken's 2022 spike was real. None of the popular claims holds up. Apart from COVID,
 no sudden event clearly moved beef, so beef's rise points to the shrinking herd instead.
 
-**Still to come:** an interactive app (Milestone 5).
+**Interactive explorer:** `explore.html` on the project site (Milestone 5, D39).
 
 ---
 

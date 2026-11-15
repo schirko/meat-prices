@@ -130,6 +130,139 @@ def export_docs():
         print(f"  wrote docs/{name[:-3]}.html")
 
 
+# ---------------------------------------------------------------- explorer page (D39)
+GROCERIES = {
+    "all_items": "All prices",
+    "food_at_home": "Groceries overall",
+    "cereals_and_bakery": "Cereals and bakery",
+    "dairy": "Dairy",
+    "eggs": "Eggs",
+    "fresh_fruits_and_vegetables": "Fresh fruits and vegetables",
+    "nonalcoholic_beverages": "Non-alcoholic drinks",
+    "food_away_from_home": "Restaurant meals",
+}
+DOLLAR_PARTS = {
+    "beef": {"rancher / farmer": "net_farm", "packer / processor": "spread_farm_to_wholesale",
+             "store": "spread_wholesale_to_retail"},
+    "pork": {"rancher / farmer": "net_farm", "packer / processor": "spread_farm_to_wholesale",
+             "store": "spread_wholesale_to_retail"},
+    "chicken": {"farm + packer (wholesale)": "wholesale", "store": "spread_wholesale_to_retail"},
+}
+# Short notes shown when one year is picked. Written for the data through September 2026.
+YEAR_NOTES = {
+    "2015": "The beef herd was rebuilding after the 2011–2013 drought, so beef started high and then eased.",
+    "2016": "A growing herd and mild drought: real beef prices kept falling.",
+    "2017": "The herd kept growing; beef was close to its cheapest real price in this data.",
+    "2018": "The herd was near its peak, and real beef prices stayed low.",
+    "2019": "The beef herd peaked at 31.6 million cows, but ranchers had started selling more cows than they replaced.",
+    "2020": "COVID-19 closed meatpacking plants in April and May: the clearest price shock in the data, for all three meats, and it faded within months.",
+    "2021": "Drought returned to cattle country, and the JBS cyberattack hit in early June.",
+    "2022": "The cow sell-off peaked (13.2% of the herd). Chicken spiked with feed costs and bird flu.",
+    "2023": "The herd kept shrinking after three years of heavy selling.",
+    "2024": "With the herd near its low, beef's price climb steepened. Mexican cattle imports were suspended in November.",
+    "2025": "The herd was the smallest in this data. Imports were suspended again in May, and many heifers still went to slaughter.",
+    "2026": "Drought is back, but ranchers are keeping their cows. Beef runs about 11% above what the herd explains, mostly in store margins.",
+}
+
+
+def _date_label(value, precision):
+    import pandas as pd
+    d = pd.Timestamp(value)
+    if precision == "day":
+        return f"{d:%b} {d.day}, {d.year}"
+    if precision == "year":
+        return f"{d.year}"
+    return f"{d:%b %Y}"
+
+
+def explorer_data(m):
+    """Everything the explorer page needs, as plain lists and dicts."""
+    import json
+    import pandas as pd
+
+    prices = m.loc[str(config.PRICE_START_YEAR):].dropna(subset=["beef_price"])
+    latest = prices.index.max()
+    clean = lambda s: [None if pd.isna(v) else round(float(v), 3) for v in s]
+    data = {
+        "months": [f"{d:%Y-%m}" for d in prices.index],
+        "latest_label": f"{latest:%B %Y}",
+        "years_partial": latest.year if latest.month < 12 else None,
+        "built": date.today().strftime("%B %d, %Y").replace(" 0", " "),
+        "nominal": {k: clean(prices[f"{k}_price"]) for k in ["beef", "pork", "chicken"]},
+        "real": {k: clean(prices[f"{k}_price_real"]) for k in ["beef", "pork", "chicken"]},
+        "groceries": {k: {"name": name, "values": clean(prices[f"cpi_{k}_2015eq100"])} for k, name in GROCERIES.items()},
+        "estimated": [f"{d:%Y-%m}" for d in prices.index[prices["filled_columns"].fillna("").astype(str).str.contains("beef_price")]],
+    }
+
+    # Who gets each dollar: yearly averages in latest-month dollars (same method as notebook 13)
+    to_today = m.loc[latest, "cpi_all_items"] / m["cpi_all_items"]
+    data["dollar"] = {}
+    for meat, parts in DOLLAR_PARTS.items():
+        yearly = {stage: (m[f"ers_{meat}_{col}"] * to_today / 100).groupby(m.index.year).mean().loc[config.PRICE_START_YEAR:]
+                  for stage, col in parts.items()}
+        years = list(next(iter(yearly.values())).index)
+        data["dollar"][meat] = {"years": [int(y) for y in years],
+                                "parts": {stage: [round(float(v), 2) for v in s] for stage, s in yearly.items()}}
+
+    # Events, with labels and (if notebook 11 has been run) its test results
+    events = pd.read_csv(config.PROCESSED_DIR / "events.csv", parse_dates=["start_date", "end_date"])
+    tests = {}
+    tests_file = config.PROCESSED_DIR / "event_tests.csv"
+    if tests_file.exists():
+        for _, r in pd.read_csv(tests_file).iterrows():
+            tests.setdefault(r["event_id"], []).append({
+                "meat": r["meat"], "gap": round(float(r["gap_pct"]), 1), "verdict": r["verdict"],
+                "simple_verdict": r["simple_verdict"], "agree": bool(r["agree"])})
+    data["tests"] = tests
+    data["events"] = []
+    for _, e in events.iterrows():
+        end = e["end_date"]
+        if pd.isna(end) and e["category"] == "weather":
+            end = latest  # a drought still going on runs to the latest month (as in notebook 08)
+        data["events"].append({
+            "id": e["event_id"], "name": e["event"], "category": e["category"], "meats": e["meats"].split(";"),
+            "claim": e["popular_explanation"] == "yes", "expected": e["expected_effect"],
+            "notes": "" if pd.isna(e["notes"]) else e["notes"],
+            "source_name": "" if pd.isna(e["source_name"]) else e["source_name"],
+            "source_url": "" if pd.isna(e["source_url"]) else e["source_url"],
+            "start": f"{e['start_date']:%Y-%m-%d}", "end": None if pd.isna(end) else f"{end:%Y-%m-%d}",
+            "start_label": _date_label(e["start_date"], e["date_precision"]),
+            "end_label": None if pd.isna(end) else ("ongoing" if pd.isna(e["end_date"]) else _date_label(end, e["date_precision"])),
+        })
+
+    # "What it means" text per selection
+    first = prices.loc[str(config.PRICE_START_YEAR)]
+    real_change = {k: (prices[f"{k}_price_real"].iloc[-1] / first[f"{k}_price_real"].mean() - 1) * 100
+                   for k in ["beef", "pork", "chicken"]}
+    data["meaning"] = {
+        "beef": (f"After inflation, ground beef costs {real_change['beef']:.0f}% more than in 2015, the only meat that "
+                 "does. Its rise follows the cattle herd: drought pushed ranchers to sell cows, the herd shrank to its "
+                 "smallest in this data, and a 1% smaller herd goes with about a 1.8% higher real price. Since 2019 most "
+                 "of the extra money went to ranchers; packers were squeezed. In 2026 beef runs about 11% above what "
+                 "the herd explains, and that extra went mainly into store margins."),
+        "pork": (f"After inflation, pork chops cost {abs(real_change['pork']):.0f}% less than in 2015. The 2020 COVID "
+                 "plant closures caused the biggest jump in the series, and it faded within months. How each dollar "
+                 "is split has barely changed since 2019."),
+        "chicken": (f"After inflation, chicken breast costs {abs(real_change['chicken']):.0f}% less than in 2015. Its "
+                    "2022 spike was real and lines up with higher feed costs and bird flu at the same time. The "
+                    "popular claims (plant fires, Colorado culls, the cage-free egg law) don't line up with any jump."),
+        "all": ("Only beef costs more than in 2015 after inflation. Turn on <i>After inflation</i> to see it: beef sits "
+                "above 100 while pork and chicken sit below. Use <i>Compare with</i> to set meat against the rest of "
+                "the grocery cart."),
+    }
+    data["year_notes"] = YEAR_NOTES
+    return json.dumps(data, separators=(",", ":"), allow_nan=False).replace("</", "<\\/")
+
+
+def build_explorer(m):
+    template = (config.PROJECT_ROOT / "src" / "explore_template.html").read_text(encoding="utf-8")
+    marker = "const D = __DATA__;"
+    assert marker in template, "explore_template.html must contain: " + marker
+    page = template.replace(marker, "const D = " + explorer_data(m) + ";", 1)
+    (SITE_DIR / "explore.html").write_text(page, encoding="utf-8")
+    print("  wrote explore.html")
+
+
 def notebook_list_html(paths):
     items = []
     for path in paths:
@@ -159,6 +292,8 @@ def main():
     paths = export_notebooks()
     print("Docs:")
     export_docs()
+    print("Explorer:")
+    build_explorer(m)
 
     base = m["cpi_all_items"].last_valid_index()
     groceries = m["cpi_food_at_home_2015eq100"].dropna()

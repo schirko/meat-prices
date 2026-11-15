@@ -260,7 +260,9 @@ Each is now covered by an automated test, so it can't come back unnoticed:
   and each problem above.
 - **Every decision recorded** in DECISIONS.md: what was decided, why, and what else was
   considered.
-- **This site** is rebuilt from the data and notebooks with `python -m src.build_site`.
+- **This site** is rebuilt from the data and notebooks with `python -m src.build_site`,
+  including the interactive explorer (`explore.html`). The explorer is plain
+  JavaScript with the data built into the page: no server, no chart library.
 
 ---
 
@@ -296,7 +298,7 @@ dollars) between 2019 and 2026.
 - Use decades of BLS and NASS history to firm up the herd → price link.
 - Add beef import volumes and tariffs.
 - Look at store costs (wages, energy) to see how much of 2026's store spread they explain.
-- Build the interactive app.
+- Add the 2027 herd count and refreshed prices to see whether 2026's gap closes.
 
 **"How do you keep it current?"**
 One command refreshes the data, re-runs every check and only publishes if they pass.
@@ -316,7 +318,5 @@ Then the site rebuilds from the same data.
 
 ## Still to come
 
-- **The interactive app** (Milestone 5): pick a meat, see its full history with the
-  events, and drill into any single year.
 - **Watching 2026:** whether beef's gap above the herd's prediction grows or closes, and
   whether ranchers keeping their cows shows up as a bigger herd in January 2027.

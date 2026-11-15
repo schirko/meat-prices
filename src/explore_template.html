@@ -1,0 +1,458 @@
+<!doctype html>
+<!-- Template for explore.html (D39). Edit this file, then run: python -m src.build_site
+     The build replaces __DATA__ with the project data as JSON. No outside scripts. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Explore the data · Meat Price Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f5; --surface: #ffffff; --ink: #1f1b18; --muted: #5f5852; --line: #e6e0d8; --grid: #eee8e1;
+  --accent: #9A3B2E; --beef: #9A3B2E; --pork: #2F6690; --chicken: #B07D12; --cpi: #6b6560;
+  --rancher: #5B3A1E; --packer: #7A4E9C; --store: #3C8D5A;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171412; --surface: #211d1a; --ink: #f1ece6; --muted: #b3aaa1; --line: #3a332e; --grid: #2d2723;
+    --accent: #e0796a; --beef: #e0796a; --pork: #7fb2db; --chicken: #e2b45a; --cpi: #a8a099;
+    --rancher: #b0855c; --packer: #b48ad6; --store: #6cc08c;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171412; --surface: #211d1a; --ink: #f1ece6; --muted: #b3aaa1; --line: #3a332e; --grid: #2d2723;
+  --accent: #e0796a; --beef: #e0796a; --pork: #7fb2db; --chicken: #e2b45a; --cpi: #a8a099;
+  --rancher: #b0855c; --packer: #b48ad6; --store: #6cc08c;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 Inter, system-ui, sans-serif; }
+a { color: var(--accent); }
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 16px 60px; }
+.topnav { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 18px 0 6px; font-size: 15px; }
+.topnav a { text-decoration: none; font-weight: 500; }
+.topnav a.muted { color: var(--muted); }
+h1 { font-family: Fraunces, Georgia, serif; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; margin: 18px 0 6px; }
+h2 { font-family: Fraunces, Georgia, serif; font-size: 24px; margin: 40px 0 8px; }
+.sub { color: var(--muted); margin: 0 0 18px; max-width: 760px; }
+.controls { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 12px 0; border-bottom: 1px solid var(--line);
+            display: flex; flex-wrap: wrap; gap: 12px 22px; align-items: center; }
+.group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.group > .lbl { font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-right: 2px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: none; color: var(--ink); font: 500 14px Inter, system-ui, sans-serif; padding: 7px 13px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+select { font: 500 14px Inter, system-ui, sans-serif; padding: 7px 10px; border-radius: 999px; border: 1px solid var(--line);
+         background: var(--surface); color: var(--ink); }
+label.check { font-size: 14px; display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 18px 0; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.tile .v { font-family: Fraunces, Georgia, serif; font-size: 30px; font-weight: 700; line-height: 1.1; }
+.tile .l { color: var(--muted); font-size: 14px; margin-top: 6px; line-height: 1.35; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 14px 8px; position: relative; }
+.card h3 { margin: 2px 4px 2px; font-size: 16px; }
+.card .note { color: var(--muted); font-size: 13.5px; margin: 0 4px 6px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+svg text { font-family: Inter, system-ui, sans-serif; fill: var(--muted); font-size: 11.5px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 4px 4px 8px; font-size: 13.5px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { display: inline-block; width: 18px; height: 3px; border-radius: 2px; }
+.legend i.box { height: 11px; width: 11px; border-radius: 3px; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 13px; line-height: 1.45;
+       padding: 8px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; transition: opacity .1s; z-index: 3; }
+.tip b { font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 4px 4px; }
+.chip { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 10px;
+        font: 13px Inter, system-ui, sans-serif; cursor: pointer; }
+.chip[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--bg); }
+.meaning { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 12px;
+           padding: 4px 18px; margin: 16px 0; }
+.events { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.ev { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; }
+.ev:hover, .ev.on { border-color: var(--ink); }
+.ev .top { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.ev .num { font-family: Fraunces, Georgia, serif; font-weight: 700; }
+.ev .when { color: var(--muted); font-size: 13.5px; }
+.ev .name { font-weight: 600; margin: 2px 0 4px; }
+.tag { font-size: 12px; border-radius: 999px; padding: 1px 8px; color: #fff; display: inline-block; }
+.tag.claim { background: none; color: var(--ink); border: 1px dashed var(--muted); }
+.ev .found { font-size: 14px; margin: 6px 0 2px; }
+.ev .more { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+.empty { color: var(--muted); font-style: italic; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+@media (max-width: 600px) { .controls { position: static; } .tile .v { font-size: 26px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a href="index.html">&larr; Meat Price Explorer</a>
+    <a class="muted" href="../">Scott Schirkofsky · Portfolio</a>
+  </nav>
+  <h1>Explore the data</h1>
+  <p class="sub">Pick a meat, switch between shelf prices and inflation-adjusted prices, and choose all years or a single
+  year. Events are marked on the chart; tap one below to highlight it. Data through <span id="latest"></span>.</p>
+
+  <div class="controls" role="toolbar" aria-label="Chart controls">
+    <div class="group"><span class="lbl">Meat</span>
+      <div class="seg" id="meatSeg">
+        <button data-v="beef">Ground beef</button><button data-v="pork">Pork chops</button>
+        <button data-v="chicken">Chicken breast</button><button data-v="all">All meats</button>
+      </div></div>
+    <div class="group"><span class="lbl">Prices</span>
+      <div class="seg" id="modeSeg"><button data-v="nominal">At the time</button><button data-v="real">After inflation</button></div></div>
+    <div class="group"><span class="lbl">Year</span><select id="yearSel" aria-label="Year"></select></div>
+    <div class="group"><label class="check"><input type="checkbox" id="evChk" checked> Show events</label></div>
+  </div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="card">
+    <h3 id="chartTitle"></h3>
+    <p class="note" id="chartNote"></p>
+    <div class="legend" id="legend"></div>
+    <div id="chart"></div>
+    <div class="chips" id="chips" hidden></div>
+    <div class="tip" id="tip"></div>
+  </div>
+
+  <div class="meaning" id="meaning"></div>
+
+  <h2>Who gets each dollar</h2>
+  <p class="sub" id="dollarSub"></p>
+  <div class="card">
+    <div class="legend" id="dollarLegend"></div>
+    <div id="dollarChart"></div>
+    <div class="tip" id="tip2"></div>
+  </div>
+
+  <h2 id="evHead">Events</h2>
+  <p class="sub">Dated events that could have moved prices. Tested events show what notebook 11 found: how far the price
+  ran from where it was heading over the next six months, and whether that was unusual. <b>Popular claims</b> are widely
+  repeated explanations included so they can be checked.</p>
+  <div class="events" id="events"></div>
+
+  <footer>Data: U.S. Bureau of Labor Statistics, USDA Economic Research Service and NASS, U.S. Drought Monitor.
+  Real prices are in <span class="latest2"></span> dollars. October 2025 is estimated (government shutdown).
+  Page built <span id="built"></span>. <a href="index.html">Back to the project</a>.</footer>
+</div>
+
+<script>
+const D = __DATA__;
+
+const NAMES = {beef: "Ground beef", pork: "Pork chops", chicken: "Chicken breast"};
+const CAT = {weather: ["Drought", "#C9952F"], packing_capacity: ["Packing plants", "#7A4E9C"], feed_costs: ["Feed costs", "#3C8D5A"],
+             disease: ["Animal disease", "#D1495B"], trade: ["Trade", "#E07B39"], data: ["Data gap", "#8f8f8f"],
+             popular_claim: ["Popular claim", "#666666"]};
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const state = {meat: "beef", mode: "nominal", year: "all", events: true, groceries: new Set(), highlight: null};
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const color = k => css("--" + k);
+const $ = id => document.getElementById(id);
+const t0 = D.months.map(m => new Date(m + "-01T00:00:00"));
+const fmtMonth = d => MONTHS[d.getMonth()] + " " + d.getFullYear();
+const money = v => "$" + v.toFixed(2);
+const pct = v => (v >= 0 ? "+" : "−") + Math.abs(v).toFixed(0) + "%";
+const avg = a => a.reduce((s, x) => s + x, 0) / a.length;
+const yearIdx = y => D.months.map((m, i) => m.startsWith(String(y)) ? i : -1).filter(i => i >= 0);
+const base2015 = arr => avg(yearIdx(2015).map(i => arr[i]));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// ---------- series for the current selection ----------
+function seriesFor() {
+  const out = [];
+  if (state.meat === "all") {
+    for (const k of ["beef", "pork", "chicken"]) {
+      const a = D[state.mode][k], b = base2015(a);
+      out.push({key: k, name: NAMES[k], color: color(k), values: a.map(v => v / b * 100), width: k === "beef" ? 2.6 : 2});
+    }
+    const cpi = D.groceries.all_items.values;
+    if (state.mode === "nominal") out.push({key: "cpi", name: "All prices", color: color("cpi"), values: cpi, dash: "6 4", width: 1.8});
+    for (const g of state.groceries) {
+      const vals = D.groceries[g].values.map((v, i) => state.mode === "real" ? v / cpi[i] * 100 : v);
+      out.push({key: g, name: D.groceries[g].name, color: color("cpi"), values: vals, dash: "2 3", width: 1.6, faint: true});
+    }
+  } else {
+    out.push({key: state.meat, name: NAMES[state.meat], color: color(state.meat), values: D[state.mode][state.meat], width: 2.6});
+  }
+  return out;
+}
+
+// ---------- line chart ----------
+function niceTicks(lo, hi, n) {
+  const raw = (hi - lo) / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const step = [1, 2, 2.5, 5, 10].map(s => s * mag).find(s => s >= raw);
+  const ticks = []; for (let v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) ticks.push(+v.toFixed(6));
+  return ticks;
+}
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+
+function eventsInView(lo, hi) {
+  if (!state.events) return [];
+  return D.events.filter(e => (state.meat === "all" || e.meats.includes(state.meat)))
+    .map(e => {
+      const s = new Date(e.start + "T00:00:00"), en = e.end ? new Date(e.end + "T00:00:00") : null;
+      return {...e, s, en, period: en && (en - s) / 864e5 > 31};
+    })
+    .filter(e => (e.period ? e.en >= lo && e.s <= hi : e.s >= lo && e.s <= hi));
+}
+
+function drawLine() {
+  const box = $("chart"); box.innerHTML = "";
+  const W = Math.max(320, box.clientWidth), H = W < 560 ? 300 : 400;
+  const m = {l: 52, r: W < 560 ? 14 : 120, t: 34, b: 30};
+  const svg = el("svg", {viewBox: `0 0 ${W} ${H}`, role: "img"}, box);
+  const ser = seriesFor();
+  const idx = state.year === "all" ? D.months.map((_, i) => i) : yearIdx(state.year);
+  const xs = idx.map(i => t0[i]);
+  const lo = xs[0], hi = state.year === "all" ? xs[xs.length - 1] : new Date(+state.year, 11, 1);
+  const vals = ser.flatMap(s => idx.map(i => s.values[i])).filter(v => v != null && !isNaN(v));
+  let ymin = Math.min(...vals), ymax = Math.max(...vals);
+  if (state.meat === "all") { ymin = Math.min(ymin, 95); }
+  const pad = (ymax - ymin) * 0.08 || 1; ymin -= pad; ymax += pad;
+  const X = d => m.l + (d - lo) / ((hi - lo) || 1) * (W - m.l - m.r);
+  const Y = v => H - m.b - (v - ymin) / (ymax - ymin) * (H - m.t - m.b);
+
+  // grid and y axis
+  for (const tk of niceTicks(ymin, ymax, 5)) {
+    el("line", {x1: m.l, x2: W - m.r, y1: Y(tk), y2: Y(tk), stroke: color("grid")}, svg);
+    el("text", {x: m.l - 8, y: Y(tk) + 4, "text-anchor": "end"}, svg).textContent = state.meat === "all" ? tk : "$" + tk.toFixed(tk < 10 && tk % 1 ? 2 : 0);
+  }
+  if (state.meat === "all") el("line", {x1: m.l, x2: W - m.r, y1: Y(100), y2: Y(100), stroke: color("cpi"), "stroke-width": 1, opacity: .6}, svg);
+  // x axis
+  if (state.year === "all") {
+    for (let y = lo.getFullYear() + (lo.getMonth() ? 1 : 0); y <= hi.getFullYear(); y += (W < 560 ? 2 : 1)) {
+      const d = new Date(y, 0, 1); if (d < lo) continue;
+      el("text", {x: X(d), y: H - m.b + 18, "text-anchor": "middle"}, svg).textContent = y;
+    }
+  } else {
+    xs.forEach((d, k) => { if (W >= 560 || k % 2 === 0) el("text", {x: X(d), y: H - m.b + 18, "text-anchor": "middle"}, svg).textContent = MONTHS[d.getMonth()]; });
+  }
+
+  // events
+  const evs = eventsInView(lo, hi).sort((a, b) => a.s - b.s);
+  evs.forEach((e, k) => {
+    const c = CAT[e.category][1], hl = state.highlight === e.id;
+    const g = el("g", {}, svg); el("title", {}, g).textContent = `${e.id.replace(/^E0?/, "")}. ${e.name}`;
+    const x1 = X(e.s < lo ? lo : e.s);
+    if (e.period) {
+      const x2 = X(e.en > hi ? hi : e.en);
+      el("rect", {x: x1, y: m.t, width: Math.max(2, x2 - x1), height: H - m.t - m.b, fill: c,
+                  opacity: hl ? .38 : (e.claim ? .08 : .16), stroke: e.claim ? c : "none", "stroke-dasharray": "4 3"}, g);
+    } else {
+      el("line", {x1, x2: x1, y1: m.t, y2: H - m.b, stroke: c, "stroke-width": hl ? 3 : 1.6, "stroke-dasharray": e.claim ? "5 4" : ""}, g);
+    }
+    const row = k % 3;
+    el("text", {x: x1 + 3, y: m.t - 22 + row * 11, fill: c, "font-weight": 700, style: `fill:${c}`}, g).textContent = e.id.replace(/^E0?/, "");
+  });
+
+  // estimated month
+  for (const em of D.estimated) {
+    const i = D.months.indexOf(em); if (!idx.includes(i)) continue;
+    el("text", {x: X(t0[i]), y: H - m.b - 6, "text-anchor": "middle", style: "font-size:10px"}, svg).textContent = "est.";
+  }
+
+  // lines
+  for (const s of ser) {
+    const pts = idx.map(i => [X(t0[i]), Y(s.values[i])]).filter(p => !isNaN(p[1]));
+    el("path", {d: "M" + pts.map(p => p.join(",")).join("L"), fill: "none", stroke: s.color, "stroke-width": s.width,
+                "stroke-dasharray": s.dash || "", opacity: s.faint ? .75 : 1, "stroke-linejoin": "round"}, svg);
+    if (state.year !== "all") pts.forEach(p => el("circle", {cx: p[0], cy: p[1], r: 3.5, fill: s.color}, svg));
+    if (W >= 560) {
+      const last = pts[pts.length - 1], v = s.values[idx[idx.length - 1]];
+      el("text", {x: last[0] + 6, y: last[1] + 4, style: `fill:${s.color};font-weight:600`}, svg).textContent =
+        (s.name.length > 16 ? s.name.slice(0, 15) + "…" : s.name) + " " + (state.meat === "all" ? v.toFixed(0) : money(v));
+    }
+  }
+
+  // hover
+  const guide = el("line", {y1: m.t, y2: H - m.b, stroke: color("muted"), "stroke-width": 1, opacity: 0}, svg);
+  const dots = ser.map(s => el("circle", {r: 4.5, fill: s.color, stroke: color("surface") || "#fff", "stroke-width": 2, opacity: 0}, svg));
+  const ov = el("rect", {x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent"}, svg);
+  const tip = $("tip");
+  const move = ev => {
+    const r = svg.getBoundingClientRect(), px = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+    const sx = px * W / r.width;
+    let best = idx[0], bd = Infinity; for (const i of idx) { const dd = Math.abs(X(t0[i]) - sx); if (dd < bd) { bd = dd; best = i; } }
+    const gx = X(t0[best]); guide.setAttribute("x1", gx); guide.setAttribute("x2", gx); guide.setAttribute("opacity", .6);
+    let html = `<b>${fmtMonth(t0[best])}</b>${D.estimated.includes(D.months[best]) ? " (estimated)" : ""}`;
+    ser.forEach((s, k) => { const v = s.values[best]; dots[k].setAttribute("cx", gx); dots[k].setAttribute("cy", Y(v)); dots[k].setAttribute("opacity", 1);
+      html += `<br><span style="color:${s.color}">●</span> ${esc(s.name)}: ${state.meat === "all" ? v.toFixed(1) : money(v) + "/lb"}`; });
+    const here = evs.filter(e => e.period ? (t0[best] >= e.s && t0[best] <= e.en) : (e.s.getFullYear() === t0[best].getFullYear() && e.s.getMonth() === t0[best].getMonth()));
+    if (here.length) html += "<br>" + here.map(e => `<span style="color:${CAT[e.category][1]}">■</span> ${esc(e.name)}`).join("<br>");
+    tip.innerHTML = html; tip.style.opacity = 1;
+    const cr = box.parentElement.getBoundingClientRect(), tx = r.left - cr.left + gx * r.width / W;
+    tip.style.left = Math.min(Math.max(8, tx + 14), cr.width - tip.offsetWidth - 8) + "px";
+    tip.style.top = (r.top - cr.top + 40) + "px";
+  };
+  const leave = () => { tip.style.opacity = 0; guide.setAttribute("opacity", 0); dots.forEach(d => d.setAttribute("opacity", 0)); };
+  ov.addEventListener("mousemove", move); ov.addEventListener("touchmove", move, {passive: true}); ov.addEventListener("touchstart", move, {passive: true});
+  ov.addEventListener("mouseleave", leave);
+
+  // legend, title, note
+  $("legend").innerHTML = ser.map(s => `<span><i style="background:${s.color};${s.dash ? "opacity:.7" : ""}"></i>${esc(s.name)}</span>`).join("") +
+    (evs.length ? [...new Set(evs.map(e => e.category))].map(c => `<span><i class="box" style="background:${CAT[c][1]};opacity:.6"></i>${CAT[c][0]}</span>`).join("") : "");
+  const yearTxt = state.year === "all" ? `${D.months[0].slice(0, 4)} to ${fmtMonth(t0[t0.length - 1])}` : state.year;
+  const modeTxt = state.mode === "real" ? `after inflation (${D.latest_label} dollars)` : "at the time";
+  $("chartTitle").textContent = state.meat === "all" ? `All three meats, ${yearTxt}` : `${NAMES[state.meat]}, ${yearTxt}`;
+  $("chartNote").textContent = state.meat === "all"
+    ? `Prices ${modeTxt}, rebased so each meat's 2015 average = 100. ${state.mode === "real" ? "Above 100 means more expensive than in 2015 after inflation." : "The dashed line is all prices (inflation)."}`
+    : `U.S. average retail price per pound, ${modeTxt}. Hover or tap the chart for values.`;
+  svg.setAttribute("aria-label", $("chartTitle").textContent + ". " + $("chartNote").textContent);
+}
+
+// ---------- tiles ----------
+function tiles() {
+  const T = [];
+  const last = D.months.length - 1;
+  if (state.meat === "all") {
+    for (const k of ["beef", "pork", "chicken"]) {
+      const a = D.real[k], ch = (a[last] / base2015(a) - 1) * 100;
+      T.push([pct(ch), `${NAMES[k]} after inflation since 2015`, k]);
+    }
+    const c = D.groceries.all_items.values; T.push([pct(c[last] - 100), "All prices (inflation) since 2015", "cpi"]);
+  } else if (state.year === "all") {
+    const n = D.nominal[state.meat], r = D.real[state.meat];
+    let hiI = 0; n.forEach((v, i) => { if (v > n[hiI]) hiI = i; });
+    T.push([money(n[last]), `Price per pound, ${fmtMonth(t0[last])}`, state.meat]);
+    T.push([pct((n[last] / base2015(n) - 1) * 100), "Change since 2015 (shelf price)", ""]);
+    T.push([pct((r[last] / base2015(r) - 1) * 100), "Change since 2015 after inflation", ""]);
+    T.push([money(n[hiI]), `Highest month: ${fmtMonth(t0[hiI])}`, ""]);
+  } else {
+    const a = D[state.mode][state.meat], ii = yearIdx(state.year), prev = yearIdx(+state.year - 1);
+    const yr = avg(ii.map(i => a[i]));
+    T.push([money(yr), `Average price in ${state.year} (${state.mode === "real" ? "after inflation" : "at the time"})`, state.meat]);
+    T.push([pct((a[ii[ii.length - 1]] / a[ii[0]] - 1) * 100), `${MONTHS[t0[ii[0]].getMonth()]} to ${MONTHS[t0[ii[ii.length - 1]].getMonth()]} ${state.year}`, ""]);
+    if (prev.length) { const same = prev.slice(0, ii.length); T.push([pct((yr / avg(same.map(i => a[i])) - 1) * 100), `vs the same months of ${+state.year - 1}`, ""]); }
+    let hiI = ii[0]; ii.forEach(i => { if (a[i] > a[hiI]) hiI = i; });
+    T.push([money(a[hiI]), `Highest month: ${MONTHS[t0[hiI].getMonth()]}`, ""]);
+  }
+  $("tiles").innerHTML = T.map(([v, l, k]) => `<div class="tile"><div class="v" style="${k ? `color:${color(k)}` : ""}">${v}</div><div class="l">${l}</div></div>`).join("");
+}
+
+// ---------- who gets each dollar (stacked bars) ----------
+function drawDollar() {
+  const meat = state.meat === "all" ? "beef" : state.meat, P = D.dollar[meat];
+  $("dollarSub").textContent = (state.meat === "all" ? "Showing beef; pick a meat above to see pork or chicken. " : "") +
+    `How the retail price of a pound of ${meat === "beef" ? "fresh beef" : meat === "pork" ? "fresh pork" : "chicken"} splits between each stage, ` +
+    `in ${D.latest_label} dollars (USDA price spreads). A spread pays for costs as well as profit. Tap a year to open it in the chart above.`;
+  const box = $("dollarChart"); box.innerHTML = "";
+  const W = Math.max(320, box.clientWidth), H = W < 560 ? 240 : 290, m = {l: 44, r: 10, t: 12, b: 28};
+  const svg = el("svg", {viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Stacked bars: each stage's part of the retail price by year"}, box);
+  const parts = Object.keys(P.parts), years = P.years;
+  const tot = years.map((_, j) => parts.reduce((s, p) => s + Math.max(0, P.parts[p][j]), 0));
+  const ymax = Math.max(...tot) * 1.08, Y = v => H - m.b - v / ymax * (H - m.t - m.b);
+  const bw = (W - m.l - m.r) / years.length;
+  for (const tk of niceTicks(0, ymax, 4)) {
+    el("line", {x1: m.l, x2: W - m.r, y1: Y(tk), y2: Y(tk), stroke: color("grid")}, svg);
+    el("text", {x: m.l - 6, y: Y(tk) + 4, "text-anchor": "end"}, svg).textContent = "$" + tk;
+  }
+  const PC = {"rancher / farmer": "rancher", "packer / processor": "packer", "farm + packer (wholesale)": "packer", "store": "store"};
+  const tip = $("tip2");
+  years.forEach((y, j) => {
+    const g = el("g", {style: "cursor:pointer"}, svg); let acc = 0;
+    const sel = String(y) === String(state.year);
+    for (const p of parts) {
+      const v = Math.max(0, P.parts[p][j]);
+      el("rect", {x: m.l + j * bw + bw * .15, width: bw * .7, y: Y(acc + v), height: Y(acc) - Y(acc + v), fill: color(PC[p]),
+                  opacity: state.year === "all" || sel ? 1 : .45}, g);
+      acc += v;
+    }
+    if (W >= 560 || j % 2 === 0) el("text", {x: m.l + j * bw + bw / 2, y: H - m.b + 17, "text-anchor": "middle", style: sel ? "font-weight:700" : ""}, svg).textContent = y;
+    g.addEventListener("click", () => { state.year = String(y); $("yearSel").value = state.year; render(); });
+    const show = ev => {
+      tip.innerHTML = `<b>${y}${y === D.years_partial ? " (so far)" : ""}: ${money(tot[j])}/lb</b>` +
+        parts.map(p => `<br><span style="color:${color(PC[p])}">■</span> ${p}: ${money(P.parts[p][j])}`).join("");
+      tip.style.opacity = 1;
+      const r = svg.getBoundingClientRect(), cr = box.parentElement.getBoundingClientRect();
+      const tx = r.left - cr.left + (m.l + (j + .5) * bw) * r.width / W;
+      tip.style.left = Math.min(Math.max(8, tx + 12), cr.width - tip.offsetWidth - 8) + "px"; tip.style.top = "30px";
+    };
+    g.addEventListener("mousemove", show); g.addEventListener("touchstart", show, {passive: true});
+    g.addEventListener("mouseleave", () => tip.style.opacity = 0);
+  });
+  $("dollarLegend").innerHTML = parts.map(p => `<span><i class="box" style="background:${color(PC[p])}"></i>${p}</span>`).join("");
+}
+
+// ---------- meaning box ----------
+function meaning() {
+  const k = state.meat;
+  $("meaning").innerHTML = `<p><b>What it means.</b> ${D.meaning[k]}</p>` +
+    (state.year !== "all" && D.year_notes[state.year] ? `<p><b>${state.year}.</b> ${D.year_notes[state.year]}</p>` : "");
+}
+
+// ---------- event cards ----------
+function eventCards() {
+  const lo = state.year === "all" ? new Date(1900, 0, 1) : new Date(+state.year, 0, 1);
+  const hi = state.year === "all" ? new Date(2100, 0, 1) : new Date(+state.year, 11, 31);
+  const list = D.events.filter(e => state.meat === "all" || e.meats.includes(state.meat)).filter(e => {
+    const s = new Date(e.start + "T00:00:00"), en = e.end ? new Date(e.end + "T00:00:00") : s; return en >= lo && s <= hi; });
+  $("evHead").textContent = `Events${state.meat === "all" ? "" : " for " + NAMES[state.meat].toLowerCase()}${state.year === "all" ? "" : " in " + state.year} (${list.length})`;
+  if (!list.length) { $("events").innerHTML = `<p class="empty">No events on the list for this selection.</p>`; return; }
+  $("events").innerHTML = list.map(e => {
+    const c = CAT[e.category];
+    const when = e.end ? `${e.start_label} – ${e.end_label}` : e.start_label;
+    const tests = (D.tests[e.id] || []).filter(r => state.meat === "all" || r.meat === state.meat);
+    const found = tests.length ? tests.map(r => `<div class="found">Tested (${r.meat}): <b>${r.gap >= 0 ? "+" : ""}${r.gap}%</b> vs. forecast · ${r.verdict}${r.agree ? "" : " (the simpler method says " + r.simple_verdict + ")"}</div>`).join("")
+      : `<div class="found" style="color:var(--muted)">${e.category === "weather" ? "Droughts act slowly through the herd; see notebook 12." : e.category === "data" ? "Interrupted data collection, not prices." : "Not tested (too early or too recent)."}</div>`;
+    return `<div class="ev${state.highlight === e.id ? " on" : ""}" data-id="${e.id}" tabindex="0">
+      <div class="top"><span class="num" style="color:${c[1]}">${e.id.replace(/^E0?/, "")}</span><span class="when">${when}</span>
+      <span class="tag" style="background:${c[1]}">${c[0]}</span>${e.claim && e.category !== "popular_claim" ? '<span class="tag claim">Popular claim</span>' : ""}</div>
+      <div class="name">${esc(e.name)}</div>
+      <div class="more">${esc(e.expected)}</div>${found}
+      <div class="more">${esc(e.notes || "")} ${e.source_url ? `<a href="${esc(e.source_url)}" rel="noopener" target="_blank">${esc(e.source_name || "Source")}</a>` : ""}</div></div>`;
+  }).join("");
+  document.querySelectorAll(".ev").forEach(c => {
+    const on = () => { state.highlight = state.highlight === c.dataset.id ? null : c.dataset.id; state.events = true; $("evChk").checked = true;
+      render(false); if (state.highlight) $("chart").scrollIntoView({behavior: "smooth", block: "center"}); };
+    c.addEventListener("click", ev => { if (ev.target.tagName !== "A") on(); });
+    c.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); on(); } });
+  });
+}
+
+// ---------- grocery chips (All meats only) ----------
+function chips() {
+  const box = $("chips"); box.hidden = state.meat !== "all";
+  if (box.hidden) return;
+  box.innerHTML = '<span style="font-size:13px;color:var(--muted);margin-right:4px">Compare with:</span>' +
+    Object.entries(D.groceries).filter(([k]) => k !== "all_items").map(([k, g]) =>
+      `<button class="chip" data-k="${k}" aria-pressed="${state.groceries.has(k)}">${esc(g.name)}</button>`).join("");
+  box.querySelectorAll(".chip").forEach(b => b.addEventListener("click", () => {
+    state.groceries.has(b.dataset.k) ? state.groceries.delete(b.dataset.k) : state.groceries.add(b.dataset.k); render(false); }));
+}
+
+// ---------- controls ----------
+function segs() {
+  for (const [id, key] of [["meatSeg", "meat"], ["modeSeg", "mode"]])
+    $(id).querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === state[key]));
+}
+function render(resetHighlight = true) {
+  if (resetHighlight === true && state._last !== state.meat + state.year) state.highlight = null;
+  state._last = state.meat + state.year;
+  segs(); tiles(); drawLine(); chips(); meaning(); drawDollar(); eventCards();
+  try { history.replaceState(null, "", `#${state.meat}/${state.mode}/${state.year}`); } catch (e) {}
+}
+for (const [id, key] of [["meatSeg", "meat"], ["modeSeg", "mode"]])
+  $(id).addEventListener("click", ev => { const b = ev.target.closest("button"); if (!b) return; state[key] = b.dataset.v; render(); });
+const years = [...new Set(D.months.map(m => m.slice(0, 4)))];
+$("yearSel").innerHTML = '<option value="all">All years</option>' + years.map(y => `<option value="${y}">${y}${+y === D.years_partial ? " (so far)" : ""}</option>`).join("");
+$("yearSel").addEventListener("change", ev => { state.year = ev.target.value; render(); });
+$("evChk").addEventListener("change", ev => { state.events = ev.target.checked; render(false); });
+$("latest").textContent = D.latest_label; document.querySelectorAll(".latest2").forEach(s => s.textContent = D.latest_label);
+$("built").textContent = D.built;
+(() => { const [m, mo, y] = (location.hash || "").slice(1).split("/");
+  if (["beef", "pork", "chicken", "all"].includes(m)) state.meat = m;
+  if (["nominal", "real"].includes(mo)) state.mode = mo;
+  if (y && (y === "all" || years.includes(y))) state.year = y;
+  $("yearSel").value = state.year; })();
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => render(false), 150); });
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => render(false));
+render();
+</script>
+</body>
+</html>

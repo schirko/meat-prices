@@ -79,12 +79,22 @@ evidence.
 
 ---
 
-## Milestone 5: Streamlit app ⬜
+## Milestone 5: Interactive explorer ✅
 
-**Goal:** the main page from the mockup, running on real data.
+**Goal:** the main page from the mockup, running on real data. Built as an interactive
+page inside the project site instead of a Streamlit app (D39).
 
 | Item | Status | What's involved |
 |---|---|---|
+| 5.1 Page skeleton and controls | ✅ | `explore.html`, built by `python -m src.build_site` from `src/explore_template.html`. Meat picker (beef, pork, chicken, all meats), prices at the time vs. after inflation, year selector ("All years" or one year), events on/off. The selection is kept in the page address, so a view can be shared. |
+| 5.2 Price tiles and all-years view | ✅ | Tiles (latest price, change since 2015 before and after inflation, highest month) and the full price history with event bands and lines (D11) |
+| 5.2b Single-year view | ✅ | Month-by-month chart, change through the year and against the same months of the year before, the highest month, the events that year, and a short note on the year |
+| 5.2c "All meats" view | ✅ | All three meats as an index (2015 = 100), with all prices for comparison; works for all years or one year (D13) |
+| 5.2d "Meat vs. the rest of the grocery cart" | ✅ | "Compare with" buttons add grocery categories (groceries overall, cereals, dairy, eggs, fresh produce, drinks, restaurant meals) to the All meats chart (D19) |
+| 5.3 "Who gets the dollar" and verdict sections | ✅ | Stacked bars of the rancher, packer and store parts of each pound, by year, in real dollars; tapping a year opens it above. A "What it means" box for each meat; the verdict leads the front page. |
+| 5.4 Methods and data page | ✅ | "Findings and methods explained" (`docs/FINDINGS.md`), plus the data sources, decisions and column dictionary, all published as site pages |
+
+---|---|---|
 | 5.1 App skeleton and sidebar | ⬜ | Page layout, load processed data; sidebar with meat selector (beef, pork, chicken, all meats), year selector ("All years" or one year), nominal vs inflation-adjusted, event markers on/off |
 | 5.2 Price tiles and all-years view | ⬜ | `st.metric` tiles for the selected meat, full price history chart with event markers (see D11) |
 | 5.2b Single-year view | ⬜ | When one year is picked: month-by-month chart, change from the year before, events that happened that year |
@@ -114,7 +124,7 @@ problems before they reach the app (D29, D31).
 
 | Item | Status | What's involved |
 |---|---|---|
-| 7.1 Deploy on the VPS | ⏸ | Deferred (D32): portfolio links to the GitHub repo for now. When resumed: run the Streamlit app as a service on the VPS at schirko.com/scott/meat-prices behind the web server, with HTTPS (D12, D30) |
+| 7.1 Deploy on the VPS | ✅ | Done another way (D36, D39): the whole project site, including the interactive explorer, is static files served by schirko.com at /scott/meat-prices/ from Scott's VPS (Coolify redeploys on push). No Streamlit service needed. |
 | 7.2 Portfolio polish | 🔄 | Done early (D32, D35): README summary with findings, two charts (`python -m src.readme_charts`), limits, tests badge, and the project site at schirko.com/scott/meat-prices (`python -m src.build_site`, D36). Left: app link and screenshots once the app exists, and the portfolio site entry. Original plan: one-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
 
 ---
@@ -122,6 +132,21 @@ problems before they reach the app (D29, D31).
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-11-15: Interactive explorer (Milestone 5 complete)
+- **Done:** `explore.html` on the project site, built with the rest of the site by
+  `python -m src.build_site` (D39). It has:
+  - a meat picker, prices at the time or after inflation, and all years or one year
+  - events shown as bands and lines, each with a card that includes notebook 11's test
+    result
+  - an All meats view with grocery comparisons
+  - "who gets each dollar" stacked bars
+  - a "What it means" box for each meat
+- **To feed the event cards,** notebook 11 now saves its results to
+  `data/processed/event_tests.csv`.
+- **Tested:** desktop and phone widths, light and dark; no script errors.
+- **Next:** Milestone 7 wrap-up: a final pass over the site and README, and the
+  portfolio card.
 
 ### 2026-11-15: The verdict (items 4.5, 4.1, 4.2; Milestone 4 complete)
 - **Done:** notebook `13_verdict.ipynb`. It runs three tests per meat, then gives a
