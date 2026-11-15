@@ -41,7 +41,8 @@ the supply chain.
    latest month, 56 columns). Every fix is documented, including problems found
    in the source files ([06](notebooks/06_clean_and_combine.ipynb)).
 3. **Explored** the patterns behind the findings above
-   ([07](notebooks/07_explore.ipynb)).
+   ([07](notebooks/07_explore.ipynb)) and lined them up with a dated event list
+   ([08](notebooks/08_events.ipynb)).
 4. **Automated** the pipeline. One command re-downloads, rebuilds and checks the
    data, and 23 automated tests run on every push (the badge at the top).
 
@@ -55,8 +56,13 @@ patterns, and the statistical tests come in Milestone 4.
 [data sources](docs/DATA_SOURCES.md) ·
 [column dictionary](docs/DATA_DICTIONARY.md)
 
-**Still to come:** a dated event timeline on the charts, statistical tests of
-which events moved prices, and an interactive app.
+**Events:** 16 dated, sourced events (plant closures, drought, trade, disease, and
+three popular claims) are marked on the price charts in
+[notebook 08](notebooks/08_events.ipynb). The 2020 COVID closures stand out for all
+three meats. The popular claims don't line up with price jumps.
+
+**Still to come:** statistical tests of which events moved prices, and an
+interactive app.
 
 ---
 

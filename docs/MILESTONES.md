@@ -52,7 +52,7 @@ exactly how, so anyone can repeat it.
 
 ---
 
-## Milestone 3: Event timeline 🔄
+## Milestone 3: Event timeline ✅
 
 **Goal:** a cited, dated table of events that can go on charts and into
 statistical tests.
@@ -60,7 +60,7 @@ statistical tests.
 | Item | Status | Notebook / file | What's involved |
 |---|---|---|---|
 | 3.1 Research and record events | ✅ | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (widely given as the reason chicken prices rose; fact-checkers found them no more common than usual; test against the price data), Colorado bird-flu culls (2022, 2024) and cage-free egg law (2025) (these involve egg-laying hens; check whether they show up in meat-chicken prices at all), Mexican cattle import suspensions, screwworm (2026) |
-| 3.2 Overlay events on prices | ⬜ | `08_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
+| 3.2 Overlay events on prices | ✅ | `08_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
 
 ---
 
@@ -134,6 +134,18 @@ Newest first. One entry per finished item.
   GitHub Actions tests pass (green badge). Scott reviewed and approved all 16
   events in `events.csv` as they are (item 3.1 complete).
 - **Next:** item 3.2, notebook `08_events.ipynb`, marking the events on the price charts.
+
+### 2026-11-14: Events on the price charts (Milestone 3 complete)
+- **Done:** notebook `08_events.ipynb` (item 3.2): an event timeline, each meat's price
+  with its events, a three-month "how much did the price move" screen ranked against
+  every other three-month move (D33), and the beef events on the drought → sell-off →
+  price chain.
+- **Found:** the 2020 COVID closures caused one of the biggest price moves on record for
+  all three meats, then faded. Chicken's 2022 spike lines up with feed costs and bird
+  flu together. The three popular claims came in ordinary months (or, for the fires
+  claim, only chicken moved). Beef's rise is a slow build following the herd, not a
+  series of event shocks.
+- **Next:** Milestone 4, testing these patterns properly.
 
 
 ### 2026-11-13: Milestone 6 items 6.1–6.4 complete

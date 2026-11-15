@@ -511,3 +511,27 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
 - **What this means:** the repo is now the project's front door, so the README's
   one-page summary and screenshots (item 7.2) matter more, and every notebook should
   be committed with its outputs saved so the charts show on GitHub.
+
+## D33. How events are drawn and screened (2026-11-14)
+
+- **Decided:**
+  - An event that lasts more than a month is drawn as a shaded band; anything else is a
+    line on its start date. A drought with no end date is still going on, so it runs
+    to the latest month of data.
+  - Popular claims are drawn dashed or faded, so they're never mistaken for
+    established causes.
+  - Each meat's chart shows only the events listed for that meat.
+  - Notebook 08 screens each event with one number: the change in the
+    **inflation-adjusted** price from the month before the event started to three
+    months after. Each change is **ranked against every three-month change for that
+    meat since 2015**.
+- **Why:** a percent change on its own doesn't say whether it's unusual, because
+  prices move about 2% in a typical three months. Ranking it against all the others
+  puts it in context with no statistical model. Using real prices keeps general
+  inflation from making every recent event look big.
+- **Limits, handled in Milestone 4:**
+  - Overlapping events can't be separated.
+  - An event that lands on a rising trend ranks high even if it did nothing.
+  - Slow effects such as drought don't fit a three-month window.
+  - The 2020–2023 drought's −16% is an example: it measures the COVID spike fading,
+    not the drought.
