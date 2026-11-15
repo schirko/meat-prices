@@ -61,6 +61,8 @@ def export_notebooks():
         nb = nbformat.read(path, as_version=4)
         html, _ = exporter.from_notebook_node(nb, resources={"metadata": {"name": path.stem}})
         html = re.sub(r"(<body[^>]*>)", lambda m: m.group(1) + back.format(name=path.name), html, count=1)
+        # Keep the page out of search engines (D35)
+        html = html.replace("<head>", '<head>\n<meta name="robots" content="noindex, nofollow">', 1)
         (out_dir / f"{path.stem}.html").write_text(html, encoding="utf-8")
         listed.append(path)
         print(f"  exported {path.name}")

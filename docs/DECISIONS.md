@@ -581,6 +581,14 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
 - **Why `docs/` and not a separate branch:** GitHub Pages can serve `docs/` on master
   directly, with no extra branch or workflow file. The Markdown docs in the same folder
   are linked on GitHub instead of being turned into pages.
+- **Kept out of search engines (Scott's choice):** every page carries
+  `<meta name="robots" content="noindex, nofollow">`. Search engines that honor the tag
+  (Google, Bing and the other major ones) leave the pages out of their results. People
+  with the link, such as visitors from the portfolio, can still open them. A `robots.txt`
+  file can't be used, because it only works at the root of `schirko.github.io`, not in
+  a project folder. The GitHub repository itself is public, and GitHub lets search
+  engines index public repos; only making the repo private would stop that, and free
+  accounts can't run Pages from a private repo.
 - **Limits:** the findings text on the front page is written by hand in the template;
   only the numbers update automatically. When a new analysis changes a finding, the
   template is edited too. The notebook pages show the outputs saved in each notebook,
