@@ -654,3 +654,26 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   - The what-if assumes the links stay fixed.
   - A longer BLS and NASS history would strengthen link 3; it can't be downloaded from
     this workspace.
+
+## D38. What "justified" means, and folding 4.1 and 4.2 into the verdict (item 4.5, 2026-11-15)
+
+- **Decided:** "Are today's prices justified?" is answered with three tests per meat,
+  each something a reader can check:
+  1. **Inflation.** The real price change since 2015, and against the 2015–2019
+     average.
+  2. **Who gets the dollar.** The rancher, packer and store parts of each retail pound
+     (USDA price spreads), in real dollars, and which part the rise since 2019 went to.
+  3. **Supply (beef only).** The herd → price fit on 2015–2025 predicts the latest
+     year's price, with a 95% prediction range. The latest year is the test because the
+     fit hasn't seen it.
+- **Items 4.1 and 4.2 become tests 1 and 2** of `13_verdict.ipynb`, instead of separate
+  notebooks 09 and 10. Notebook 07 had already done most of that work, and two thin
+  notebooks would have repeated it.
+- **Why these tests:** each answers a common version of the question. "Is it just
+  inflation?" "Who's getting rich?" "Is there really a shortage?" None needs a judgment
+  about what profit is fair.
+- **What it doesn't claim:** a price spread pays for costs (labor, energy, rent, waste)
+  as well as profit, so a wider spread isn't proof of overcharging. The supply test
+  rests on 11 years, and the latest year is partial.
+- **Pork and chicken skip test 3:** there's no comparable supply series in the project,
+  and both are cheaper in real terms than in 2015, so there's no rise to explain.

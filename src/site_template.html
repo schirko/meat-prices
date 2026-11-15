@@ -49,6 +49,8 @@ h2 { font-family: Fraunces, Georgia, serif; font-size: 28px; margin: 56px 0 12px
 figure { margin: 24px 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px; }
 figure img { width: 100%; height: auto; display: block; }
 figcaption { color: #5f5852; font-size: 14px; padding: 8px 6px 2px; }
+.verdict { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--accent);
+           border-radius: 12px; padding: 6px 22px; font-size: 18px; }
 .findings { padding-left: 0; list-style: none; margin: 0; }
 .findings li { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent);
                border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
@@ -98,7 +100,15 @@ footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--lin
   <figcaption>Retail prices, rebased so the 2015 average = 100. A line above "All prices" rose faster than inflation.</figcaption>
 </figure>
 
-<h2 id="findings">Key findings</h2>
+<h2 id="findings">The verdict: are today's prices justified?</h2>
+<div class="verdict">
+  <p><b>Mostly yes.</b> Pork and chicken are cheaper than in 2015 after inflation. Beef's rise through 2025 is
+  explained by a real cattle shortage, and the money went mainly to ranchers, not packers or stores. The exception
+  is 2026: beef is running about 11% above what the shrinking herd explains, and that extra has gone mainly into
+  store margins. <a href="notebooks/13_verdict.html">See the verdict notebook</a>.</p>
+</div>
+
+<h2>Key findings</h2>
 <ul class="findings">
   <li><b>Beef is the outlier.</b> Ground beef is up ${beef_nominal}% since 2015, while prices in general rose
   ${all_prices}% and groceries ${groceries}%. After inflation, beef costs ${beef_real}% more; pork chops cost
@@ -114,9 +124,10 @@ footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--lin
   plant fires and closures, the JBS cyberattack and screwworm show no clear shift.</li>
   <li><b>The popular explanations don't hold up.</b> Plant fires, Colorado's bird-flu culls and the cage-free egg law
   came at times when prices didn't shift. Chicken's 2022 spike was real, but it lines up with feed costs and bird flu.</li>
-  <li><b>Ranchers are getting a bigger share of the money.</b> Their share of each retail beef dollar rose from
-  ${rancher_2019}% in 2019 to ${rancher_latest}% in ${rancher_year}, which points to scarce cattle rather than wider
-  packer or store margins.</li>
+  <li><b>Ranchers got most of the money; packers were squeezed.</b> Ranchers' share of each retail beef dollar rose
+  from ${rancher_2019}% in 2019 to ${rancher_latest}% in ${rancher_year}. After inflation, ranchers got about 86% of
+  beef's price rise since 2019, while packers' part of each pound fell from $$1.11 to $$0.30. Stores' part rose too,
+  mostly in 2026.</li>
 </ul>
 
 <figure>
@@ -137,7 +148,8 @@ footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--lin
 </ol>
 <p class="note"><b>Limits.</b> These are national averages; local prices differ. October 2025 is estimated because the
 government shutdown stopped price collection that month. Overlapping events can't be told apart. Few years of
-data (12–16 per link) limit how precise the measured links can be. A final verdict is still in progress.</p>
+data (12–16 per link) limit how precise the measured links can be. Price spreads include costs as well as profit, so they can't
+show whether margins are fair.</p>
 
 <h2 id="notebooks">The analysis, step by step</h2>
 <p class="note">Each notebook explains what it's looking for, shows the code and its result, then how to read it

@@ -43,6 +43,7 @@ NOTEBOOK_BLURBS = {
     "08": "The 16 dated events on the price charts.",
     "11": "Testing whether prices really shifted at each event.",
     "12": "Measuring the chain: drought, then the cow sell-off, then the herd, then the price.",
+    "13": "The verdict: inflation, who gets each beef dollar, and whether supply explains today's price.",
 }
 
 # Project docs published as pages: file -> page title

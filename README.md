@@ -12,7 +12,18 @@ the supply chain.
 
 ![Ground beef rose 63% since 2015, ahead of all prices (42%); chicken breast rose 23% and pork chops 9%](docs/images/headline.png)
 
-## Key findings so far
+## The verdict: are today's prices justified?
+
+**Mostly yes** ([notebook 13](notebooks/13_verdict.ipynb)).
+- **Pork and chicken:** cheaper than in 2015 after inflation, so yes.
+- **Beef, through 2025:** its rise is explained by a real cattle shortage, and the
+  money went mainly to **ranchers (86% of the real rise since 2019)**. Packers were
+  squeezed.
+- **Beef, 2026:** it runs about **11% above what the herd explains**, and that extra
+  went mainly into **store margins**. It's the one part of today's beef price that
+  supply doesn't account for.
+
+## Key findings
 
 *Data through September 2026. "Real" means adjusted for inflation, in September 2026 dollars.*
 
@@ -32,9 +43,9 @@ the supply chain.
   actual). Drought explains **roughly 40%** of the herd loss; ranchers' other
   choices explain the rest.
 - **Ranchers are getting a bigger share of the money.** Their share of each
-  retail beef dollar rose from **43% in 2019 to 54% in 2025**. That points to scarce
-  cattle, not wider packer or grocery margins, as the main driver of the latest
-  price rise. Milestone 4 will test this formally.
+  retail beef dollar rose from **43% in 2019 to 54% in 2025**. After inflation,
+  ranchers got $2.08 of the $2.40-a-pound rise since 2019 and stores $1.13, while
+  packers' part *fell* $0.81. Most of the store gain came in 2026.
 
 ![Four stacked charts: drought, then the cow sell-off, then the shrinking herd, then the rising real price of ground beef](docs/images/chain.png)
 
@@ -50,16 +61,18 @@ the supply chain.
 3. **Explored** the patterns behind the findings above
    ([07](notebooks/07_explore.ipynb)), lined them up with a dated event list
    ([08](notebooks/08_events.ipynb)), tested the events ([11](notebooks/11_event_tests.ipynb))
-   and measured the drought → herd → price chain ([12](notebooks/12_supply_chain.ipynb)).
+   measured the drought → herd → price chain ([12](notebooks/12_supply_chain.ipynb)),
+   and brought it all together in a verdict ([13](notebooks/13_verdict.ipynb)).
 4. **Automated** the pipeline. One command re-downloads, rebuilds and checks the
    data, and 23 automated tests run on every push (the badge at the top).
 
 **Limits.** These are national averages; local prices differ. BLS prices are
 averages across stores, not a fixed basket. October 2025 is filled in because the
-government shutdown stopped data collection that month. The findings so far show
-patterns, and the statistical tests come in Milestone 4.
+government shutdown stopped data collection that month. Most measurements rest on
+12–16 years of data, so their sizes are approximate. Price spreads include costs as
+well as profit.
 
-**Read more:** [plan and progress](docs/MILESTONES.md) ·
+**Read more:** [findings and methods explained](docs/FINDINGS.md) · [plan and progress](docs/MILESTONES.md) ·
 [every decision and why](docs/DECISIONS.md) ·
 [data sources](docs/DATA_SOURCES.md) ·
 [column dictionary](docs/DATA_DICTIONARY.md)
@@ -73,8 +86,7 @@ in ordinary months. The 2020 COVID closures clearly shifted all three meats (+11
 and chicken's 2022 spike was real. None of the popular claims holds up. Apart from COVID,
 no sudden event clearly moved beef, so beef's rise points to the shrinking herd instead.
 
-**Still to come:** a final verdict on whether today's prices are justified, and
-an interactive app.
+**Still to come:** an interactive app (Milestone 5).
 
 ---
 

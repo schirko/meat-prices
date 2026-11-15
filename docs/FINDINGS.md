@@ -23,6 +23,11 @@ in September 2026 dollars.
 > 2025; the actual rise was 28%. Drought accounts for roughly 40% of the herd loss.
 > Ranchers' other choices account for the rest.
 >
+> So are today's prices justified? Mostly yes. Pork and chicken are cheaper than in
+> 2015 after inflation. Beef's rise went mainly to ranchers, because cattle are scarce;
+> packers were actually squeezed. The exception is 2026: beef is running about 11% above
+> what the herd explains, and that extra has gone mainly into store margins.
+>
 > It's built from free government data (BLS, USDA, the U.S. Drought Monitor), with one
 > command to refresh it, automated data tests, and every decision documented.
 
@@ -98,14 +103,52 @@ pandemic did, briefly. Beef's rise isn't a string of shocks; it's something slow
 Fewer cows means fewer calves for years, so less beef, so higher prices. I measured each
 step separately. Together they account for almost all of beef's rise since 2019."
 
-### 4. Ranchers are getting a bigger share of each beef dollar (notebooks 02 and 07)
+### 4. Who got the money: mostly ranchers (notebooks 02, 07 and 13)
 
 Ranchers' share of each retail beef dollar rose from **43% in 2019 to 54% in 2025**.
-That points to scarce cattle rather than wider margins for packers or stores as the main
-driver of the latest rise. *(Item 4.2 will look at this more closely.)*
+In real dollars, a pound of fresh beef rose about **$2.40** from 2019 to 2026:
 
-**How it was found:** USDA's meat price spreads, which follow a pound of beef from the
-farm, through the packer (wholesale), to the store (retail).
+| Stage | Change since 2019 (real $/lb) | Share of the rise |
+|---|---|---|
+| Rancher | +$2.08 | 86% |
+| Store | +$1.13 | 47% |
+| Packer | −$0.81 | −33% |
+
+- **Through 2025, almost the whole rise went to ranchers.**
+- **Packers were squeezed:** their part fell from $1.11 to $0.30 a pound, because they
+  pay record prices for cattle and can't pass it all on.
+- **Most of the store gain came in 2026:** +$0.50 in one year.
+- **Pork and chicken:** each stage is within a few cents of 2019.
+
+**How it was found:** USDA's meat price spreads, which follow a pound of meat from the
+farm, through the packer (wholesale), to the store (retail). Each stage was converted to
+today's dollars.
+
+**How to explain it:** "If packers or stores were behind high beef prices, you'd see
+their cut grow. Through 2025 it didn't. The money went to ranchers, which is what a
+cattle shortage looks like. 2026 is different: the store's part jumped."
+
+### 5. The verdict: mostly justified (notebook 13)
+
+| Meat | vs. inflation since 2015 | Who got the rise | Explained by supply? |
+|---|---|---|---|
+| Ground beef | +15% | mostly ranchers; store margin up in 2026; packers down | yes through 2025; 2026 about 11% above |
+| Pork chops | −23% | little change | not needed (cheaper) |
+| Chicken breast | −13% | little change | not needed (cheaper) |
+
+- **Pork and chicken: justified.** Both are cheaper than in 2015 after inflation.
+- **Beef: mostly justified, with a 2026 caveat.**
+  - The herd → price fit, made on 2015–2025 only, predicts about **$6.20 a pound** for
+    2026 (95% range $5.59 to $6.87). The actual 2026 average so far is **$6.90**, 11%
+    above the prediction and just above the range.
+  - That extra lines up with the jump in the store's part of the price.
+  - It isn't proof of overcharging, because store spreads also pay for rising costs. But
+    it's the one part of today's beef price the supply story doesn't cover.
+
+**How to explain it:** "Mostly yes. Pork and chicken got cheaper after inflation. Beef's
+rise is a real cattle shortage, and the money went to ranchers. The one thing I'd flag
+is 2026, when beef got ahead of what the herd explains, and the extra shows up in store
+margins."
 
 ---
 
@@ -168,6 +211,17 @@ correction widens the uncertainty to account for that, so p-values aren't too op
 coincidence. The herd → price result was re-checked with a time trend included and using
 year-to-year changes; it held up both ways.
 
+**Out-of-sample test and prediction range (notebook 13).** Fit a relationship on some
+years (2015–2025), then predict a year it hasn't seen (2026). The **95% prediction range**
+is where that year's value should land 19 times out of 20 if nothing new is going on. A
+result outside it is a signal that something beyond the fitted relationship is at work.
+Testing on data the model hasn't seen is fairer than checking how well it fits the data
+it was built from.
+
+**Price spreads aren't profit.** The gap between what a store pays wholesale and what it
+charges also covers wages, rent, energy and waste. A wider spread can mean higher costs,
+higher profit, or both; this data can't tell which.
+
 **What-if (counterfactual).** Replace the 2020–2023 drought with a normal level, push
 that change through the fitted links, and see how the herd and the price would have
 differed. It assumes everything else stayed the same.
@@ -228,10 +282,20 @@ Two things. Messy source data: several USDA problems only showed up through care
 checks. And not fooling myself: the model's own error range would have called a third of
 all ordinary months "events" until the placebo test exposed it.
 
+**"So are beef prices a rip-off?"**
+Mostly no. Through 2025 the shrinking herd explains the rise, and the money went to
+ranchers, not packers or stores. In 2026 beef got about 11% ahead of what the herd
+explains, and the store's cut grew. That's worth watching, but the data can't separate
+store costs from store profit, so I wouldn't call it gouging.
+
+**"Weren't the big meatpackers to blame?"**
+Not in this data. Their part of each pound of beef fell from $1.11 to $0.30 (in today's
+dollars) between 2019 and 2026.
+
 **"What would you do with more time?"**
 - Use decades of BLS and NASS history to firm up the herd → price link.
-- Add beef import volumes.
-- Finish the "who gets the dollar" analysis (item 4.2).
+- Add beef import volumes and tariffs.
+- Look at store costs (wages, energy) to see how much of 2026's store spread they explain.
 - Build the interactive app.
 
 **"How do you keep it current?"**
@@ -247,9 +311,12 @@ Then the site rebuilds from the same data.
 - Overlapping events (for example feed costs and bird flu in 2022) can't be separated.
 - The what-if assumes the links stay fixed.
 - October 2025 is estimated because of the shutdown.
+- Price spreads include costs as well as profit.
+- USDA's spreads cover all fresh beef; the BLS price is ground beef.
 
 ## Still to come
 
-- **Item 4.5, the verdict:** are today's beef prices justified by the supply situation?
-  It will bring in meat vs. inflation (4.1) and who gets each beef dollar (4.2).
-- **The interactive app** (Milestone 5).
+- **The interactive app** (Milestone 5): pick a meat, see its full history with the
+  events, and drill into any single year.
+- **Watching 2026:** whether beef's gap above the herd's prediction grows or closes, and
+  whether ranchers keeping their cows shows up as a bigger herd in January 2027.

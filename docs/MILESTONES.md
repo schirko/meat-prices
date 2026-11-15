@@ -64,18 +64,18 @@ statistical tests.
 
 ---
 
-## Milestone 4: Analysis ⬜
+## Milestone 4: Analysis ✅
 
 **Goal:** answer "did the events matter?" and "are prices justified?" with
 evidence.
 
 | Item | Status | Notebook | What's involved |
 |---|---|---|---|
-| 4.1 Inflation-adjusted prices | ⬜ | `09_inflation_adjusted.ipynb` | Convert prices to today's dollars using CPI; compare meat to overall inflation |
-| 4.2 Who gets the dollar | ⬜ | `10_price_spreads.ipynb` | Farm, packer and retail shares over time |
+| 4.1 Inflation-adjusted prices | ✅ | `13_verdict.ipynb` (test 1) | Folded into the verdict (D38): real change since 2015 and against the 2015–2019 average, per meat |
+| 4.2 Who gets the dollar | ✅ | `13_verdict.ipynb` (test 2) | Folded into the verdict (D38): rancher, packer and store parts of each pound, in real dollars, 2015 on |
 | 4.3 Did prices shift at each event? | ✅ | `11_event_tests.ipynb` | Forecast from the 3 years before each event, compared with what happened; gaps judged against every ordinary month (D34) |
 | 4.4 Supply side: drought → herd → price | ✅ | `12_supply_chain.ipynb` | Yearly fits (HAC errors) for each link: drought → cow sell-off rate, sell-off → herd change, herd → real price (log-log elasticity); a drought what-if; the 2026 exception (D37) |
-| 4.5 Verdict | ⬜ | `13_verdict.ipynb` | Pull findings together into plain-language conclusions |
+| 4.5 Verdict | ✅ | `13_verdict.ipynb` | Three tests per meat (inflation, who gets the dollar, supply out-of-sample) and a plain-language verdict (D38) |
 
 ---
 
@@ -122,6 +122,29 @@ problems before they reach the app (D29, D31).
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-11-15: The verdict (items 4.5, 4.1, 4.2; Milestone 4 complete)
+- **Done:** notebook `13_verdict.ipynb`. It runs three tests per meat, then gives a
+  plain-language verdict (D38). Items 4.1 (inflation) and 4.2 (who gets the dollar) are
+  folded in, since notebook 07 had already done most of that work.
+- **Verdict: mostly justified.**
+  - Pork and chicken are cheaper than in 2015 after inflation (−23%, −13%).
+  - Beef's rise through 2025 is explained by the cattle shortage. Since 2019, ranchers
+    got 86% of the real price rise; packers' part fell from $1.11 to $0.30 a pound.
+  - The exception is 2026: beef is about 11% above what the herd predicts (fit on
+    2015–2025), and the extra went mainly into the store's part of the price.
+- **Also:** the README, the site front page and the findings guide now lead with the
+  verdict.
+- **Next:** Milestone 5, the interactive app.
+
+### 2026-11-15: Findings guide and portfolio links
+- **Done:** `docs/FINDINGS.md`, a single plain-language guide to the whole project. It
+  covers the one-minute story, each finding and how it was found, every method
+  explained, the data problems caught, how it's built, likely employer questions with
+  answers, and limits. It's published on the site as "Findings and methods explained"
+  and linked from the front page and the README.
+- **Also:** every page on the site now links back to the portfolio at schirko.com/scott.
+- **Next:** item 4.5, the verdict. The guide gets updated with each new finding.
 
 ### 2026-11-15: The supply chain measured (item 4.4)
 - **Done:** notebook `12_supply_chain.ipynb`. It measures each link of the chain with one
