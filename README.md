@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/schirko/meat-prices/actions/workflows/tests.yml/badge.svg)](https://github.com/schirko/meat-prices/actions/workflows/tests.yml)
 
-**Project site:** [schirko.github.io/meat-prices](https://schirko.github.io/meat-prices/), with the summary, charts and every notebook as a readable page.
+**Project site:** [schirko.com/scott/meat-prices](https://schirko.com/scott/meat-prices/), with the summary, charts, every notebook and the project docs as readable pages.
 
 **Why does meat cost so much now?** This project looks at U.S. retail prices for
 beef, pork and chicken from 2015 to today. It shows where prices were before
@@ -172,7 +172,7 @@ python -m src.refresh --offline            # rebuild from the saved raw files (n
 python -m src.refresh --offline --dry-run  # build and check only; change nothing
 pytest                                     # run the data and pipeline tests
 python -m src.readme_charts                # redraw the README charts and print its numbers
-python -m src.build_site                   # rebuild the project site in docs/ (charts, numbers, notebook pages)
+python -m src.build_site                   # rebuild the project site into SITE_DIR (see .env.example)
 ```
 
 The tests check, among other things, that there is one row per month with no

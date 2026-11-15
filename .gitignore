@@ -13,6 +13,9 @@ venv/
 # Secrets
 .env
 
+# Local build of the project site (the real one goes to SITE_DIR; see D36)
+site/
+
 # Raw data is re-downloaded by the notebooks (see docs/DECISIONS.md, D9)
 data/raw/*
 !data/raw/.gitkeep

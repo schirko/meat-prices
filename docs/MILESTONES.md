@@ -115,7 +115,7 @@ problems before they reach the app (D29, D31).
 | Item | Status | What's involved |
 |---|---|---|
 | 7.1 Deploy on the VPS | ⏸ | Deferred (D32): portfolio links to the GitHub repo for now. When resumed: run the Streamlit app as a service on the VPS at schirko.com/scott/meat-prices behind the web server, with HTTPS (D12, D30) |
-| 7.2 Portfolio polish | 🔄 | Done early (D32, D35): README summary with findings, two charts (`python -m src.readme_charts`), limits, tests badge, and the GitHub Pages project site (`python -m src.build_site`). Left: app link and screenshots once the app exists, and the portfolio site entry. Original plan: one-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
+| 7.2 Portfolio polish | 🔄 | Done early (D32, D35): README summary with findings, two charts (`python -m src.readme_charts`), limits, tests badge, and the project site at schirko.com/scott/meat-prices (`python -m src.build_site`, D36). Left: app link and screenshots once the app exists, and the portfolio site entry. Original plan: one-page summary at the top of the README (question, data, method, three findings, app link), screenshots, "limits" section; project entry on Scott's portfolio site with a "view code" link to GitHub |
 
 ---
 
@@ -167,6 +167,17 @@ Newest first. One entry per finished item.
   `docs/`. GitHub Pages serves it at https://schirko.github.io/meat-prices/. The
   portfolio card links there and to the repo.
 - **Next:** item 4.4. After each new notebook, rebuild the site and push.
+
+### 2026-11-15: Site moved to schirko.com (D36)
+- **Done:**
+  - GitHub Pages unpublished.
+  - `python -m src.build_site` now builds into `SITE_DIR`, the Schirko portfolio
+    folder, so the site is served at schirko.com/scott/meat-prices/.
+  - The project docs are published as pages too.
+  - The repo stays public; the site and the portfolio card link to it.
+  - The portfolio card in the Schirko project now points to the new address.
+- **Next:** item 4.4. After each new notebook,
+  rebuild the site and push the Schirko project.
 
 
 ### 2026-11-13: Milestone 6 items 6.1–6.4 complete

@@ -593,3 +593,33 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   only the numbers update automatically. When a new analysis changes a finding, the
   template is edited too. The notebook pages show the outputs saved in each notebook,
   so a notebook has to be run and saved before the site is rebuilt.
+
+## D36. Project site served from schirko.com/scott/meat-prices; repo stays public (2026-11-15)
+
+- **Decided:**
+  - The project site moves from GitHub Pages (D35, now unpublished) to
+    **schirko.com/scott/meat-prices/**.
+  - `python -m src.build_site` writes the finished site into the folder named by
+    `SITE_DIR` in `.env`. On Scott's PC that is `Schirko\scott\meat-prices`, the
+    portfolio folder of his schirko.com project.
+  - A push of the Schirko project makes Coolify rebuild schirko.com, which serves
+    `/scott/` publicly.
+  - The **repository stays public**, so employers can read the code, and the site and
+    the portfolio card both link to it.
+  - The project docs (decisions, data sources, column dictionary, milestones) are also
+    published as pages on the site.
+- **Why:** Scott wanted the project site kept out of public view more than the code.
+  On his own VPS, schirko.com keeps every page out of search engines (an
+  `X-Robots-Tag: noindex` header on every response, plus the tag in each page), and he
+  controls who can reach it. Search engines can't be stopped from indexing a public
+  github.io address. The portfolio already deploys this way, so no new server setup is
+  needed.
+- **Considered instead:**
+  - Keeping GitHub Pages (free, but public on github.io).
+  - Making the repo private (free), which would hide the code from employers too.
+  - GitHub Pro, about $4/month, to run Pages from a private repo; the site would still
+    be public.
+- **What changes:**
+  - `docs/index.html`, `docs/notebooks/` and `docs/.nojekyll` are removed from this repo.
+  - The README charts in `docs/images/` stay.
+  - Without `SITE_DIR`, the build goes to `site/` (ignored by git) for a local preview.
