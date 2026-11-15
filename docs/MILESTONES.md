@@ -59,7 +59,7 @@ statistical tests.
 
 | Item | Status | Notebook / file | What's involved |
 |---|---|---|---|
-| 3.1 Research and record events | 🔄 | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (widely given as the reason chicken prices rose; fact-checkers found them no more common than usual; test against the price data), Colorado bird-flu culls (2022, 2024) and cage-free egg law (2025) (these involve egg-laying hens; check whether they show up in meat-chicken prices at all), Mexican cattle import suspensions, screwworm (2026) |
+| 3.1 Research and record events | ✅ | `data/processed/events.csv` | Date, event, which meats it affected, source link. Candidates to check: COVID plant shutdowns (2020), JBS cyberattack (2021), drought years (D17), the 2022 chicken breast spike (feed costs? demand? bird flu?), 2022 food plant fires (widely given as the reason chicken prices rose; fact-checkers found them no more common than usual; test against the price data), Colorado bird-flu culls (2022, 2024) and cage-free egg law (2025) (these involve egg-laying hens; check whether they show up in meat-chicken prices at all), Mexican cattle import suspensions, screwworm (2026) |
 | 3.2 Overlay events on prices | ⬜ | `08_events.ipynb` | Annotated charts; first visual check of which events line up with jumps |
 
 ---
@@ -127,6 +127,14 @@ Newest first. One entry per finished item.
 - **Done:** decided the portfolio will link to the public GitHub repo for now (D32);
   VPS hosting (item 7.1) deferred. The README becomes the project's front door.
 - **Next:** item 3.1 event review, then 3.2.
+
+### 2026-11-14: README summary and event list approved
+- **Done:** README now opens with the tests badge, a one-page summary, key findings
+  and two charts made by `python -m src.readme_charts` (item 7.2, done early).
+  GitHub Actions tests pass (green badge). Scott reviewed and approved all 16
+  events in `events.csv` as they are (item 3.1 complete).
+- **Next:** item 3.2, notebook `08_events.ipynb`, marking the events on the price charts.
+
 
 ### 2026-11-13: Milestone 6 items 6.1–6.4 complete
 - **Done:** built the refresh pipeline in `src/` and the tests in `tests/`, with the
