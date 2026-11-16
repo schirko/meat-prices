@@ -133,6 +133,14 @@ problems before they reach the app (D29, D31).
 
 Newest first. One entry per finished item.
 
+### 2026-11-16: Plain-language findings guide and notebook reading guides (D42)
+- **Done:**
+  - `docs/FINDINGS.md` rewritten for a smart reader with little analytical training:
+    the short version, five ideas to know first, each finding with "how sure are we",
+    how to read each chart, a glossary, then the methods for the curious.
+  - A "Reading guide" cell added at the top of notebooks 08, 11, 12 and 13. They're text
+    cells only, so the notebooks don't need re-running.
+
 ### 2026-11-16: Standing rule: write only inside scott/meat-prices/ (D41)
 - **Rule (Scott):** this project owns `scott/meat-prices/` and its card screenshot,
   nothing else; `scott/index.html` and `scott/styles.css` belong to the portfolio

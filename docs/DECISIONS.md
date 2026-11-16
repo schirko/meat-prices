@@ -745,3 +745,24 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   `meat-prices/`, then removing and restoring its GitHub button (D36). A change-log row
   was also added to the Schirko project's development guide. Under this rule, both
   would now go through Scott to the portfolio project.
+
+## D42. Write for a smart reader with little analytical training (2026-11-16, Scott's standard)
+
+- **Decided:** the findings and their explanations are written so a smart person with
+  little analytical training can read the whole project and understand it.
+  - Plain words first, with every technical term explained in everyday language where
+    it first appears.
+  - Numbers tied to things people recognize: a pound of beef, a share of the herd,
+    "1 in 10".
+  - Technical detail kept in clearly marked places (*For the curious*, the notebooks'
+    code) rather than mixed into the explanations.
+- **Applied to:**
+  - `docs/FINDINGS.md`, rewritten. It now has the short version, five ideas to know
+    first, "how sure are we" for each finding, how to read each chart, a plain-language
+    glossary, then the methods for the curious.
+  - The most technical notebooks (08, 11, 12 and 13), which each get a "Reading guide"
+    cell at the top that explains their terms and points to the bottom line.
+- **Why:** the site is for employers and the general public as well as data
+  scientists, and Scott uses it to learn from and to explain the project.
+- **Going forward:** new write-ups (notebook "How to read it" and "What it means"
+  sections, site text, the explorer's notes) follow the same standard.
