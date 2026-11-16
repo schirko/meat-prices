@@ -56,7 +56,11 @@ DOC_PAGES = {
 }
 
 # Shared "back to portfolio" bar (D40). The portfolio owns /scott/backbar.css; don't copy or restyle it.
-BACKBAR_HEAD = '<link rel="stylesheet" href="/scott/backbar.css">'
+BACKBAR_HEAD = """<link rel="stylesheet" href="/scott/backbar.css">
+<link rel="icon" href="/scott/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="16x16" href="/scott/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/scott/favicon-32.png">
+<link rel="apple-touch-icon" href="/scott/apple-touch-icon.png">"""  # stylesheet and favicons owned by the portfolio
 BACKBAR = """<div class="sx-backbar">
   <a class="sx-back" href="/scott/">
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>

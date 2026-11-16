@@ -707,17 +707,20 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   `/scott/backbar.css` in its `<head>`, and the bar is the first element inside
   `<body>`. That replaces the project's own back links.
   - **Crumb:** "Meat Price Explorer", as on the portfolio card.
-  - **Links:** Overview, Explore, Notebooks and Docs.
   - The bar's HTML lives in one place, `BACKBAR` in `src/build_site.py`.
 - **Why:** all project pages on schirko.com/scott match, and the portfolio can change
   the bar's look for every project at once by editing its one stylesheet. So
   `backbar.css` is linked, never copied, and the `.sx-` classes are never restyled.
 - **Absolute paths** (`/scott/...`) because pages sit at different depths, as the
   portfolio requires.
-- **Links point at pages that exist.** The portfolio serves `index.html` for a folder,
-  but `notebooks/` and `docs/` have no index page. So "Notebooks" goes to the notebook
-  list on the front page (`/scott/meat-prices/#notebooks`) and "Docs" to the findings
-  guide.
+- **Favicons:** the same `<head>` snippet also links the portfolio's favicons
+  (`/scott/favicon.ico`, the 16 and 32 px PNGs, and the Apple touch icon), so every
+  project page shows the portfolio's icon. Added at the portfolio's request.
+- **Links:** Overview and Explore (the project's own pages, which the bar allows), plus
+  Notebooks (`/scott/meat-prices/notebooks/`) and Docs (`/scott/meat-prices/docs/`),
+  as in the portfolio's markup. The portfolio serves `index.html` for a folder, so
+  `build_site` writes `notebooks/index.html` and `docs/index.html`, each a list of its
+  pages, for those links to open.
 - **Notebook pages:** the notebook template puts a margin around the page body, which
   would inset the bar. A small style moves that spacing onto the notebook content, so
   the bar runs edge to edge as on the other pages. The `.sx-` styles are untouched.
