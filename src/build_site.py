@@ -313,7 +313,21 @@ def notebook_list_html(paths):
     return "\n".join(items)
 
 
+def check_site_dir():
+    """Refuse to build anywhere but this project's own folder (D41).
+
+    The portfolio owns scott/index.html and scott/styles.css; this project owns only
+    scott/meat-prices/ (and its card screenshot). A SITE_DIR pointing at the scott/
+    folder would overwrite the portfolio's index.html, so the build stops instead.
+    """
+    allowed = SITE_DIR.name == "meat-prices" or SITE_DIR.resolve() == (config.PROJECT_ROOT / "site").resolve()
+    if not allowed:
+        raise SystemExit(f"SITE_DIR must be the meat-prices folder (or the local site/ preview), not {SITE_DIR}. "
+                         "This project only writes inside scott/meat-prices/ (D41).")
+
+
 def main():
+    check_site_dir()
     SITE_DIR.mkdir(parents=True, exist_ok=True)
     print(f"Building the site in {SITE_DIR}")
     m = checks.load_master(config.PROCESSED_DIR / "master_monthly.csv")

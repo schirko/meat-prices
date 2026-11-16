@@ -133,6 +133,14 @@ problems before they reach the app (D29, D31).
 
 Newest first. One entry per finished item.
 
+### 2026-11-16: Standing rule: write only inside scott/meat-prices/ (D41)
+- **Rule (Scott):** this project owns `scott/meat-prices/` and its card screenshot,
+  nothing else; `scott/index.html` and `scott/styles.css` belong to the portfolio
+  project. Card changes go to Scott as text.
+- **Build script:** no step ever wrote `scott/index.html`, so nothing was removed. The
+  build now refuses to run if `SITE_DIR` points anywhere but the `meat-prices` folder
+  (or the local `site/` preview).
+
 ### 2026-11-15: Shared portfolio bar (D40)
 - **Done:** every generated page now uses the portfolio's shared "back to portfolio" bar
   (`/scott/backbar.css`), with links to Overview, Explore, Notebooks and Docs. The

@@ -726,3 +726,22 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   the bar runs edge to edge as on the other pages. The `.sx-` styles are untouched.
 - **Local preview:** with absolute paths, the bar is unstyled when pages are opened as
   files from `site/`. It looks right on schirko.com.
+
+## D41. This project writes only inside scott/meat-prices/ (2026-11-16, Scott's standing rule)
+
+- **Rule:** this project owns `scott/meat-prices/` and its card screenshot
+  `scott/images/screenshots/meat-prices.png`, nothing else in the Schirko project. The
+  portfolio project owns `scott/index.html` and `scott/styles.css`, and this project
+  never writes them.
+- **Card changes:** if the Meat Price Explorer card on the portfolio needs to change,
+  this project supplies the new text, and Scott passes it to the portfolio project.
+- **Build script:** `python -m src.build_site` never wrote `scott/index.html`. Every
+  file goes inside `SITE_DIR`, and its `index.html` is this project's front page,
+  `scott/meat-prices/index.html`. There was no step to remove. To keep it that way,
+  the build now refuses to run unless `SITE_DIR` is the `meat-prices` folder or the
+  local `site/` preview, so a mistaken `.env` can't overwrite the portfolio's page.
+- **Past exceptions, for the record:** before this rule, the card in `scott/index.html`
+  was edited by hand from this project twice on 2026-11-15: pointing it at
+  `meat-prices/`, then removing and restoring its GitHub button (D36). A change-log row
+  was also added to the Schirko project's development guide. Under this rule, both
+  would now go through Scott to the portfolio project.
