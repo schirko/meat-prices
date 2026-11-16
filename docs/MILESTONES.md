@@ -116,7 +116,7 @@ problems before they reach the app (D29, D31).
 | 6.2 One-command refresh | ✅ | `python -m src.refresh` (also `--offline`, `--dry-run`): download, build in a temporary folder, check, publish only if checks pass, write `data/processed/REFRESH_REPORT.md` |
 | 6.3 Data tests | ✅ | `pytest`: 23 tests: every check in `src/checks.py` on the committed master table, the data dictionary, the events file, and unit tests recreating the Milestone 1 bugs |
 | 6.4 Run tests automatically | ✅ | `.github/workflows/tests.yml`: GitHub Actions runs the tests on every push |
-| 6.5 Scheduled refresh | 🔄 | `deploy/monthly_refresh.sh` written (20th of each month, 06:00); installed on the VPS in Milestone 7 |
+| 6.5 Scheduled refresh | ⏸ | Optional. `deploy/monthly_refresh.sh` is written (20th of each month, 06:00) but not installed. Since D36 a refresh also means rebuilding the site and pushing both projects, so automating it needs a machine with the API keys and push access. Until then it's run by hand (see the 2026-11-15 "Project complete" log entry). |
 
 ---
 
@@ -133,12 +133,20 @@ problems before they reach the app (D29, D31).
 
 Newest first. One entry per finished item.
 
+### 2026-11-15: Shared portfolio bar (D40)
+- **Done:** every generated page now uses the portfolio's shared "back to portfolio" bar
+  (`/scott/backbar.css`), with links to Overview, Explore, Notebooks and Docs. The
+  project's own back links are gone.
+- **Tested:** on a local server laid out like schirko.com (front page, explorer, a
+  notebook page, a doc page, and the explorer at phone width), with no script errors.
+
 ### 2026-11-15: Project complete (Milestone 7)
 - **Done:** item 7.2, the final read-through. The README's data sources now include
   NASS slaughter and the U.S. Drought Monitor. Its project layout includes the findings
   guide and the site builder, and `app/` is marked as an unused placeholder (D39). Scott
   approved the portfolio card.
-- **Status:** every milestone is complete.
+- **Status:** every milestone is complete except the optional scheduled refresh (6.5),
+  which is done by hand for now.
 - **Keeping it current:**
   1. `python -m src.refresh`
   2. Run and save any notebook whose results should change.

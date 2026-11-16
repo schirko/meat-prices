@@ -32,9 +32,6 @@
 body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 Inter, system-ui, sans-serif; }
 a { color: var(--accent); }
 .wrap { max-width: 1060px; margin: 0 auto; padding: 0 16px 60px; }
-.topnav { display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 18px 0 6px; font-size: 15px; }
-.topnav a { text-decoration: none; font-weight: 500; }
-.topnav a.muted { color: var(--muted); }
 h1 { font-family: Fraunces, Georgia, serif; font-size: clamp(28px, 5vw, 42px); line-height: 1.1; margin: 18px 0 6px; }
 h2 { font-family: Fraunces, Georgia, serif; font-size: 24px; margin: 40px 0 8px; }
 .sub { color: var(--muted); margin: 0 0 18px; max-width: 760px; }
@@ -86,13 +83,11 @@ svg text { font-family: Inter, system-ui, sans-serif; fill: var(--muted); font-s
 footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 @media (max-width: 600px) { .controls { position: static; } .tile .v { font-size: 26px; } }
 </style>
+<!--BACKBAR_HEAD-->
 </head>
 <body>
+<!--BACKBAR-->
 <div class="wrap">
-  <nav class="topnav">
-    <a href="index.html">&larr; Meat Price Explorer</a>
-    <a class="muted" href="../">Scott Schirkofsky · Portfolio</a>
-  </nav>
   <h1>Explore the data</h1>
   <p class="sub">Pick a meat, switch between shelf prices and inflation-adjusted prices, and choose all years or a single
   year. Events are marked on the chart; tap one below to highlight it. Data through <span id="latest"></span>.</p>

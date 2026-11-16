@@ -55,15 +55,23 @@ DOC_PAGES = {
     "MILESTONES.md": "Plan and progress",
 }
 
-BACK_BAR = ('<div style="font:15px system-ui,sans-serif;padding:12px 20px;border-bottom:1px solid #ddd;'
-            'background:#faf8f5"><a href="../index.html" style="color:#9A3B2E;text-decoration:none">'
-            '&larr; Meat Price Explorer</a> &nbsp;·&nbsp; <a href="../../" style="color:#555;text-decoration:none">'
-            'Scott Schirkofsky · Portfolio</a></div>')
+# Shared "back to portfolio" bar (D40). The portfolio owns /scott/backbar.css; don't copy or restyle it.
+BACKBAR_HEAD = '<link rel="stylesheet" href="/scott/backbar.css">'
+BACKBAR = """<div class="sx-backbar">
+  <a class="sx-back" href="/scott/">
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    Portfolio
+  </a>
+  <span class="sx-crumb">Meat Price Explorer</span>
+  <span class="sx-links"><a href="/scott/meat-prices/">Overview</a><a href="/scott/meat-prices/explore.html">Explore</a><a href="/scott/meat-prices/notebooks/">Notebooks</a><a href="/scott/meat-prices/docs/">Docs</a></span>
+</div>"""
+BACK_BAR = BACKBAR  # first element inside <body> on notebook and doc pages
 
 DOC_PAGE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {noindex}
+{backbar_head}
 <title>{title} · Meat Price Explorer</title>
 <style>
 body {{ margin: 0; background: #faf8f5; color: #1f1b18; font: 16px/1.6 system-ui, sans-serif; }}
@@ -105,7 +113,9 @@ def export_notebooks():
         nb = nbformat.read(path, as_version=4)
         html, _ = exporter.from_notebook_node(nb, resources={"metadata": {"name": path.stem}})
         html = re.sub(r"(<body[^>]*>)", lambda m: m.group(1) + BACK_BAR, html, count=1)
-        html = html.replace("<head>", "<head>\n" + NOINDEX, 1)
+        # Let the shared bar run edge to edge: move the notebook template's page margin onto its content
+        edge = "<style>body.jp-Notebook{margin:0;padding:0}body.jp-Notebook>main{padding:10px 18px}</style>"
+        html = html.replace("<head>", "<head>\n" + NOINDEX + "\n" + BACKBAR_HEAD + "\n" + edge, 1)
         (out_dir / f"{path.stem}.html").write_text(html, encoding="utf-8")
         listed.append(path)
         print(f"  exported {path.name}")
@@ -125,7 +135,7 @@ def export_docs():
         for other in DOC_PAGES:
             body = body.replace(f'href="{other}', f'href="{other[:-3]}.html').replace(
                 f'href="docs/{other}', f'href="{other[:-3]}.html')
-        page = DOC_PAGE.format(noindex=NOINDEX, title=title, back=BACK_BAR, body=body)
+        page = DOC_PAGE.format(noindex=NOINDEX, backbar_head=BACKBAR_HEAD, title=title, back=BACK_BAR, body=body)
         (out_dir / f"{name[:-3]}.html").write_text(page, encoding="utf-8")
         print(f"  wrote docs/{name[:-3]}.html")
 
@@ -259,8 +269,33 @@ def build_explorer(m):
     marker = "const D = __DATA__;"
     assert marker in template, "explore_template.html must contain: " + marker
     page = template.replace(marker, "const D = " + explorer_data(m) + ";", 1)
+    page = page.replace("<!--BACKBAR_HEAD-->", BACKBAR_HEAD, 1).replace("<!--BACKBAR-->", BACKBAR, 1)
     (SITE_DIR / "explore.html").write_text(page, encoding="utf-8")
     print("  wrote explore.html")
+
+
+def folder_indexes(paths):
+    """notebooks/index.html and docs/index.html, so the bar's Notebooks and Docs links open a list (D40)."""
+    nb_items = []
+    for p in paths:
+        title = re.sub(r"^\d+\s*·\s*", "", notebook_title(p))
+        nb_items.append(f'<li><a href="{p.stem}.html"><b>{p.stem[:2]}</b> · {title}</a>'
+                        f'<br><span class="blurb">{NOTEBOOK_BLURBS.get(p.stem[:2], "")}</span></li>')
+    nb_items = "\n".join(nb_items)
+    doc_items = "\n".join(f'<li><a href="{name[:-3]}.html"><b>{title}</b></a></li>' for name, title in DOC_PAGES.items())
+    style = ("<style>ul.list{list-style:none;padding:0}ul.list li{padding:10px 0;border-bottom:1px solid #e0d9d0}"
+             "ul.list a{text-decoration:none}.blurb{color:#6b6560;font-size:15px}</style>")
+    for folder, title, intro, items in [
+        ("notebooks", "The notebooks",
+         "Every step of the analysis, in order. Each notebook says what it's looking for, shows the code and its "
+         "result, then how to read it and what it means.", nb_items),
+        ("docs", "Project docs",
+         "Start with <i>Findings and methods explained</i> for the whole project in plain language.", doc_items),
+    ]:
+        body = f"{style}<h1>{title}</h1><p>{intro}</p><ul class=\"list\">{items}</ul>"
+        page = DOC_PAGE.format(noindex=NOINDEX, backbar_head=BACKBAR_HEAD, title=title, back=BACK_BAR, body=body)
+        (SITE_DIR / folder / "index.html").write_text(page, encoding="utf-8")
+        print(f"  wrote {folder}/index.html")
 
 
 def notebook_list_html(paths):
@@ -292,6 +327,7 @@ def main():
     paths = export_notebooks()
     print("Docs:")
     export_docs()
+    folder_indexes(paths)
     print("Explorer:")
     build_explorer(m)
 
@@ -316,6 +352,8 @@ def main():
         "rancher_year": base.year - 1,
         "notebooks": notebook_list_html(paths),
         "built": date.today().strftime("%B %d, %Y").replace(" 0", " "),  # no %-d: it fails on Windows
+        "backbar_head": BACKBAR_HEAD,
+        "backbar": BACKBAR,
     }
     page = Template(TEMPLATE.read_text(encoding="utf-8")).substitute(values)
     (SITE_DIR / "index.html").write_text(page, encoding="utf-8")
