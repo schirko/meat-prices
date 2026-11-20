@@ -766,3 +766,34 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   scientists, and Scott uses it to learn from and to explain the project.
 - **Going forward:** new write-ups (notebook "How to read it" and "What it means"
   sections, site text, the explorer's notes) follow the same standard.
+
+## D43. Tell the story as a presentation, downloadable in four formats (2026-11-19)
+
+- **Decided:** the project is also told as a 14-slide business story, built as a Claude
+  Slides deck. The slides run: the question, the overall picture, beef, pork and chicken,
+  the events people blame, the claims tested, the real cause, how it adds up, who got
+  the money, the verdict, what to watch, and how it was done.
+- **Charts:** drawn for the deck by `src/presentation_charts.py` into
+  `docs/presentation_charts/`, in the deck's colors, from the same master table as
+  everything else. Re-run it after a data refresh, then update the deck's images.
+- **On the site:** a "The story, as a presentation" section on the front page, below the
+  key findings, with a cover thumbnail, a "View the presentation" button and four
+  download buttons:
+  - PDF, for reading or printing;
+  - PowerPoint (.pptx), editable, with speaker notes;
+  - Web page (.html), one file that works offline, which is also what "View" opens;
+  - Slide images, every slide as a PNG, zipped.
+- **How the files get there:** Scott exports the PDF, PowerPoint and HTML from the
+  deck's Share > Export menu into `presentation/` here, with the names in
+  `presentation/README.md`. The menu has no image export, so `build_site` draws each
+  PDF page as a PNG with PyMuPDF (added to `requirements.txt`), zips them, and saves the
+  first as the cover thumbnail. It then copies whichever files exist to
+  `scott/meat-prices/presentation/` and fills in each button's file size. Missing files
+  are skipped; with none, the section and its header button are left out.
+- **Also on the front page:** a byline linking to CornerpostLogic.com, Scott's company
+  site, under the header buttons and in the footer.
+- **The portfolio card:** owned by the portfolio project (D41). The card's new
+  "Presentation" button text was given to Scott to pass on, not edited here.
+- **Why:** business audiences want the analysis told as a story, not only notebooks and
+  charts. Offering the common formats lets an employer open it however they work.
+

@@ -16,5 +16,8 @@ statsmodels
 # App (Milestone 5)
 streamlit
 
+# Site: slide images from the presentation PDF (D43)
+pymupdf
+
 # Tests (Milestone 6)
 pytest

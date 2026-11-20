@@ -126,12 +126,29 @@ problems before they reach the app (D29, D31).
 |---|---|---|
 | 7.1 Deploy on the VPS | ✅ | Done another way (D36, D39): the whole project site, including the interactive explorer, is static files served by schirko.com at /scott/meat-prices/ from Scott's VPS (Coolify redeploys on push). No Streamlit service needed. |
 | 7.2 Portfolio polish | ✅ | README summary with the verdict, findings, charts, limits and tests badge; the project site at schirko.com/scott/meat-prices with the explorer, findings guide, notebooks and docs (D35, D36, D39); every page links back to the portfolio; final read-through done |
+| 7.3 Story presentation | ✅ | 14-slide deck with its own charts, downloadable as PDF, PowerPoint, web page and slide images from the project's front page (D43) |
 
 ---
 
 ## Progress log
 
 Newest first. One entry per finished item.
+
+### 2026-11-19: Project folder moved
+- **Done:** the project now lives in `B:\Development\Python\meat-prices` (was
+  `B:\_Dev\Python\meat-prices`), and the portfolio in `B:\Development\Python\Schirko`.
+  Updated `SITE_DIR` in `.env` and `.env.example`, the build script's notes, and the
+  "Project root" lines saved in notebooks 01–05. No code depends on the folder's
+  location: every path is worked out from the project root (`src/config.py`).
+
+### 2026-11-19: The story as a presentation (D43)
+- **Done:**
+  - A 14-slide business-story deck with its own charts (`src/presentation_charts.py`).
+  - A presentation section on the front page with View, PDF, PowerPoint, Web page and
+    Slide images buttons; `build_site` copies the exported files from `presentation/`.
+  - CornerpostLogic.com byline on the front page.
+- **Next:** Scott exports the four files into `presentation/` and rebuilds the site;
+  the portfolio project adds the card's Presentation button.
 
 ### 2026-11-16: Plain-language findings guide and notebook reading guides (D42)
 - **Done:**

@@ -64,7 +64,22 @@ figcaption { color: #5f5852; font-size: 14px; padding: 8px 6px 2px; }
 .nbs .num { font-family: Fraunces, Georgia, serif; color: var(--accent); min-width: 24px; }
 .nbs .blurb { display: block; color: var(--muted); font-size: 15px; margin-left: 36px; }
 .note { color: var(--muted); font-size: 15.5px; }
+.byline { margin: 14px 0 0; color: var(--muted); font-size: 15px; }
+.deck { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 24px; align-items: start;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.deck-thumb { position: relative; display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.deck-thumb img { width: 100%; height: auto; display: block; }
+.deck-thumb span { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.65); color: #fff;
+                   font-size: 12.5px; padding: 2px 9px; border-radius: 999px; }
+.dls { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 16px; }
+.dl { display: flex; gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--line);
+      border-radius: 10px; text-decoration: none; color: var(--ink); background: var(--bg); }
+.dl:hover { border-color: var(--accent); }
+.dl .ext { flex: none; width: 46px; height: 46px; border-radius: 8px; display: grid; place-items: center;
+           background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+.dl b { display: block; font-size: 15px; } .dl small { display: block; color: var(--muted); font-size: 13px; line-height: 1.35; }
 footer { margin: 64px 0 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14.5px; }
+@media (max-width: 700px) { .deck { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { body { font-size: 16px; } .stat .v { font-size: 34px; } .nbs .blurb { margin-left: 0; } }
 </style>
 ${backbar_head}
@@ -82,10 +97,12 @@ ${backbar}
   <div class="links">
     <a class="btn primary" href="explore.html">Explore the data</a>
     <a class="btn" href="#findings">Key findings</a>
+    ${presentation_link}
     <a class="btn" href="docs/FINDINGS.html">Findings and methods explained</a>
     <a class="btn" href="#notebooks">Read the analysis</a>
     <a class="btn" href="https://github.com/schirko/meat-prices">View code on GitHub</a>
   </div>
+  <p class="byline">By Scott Schirkofsky · <a href="https://cornerpostlogic.com">CornerpostLogic.com</a></p>
 </header>
 
 <section class="stats" aria-label="Headline numbers">
@@ -130,6 +147,8 @@ ${backbar}
   mostly in 2026.</li>
 </ul>
 
+${presentation}
+
 <figure>
   <img src="images/chain.png" alt="Four stacked charts from 2010: drought in cattle country, beef cows slaughtered, the beef cow herd, and the inflation-adjusted price of ground beef.">
   <figcaption>Read top to bottom: drought, then the cow sell-off, then a smaller herd, then a higher real beef price.</figcaption>
@@ -168,7 +187,7 @@ ${notebooks}
 <a href="https://github.com/schirko/meat-prices">GitHub</a>.</p>
 
 <footer>
-  <a href="../">Scott Schirkofsky</a> · Data through ${latest_month} · Page built ${built}
+  <a href="../">Scott Schirkofsky</a> · <a href="https://cornerpostlogic.com">CornerpostLogic.com</a> · Data through ${latest_month} · Page built ${built}
 </footer>
 
 </div>

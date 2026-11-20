@@ -10,9 +10,11 @@ What it does:
    Run and save each notebook in PyCharm first; this step doesn't run them.
 4. Turns the project docs (decisions, data sources, column dictionary, milestones)
    into pages, so the site doesn't depend on the (private) GitHub repo.
+5. Copies the exported presentation (presentation/ folder, D43) and builds its
+   download buttons. Missing files are skipped; with none, the section is left out.
 
 Where it goes: the folder named by SITE_DIR in .env. On Scott's PC that is the
-portfolio folder of the Schirko project, B:\\_Dev\\Python\\Schirko\\scott\\meat-prices,
+portfolio folder of the Schirko project, B:\\Development\\Python\\Schirko\\scott\\meat-prices,
 which schirko.com serves at /scott/meat-prices/ after a push (Coolify redeploys).
 Without SITE_DIR the site is built into site/ here (ignored by git), for a local look.
 
@@ -45,6 +47,17 @@ NOTEBOOK_BLURBS = {
     "12": "Measuring the chain: drought, then the cow sell-off, then the herd, then the price.",
     "13": "The verdict: inflation, who gets each beef dollar, and whether supply explains today's price.",
 }
+
+# The story presentation (D43). Scott exports these from the Slides artifact's Share > Export
+# menu into presentation/ here; the builder copies whichever exist. file -> (label, note)
+PRESENTATION_DIR = config.PROJECT_ROOT / "presentation"
+PRESENTATION_FILES = {
+    "meat-prices-story.pdf": ("PDF", "For reading or printing"),
+    "meat-prices-story.pptx": ("PowerPoint", "Editable, with speaker notes"),
+    "meat-prices-story.html": ("Web page", "One file, works offline"),
+    "meat-prices-story-slides.zip": ("Slide images", "Every slide as a PNG, zipped"),
+}
+SLIDE_WIDTH = 1920  # pixels, for the PNGs made from the PDF
 
 # Project docs published as pages: file -> page title
 DOC_PAGES = {
@@ -313,6 +326,91 @@ def notebook_list_html(paths):
     return "\n".join(items)
 
 
+def _size(path):
+    b = path.stat().st_size
+    return f"{b / 1e6:.1f}&nbsp;MB" if b >= 1e6 else f"{max(1, round(b / 1e3))}&nbsp;KB"
+
+
+def slides_from_pdf():
+    """Make the slide-images zip and cover thumbnail from the exported PDF (D43).
+
+    The Slides export menu offers PDF, PowerPoint and HTML but no images, so each PDF page
+    is drawn as a PNG here with PyMuPDF. Skipped when the PDF is missing or the zip is
+    already newer than it."""
+    pdf = PRESENTATION_DIR / "meat-prices-story.pdf"
+    zip_path = PRESENTATION_DIR / "meat-prices-story-slides.zip"
+    if not pdf.exists() or (zip_path.exists() and zip_path.stat().st_mtime >= pdf.stat().st_mtime):
+        return
+    import zipfile
+    import pymupdf
+    with pymupdf.open(pdf) as doc, zipfile.ZipFile(zip_path, "w", zipfile.ZIP_STORED) as z:
+        for i, page in enumerate(doc, start=1):
+            zoom = SLIDE_WIDTH / page.rect.width
+            png = page.get_pixmap(matrix=pymupdf.Matrix(zoom, zoom)).tobytes("png")
+            z.writestr(f"meat-prices-story-slide-{i:02d}.png", png)
+            if i == 1:
+                thumb = 800 / page.rect.width
+                page.get_pixmap(matrix=pymupdf.Matrix(thumb, thumb)).save(PRESENTATION_DIR / "cover.png")
+        n = len(doc)
+    print(f"  made {zip_path.name} and cover.png from the PDF ({n} slides)")
+
+
+def presentation_html():
+    """Copy the exported presentation files to the site and return the front page section.
+
+    The cover thumbnail is presentation/cover.png if it exists, otherwise the first PNG
+    inside the slide-images zip. Returns "" when no files have been exported yet."""
+    slides_from_pdf()
+    found = {f: v for f, v in PRESENTATION_FILES.items() if (PRESENTATION_DIR / f).exists()}
+    if not found:
+        print("  no exported presentation files in presentation/; section left out")
+        return ""
+    out = SITE_DIR / "presentation"
+    out.mkdir(exist_ok=True)
+    for f in found:
+        shutil.copy2(PRESENTATION_DIR / f, out / f)
+        print(f"  {f} ({_size(PRESENTATION_DIR / f).replace('&nbsp;', ' ')})")
+
+    cover = ""
+    if (PRESENTATION_DIR / "cover.png").exists():
+        shutil.copy2(PRESENTATION_DIR / "cover.png", out / "cover.png")
+        cover = "presentation/cover.png"
+    elif "meat-prices-story-slides.zip" in found:
+        import zipfile
+        with zipfile.ZipFile(PRESENTATION_DIR / "meat-prices-story-slides.zip") as z:
+            pngs = sorted(n for n in z.namelist() if n.lower().endswith(".png"))
+            if pngs:
+                (out / "cover.png").write_bytes(z.read(pngs[0]))
+                cover = "presentation/cover.png"
+
+    n_slides = 14
+    if "meat-prices-story-slides.zip" in found:
+        import zipfile
+        with zipfile.ZipFile(PRESENTATION_DIR / "meat-prices-story-slides.zip") as z:
+            n_slides = sum(n.lower().endswith(".png") for n in z.namelist()) or n_slides
+    view = "presentation/meat-prices-story.html" if "meat-prices-story.html" in found else \
+           "presentation/meat-prices-story.pdf" if "meat-prices-story.pdf" in found else ""
+    thumb = (f'<a class="deck-thumb" href="{view or cover}"><img src="{cover}" '
+             f'alt="Cover slide: Why does meat cost so much now?"><span>{n_slides} slides</span></a>') if cover else ""
+    view_btn = f'<a class="btn primary" href="{view}" target="_blank" rel="noopener">View the presentation</a>' if view else ""
+    tiles = "\n".join(
+        f'<a class="dl" href="presentation/{f}" download><span class="ext">{f.rsplit(".", 1)[1].upper()}</span>'
+        f'<span><b>{label}</b><small>{note} · {_size(PRESENTATION_DIR / f)}</small></span></a>'
+        for f, (label, note) in found.items())
+    return f"""<h2 id="presentation">The story, as a presentation</h2>
+<div class="deck">
+  {thumb}
+  <div>
+    <p class="note" style="margin-top:0">The whole project told as a {n_slides}-slide business story: the question, what the
+    data shows for each meat, the events people blame, the real cause, who got the money and the verdict.</p>
+    {view_btn}
+    <div class="dls">
+{tiles}
+    </div>
+  </div>
+</div>"""
+
+
 def check_site_dir():
     """Refuse to build anywhere but this project's own folder (D41).
 
@@ -348,6 +446,8 @@ def main():
     folder_indexes(paths)
     print("Explorer:")
     build_explorer(m)
+    print("Presentation:")
+    presentation = presentation_html()
 
     base = m["cpi_all_items"].last_valid_index()
     groceries = m["cpi_food_at_home_2015eq100"].dropna()
@@ -372,6 +472,8 @@ def main():
         "built": date.today().strftime("%B %d, %Y").replace(" 0", " "),  # no %-d: it fails on Windows
         "backbar_head": BACKBAR_HEAD,
         "backbar": BACKBAR,
+        "presentation": presentation,
+        "presentation_link": '<a class="btn" href="#presentation">The presentation</a>' if presentation else "",
     }
     page = Template(TEMPLATE.read_text(encoding="utf-8")).substitute(values)
     (SITE_DIR / "index.html").write_text(page, encoding="utf-8")
