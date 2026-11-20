@@ -784,8 +784,9 @@ Scott asked me to make these calls while building Milestone 6; each can be revis
   - Web page (.html), one file that works offline, which is also what "View" opens;
   - Slide images, every slide as a PNG, zipped.
 - **How the files get there:** Scott exports the PDF, PowerPoint and HTML from the
-  deck's Share > Export menu into `presentation/` here, with the names in
-  `presentation/README.md`. The menu has no image export, so `build_site` draws each
+  deck's Share > Export menu into `presentation/` here. Renaming isn't needed: the
+  build takes the newest file of each type and publishes it under a fixed name
+  (`presentation/README.md`). The menu has no image export, so `build_site` draws each
   PDF page as a PNG with PyMuPDF (added to `requirements.txt`), zips them, and saves the
   first as the cover thumbnail. It then copies whichever files exist to
   `scott/meat-prices/presentation/` and fills in each button's file size. Missing files

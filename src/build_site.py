@@ -331,15 +331,31 @@ def _size(path):
     return f"{b / 1e6:.1f}&nbsp;MB" if b >= 1e6 else f"{max(1, round(b / 1e3))}&nbsp;KB"
 
 
+def _source(name):
+    """The exported file for a published name (D43).
+
+    The exact name if it's there; otherwise the newest file of the same type, so the
+    export menu's own names ("Why Does Meat Cost So Much Now.pdf") work without renaming.
+    Returns None when there is no such file."""
+    exact = PRESENTATION_DIR / name
+    if exact.exists():
+        return exact
+    suffix = exact.suffix.lower()
+    if suffix in (".zip", ".png"):  # made by slides_from_pdf, always under the exact name
+        return None
+    matches = [f for f in PRESENTATION_DIR.glob("*") if f.is_file() and f.suffix.lower() == suffix]
+    return max(matches, key=lambda f: f.stat().st_mtime) if matches else None
+
+
 def slides_from_pdf():
     """Make the slide-images zip and cover thumbnail from the exported PDF (D43).
 
     The Slides export menu offers PDF, PowerPoint and HTML but no images, so each PDF page
     is drawn as a PNG here with PyMuPDF. Skipped when the PDF is missing or the zip is
     already newer than it."""
-    pdf = PRESENTATION_DIR / "meat-prices-story.pdf"
+    pdf = _source("meat-prices-story.pdf")
     zip_path = PRESENTATION_DIR / "meat-prices-story-slides.zip"
-    if not pdf.exists() or (zip_path.exists() and zip_path.stat().st_mtime >= pdf.stat().st_mtime):
+    if pdf is None or (zip_path.exists() and zip_path.stat().st_mtime >= pdf.stat().st_mtime):
         return
     import zipfile
     import pymupdf
@@ -361,15 +377,16 @@ def presentation_html():
     The cover thumbnail is presentation/cover.png if it exists, otherwise the first PNG
     inside the slide-images zip. Returns "" when no files have been exported yet."""
     slides_from_pdf()
-    found = {f: v for f, v in PRESENTATION_FILES.items() if (PRESENTATION_DIR / f).exists()}
+    sources = {f: _source(f) for f in PRESENTATION_FILES}
+    found = {f: v for f, v in PRESENTATION_FILES.items() if sources[f] is not None}
     if not found:
         print("  no exported presentation files in presentation/; section left out")
         return ""
     out = SITE_DIR / "presentation"
     out.mkdir(exist_ok=True)
     for f in found:
-        shutil.copy2(PRESENTATION_DIR / f, out / f)
-        print(f"  {f} ({_size(PRESENTATION_DIR / f).replace('&nbsp;', ' ')})")
+        shutil.copy2(sources[f], out / f)
+        print(f"  {sources[f].name} -> {f} ({_size(sources[f]).replace('&nbsp;', ' ')})")
 
     cover = ""
     if (PRESENTATION_DIR / "cover.png").exists():
@@ -395,7 +412,7 @@ def presentation_html():
     view_btn = f'<a class="btn primary" href="{view}" target="_blank" rel="noopener">View the presentation</a>' if view else ""
     tiles = "\n".join(
         f'<a class="dl" href="presentation/{f}" download><span class="ext">{f.rsplit(".", 1)[1].upper()}</span>'
-        f'<span><b>{label}</b><small>{note} · {_size(PRESENTATION_DIR / f)}</small></span></a>'
+        f'<span><b>{label}</b><small>{note} · {_size(sources[f])}</small></span></a>'
         for f, (label, note) in found.items())
     return f"""<h2 id="presentation">The story, as a presentation</h2>
 <div class="deck">

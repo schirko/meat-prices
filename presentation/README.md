@@ -1,7 +1,9 @@
 # Presentation exports
 
 The story presentation (D43) is a Claude Slides deck. Export it from the deck's
-**Share → Export** menu and save the files here with these exact names:
+**Share → Export** menu and save the files here. The export's own names are fine
+("Why Does Meat Cost So Much Now.pdf"): the build picks the newest PDF, PowerPoint
+and HTML file in this folder and publishes them under these names:
 
 | Export | Save as |
 |---|---|
