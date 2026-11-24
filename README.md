@@ -4,6 +4,7 @@
 
 **Project site:** [schirko.com/scott/meat-prices](https://schirko.com/scott/meat-prices/), with the summary, charts, every notebook and the project docs as readable pages.
 **[Explore the data](https://schirko.com/scott/meat-prices/explore.html):** an interactive page to pick a meat, switch to inflation-adjusted prices, drill into any year, and see the events and who gets each dollar.
+**[The presentation](https://schirko.com/scott/meat-prices/#presentation):** the whole project told as a 14-slide business story, to view in the browser or download as PDF, PowerPoint, a single web page or slide images (D43).
 
 **Why does meat cost so much now?** This project looks at U.S. retail prices for
 beef, pork and chicken from 2015 to today. It shows where prices were before
@@ -145,11 +146,15 @@ meat-prices/
 ├── docs/
 │   ├── FINDINGS.md      Findings and methods explained in plain language
 │   ├── images/          Charts used in this README
+│   ├── presentation_charts/  Charts drawn for the presentation (src/presentation_charts.py)
+│   ├── PRESENTATION_PLAN.md  The story outline the presentation was built from
 │   ├── MILESTONES.md    The plan, progress and what each item involves
 │   ├── DECISIONS.md     Every significant decision and why we made it
 │   ├── DATA_SOURCES.md  Where each data set comes from and how to get it
 │   └── DATA_DICTIONARY.md  Every column in the master table (generated)
 ├── notebooks/           Numbered Jupyter notebooks, one per analysis step
+├── presentation/        The exported presentation (PDF, PowerPoint, HTML); the site
+│                        build adds the slide images and publishes all four (D43)
 ├── src/                 The data pipeline (download, build, check, publish) and the
 │                        site builder (build_site.py, site and explorer templates)
 ├── tests/               Data and pipeline tests (pytest)
@@ -196,7 +201,12 @@ python -m src.refresh --offline --dry-run  # build and check only; change nothin
 pytest                                     # run the data and pipeline tests
 python -m src.readme_charts                # redraw the README charts and print its numbers
 python -m src.build_site                   # rebuild the project site into SITE_DIR (see .env.example)
+python -m src.presentation_charts          # redraw the presentation's charts
 ```
+
+After a data refresh, the presentation needs updating by hand: redraw its charts, put
+them in the deck, export the PDF, PowerPoint and HTML into `presentation/` (the export's
+own file names are fine), then rebuild the site. `presentation/README.md` has the details.
 
 The tests check, among other things, that there is one row per month with no
 unexpected gaps, that values are in sensible ranges, that the farm, packer and

@@ -1,5 +1,13 @@
 # Presentation plan: "Why does meat cost so much now?"
 
+> **Status (2026-11-20): built and published.** This is the outline the deck was built
+> from. The finished deck has 14 slides: cover, hook, overall, beef, pork, chicken,
+> events, claims, real cause, how it adds up, who got the money, verdict, what to watch,
+> and how it was done. Every slide has speaker notes. Its charts are drawn by
+> `src/presentation_charts.py`. View or download it at
+> [schirko.com/scott/meat-prices/#presentation](https://schirko.com/scott/meat-prices/#presentation).
+> D43 covers how it's published.
+
 A story deck for a business audience, built from the project's findings (data through
 September 2026). Each slide has one message (the headline), one visual, and what to say
 over it. Length: about 12 slides, 10–12 minutes, plus an appendix for questions.

@@ -134,6 +134,21 @@ problems before they reach the app (D29, D31).
 
 Newest first. One entry per finished item.
 
+### 2026-11-20: Presentation live on the site (D43)
+- **Done:**
+  - Exported the deck as PDF, PowerPoint and HTML into `presentation/`. The site build
+    made the slide-images zip and the cover thumbnail from the PDF.
+  - The build now finds the exports under the names the export menu gives them, so
+    re-exporting needs no renaming.
+  - Live at schirko.com/scott/meat-prices/#presentation: View the presentation, plus
+    PDF (4.1 MB), PowerPoint (1.5 MB), Web page (2.9 MB) and Slide images (2.5 MB).
+  - Recreated the project's virtual environment after the folder move (a venv stores
+    its own folder path, so a moved one stops working); all 23 tests pass.
+- **Note:** the first push didn't show up because Coolify didn't redeploy on its own;
+  a manual Redeploy published it.
+- **Still open:** the portfolio project adds a "Presentation" button to the project's
+  card (D41: the card belongs to the portfolio).
+
 ### 2026-11-19: Project folder moved
 - **Done:** the project now lives in `B:\Development\Python\meat-prices` (was
   `B:\_Dev\Python\meat-prices`), and the portfolio in `B:\Development\Python\Schirko`.
@@ -147,8 +162,7 @@ Newest first. One entry per finished item.
   - A presentation section on the front page with View, PDF, PowerPoint, Web page and
     Slide images buttons; `build_site` copies the exported files from `presentation/`.
   - CornerpostLogic.com byline on the front page.
-- **Next:** Scott exports the four files into `presentation/` and rebuilds the site;
-  the portfolio project adds the card's Presentation button.
+- **Next:** export the deck and publish it (done 2026-11-20, above).
 
 ### 2026-11-16: Plain-language findings guide and notebook reading guides (D42)
 - **Done:**
