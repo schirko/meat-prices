@@ -48,6 +48,26 @@ def test_ers_values_with_thousands_comma(tmp_path):
     assert df["value"].iloc[0] == 1011.3
 
 
+def test_ers_keeps_months_that_rolled_off_the_recent_file(tmp_path):
+    """ERS's recent file drops its oldest month each time a new one is added. In the
+    November 2026 refresh, chicken's April 2026 fell off and the refresh stopped (D44).
+    Earlier downloads must fill that month, and the newest download must win on overlap."""
+    header = "Year,Month,Month_Number,Data_Item,Value,Units\n"
+    item = "Retail prices or values: retail broiler composite"
+    old = tmp_path / "ers_20261026"; old.mkdir()
+    new = tmp_path / "ers_20261124"; new.mkdir()
+    (old / "summary_recent.csv").write_text(header + f"2026,April,4,{item},238.9,Cents\n"
+                                            f"2026,May,5,{item},240.0,Cents\n", encoding="utf-8")
+    (new / "summary_recent.csv").write_text(header + f"2026,May,5,{item},243.9,Cents\n"
+                                            f"2026,October,10,{item},241.8,Cents\n", encoding="utf-8")
+    df = ers.load_with_earlier(new, "summary_recent").set_index("date")["value"]
+    assert df[pd.Timestamp("2026-04-01")] == 238.9   # kept from the earlier download
+    assert df[pd.Timestamp("2026-05-01")] == 243.9   # the newest download wins (revision)
+    assert len(df) == 3
+    # Rebuilding the older download doesn't pick up the newer one
+    assert len(ers.load_with_earlier(old, "summary_recent")) == 2
+
+
 # ---- The checks catch real problems -----------------------------------------
 
 def good_master():

@@ -1,4 +1,4 @@
-"""USDA ERS meat price spreads (notebook 02; decisions D21-D23)."""
+"""USDA ERS meat price spreads (notebook 02; decisions D21-D23, D44)."""
 import pandas as pd
 import requests
 
@@ -31,9 +31,24 @@ def load_file(path, source_name):
     return out[["date", "data_item", "value", "units", "source_file"]]
 
 
+def load_with_earlier(raw_dir, name):
+    """Load one ERS file from raw_dir plus the same file from earlier downloads (D44).
+
+    ERS's "recent" files only cover the latest months, so each new month pushes the
+    oldest one off the end, possibly before the long-history file reaches it. Reading
+    the copies kept from earlier ers_YYYYMMDD downloads keeps those months. Where the
+    downloads overlap, the newest one wins, so USDA revisions still come through.
+    Only downloads up to raw_dir are used, so rebuilding an old download stays the same."""
+    dirs = sorted(d for d in raw_dir.parent.glob("ers_*")
+                  if d.is_dir() and d.name <= raw_dir.name and (d / f"{name}.csv").exists())
+    frames = [load_file(d / f"{name}.csv", name) for d in dirs]   # oldest first
+    combined = pd.concat(frames, ignore_index=True)
+    return combined.drop_duplicates(subset=["date", "data_item"], keep="last").reset_index(drop=True)
+
+
 def build(raw_dir):
     """Combine the ERS files into the long spreads table (ers_price_spreads_monthly.csv)."""
-    frames = {name: load_file(raw_dir / f"{name}.csv", name) for name in config.ERS_FILES}
+    frames = {name: load_with_earlier(raw_dir, name) for name in config.ERS_FILES}
 
     def pick(source, item):
         df = frames[source]
