@@ -12,7 +12,7 @@ beef, pork and chicken from 2015 to today. It shows where prices were before
 retail dollar, and whether today's prices are justified by what is happening in
 the supply chain.
 
-![Ground beef rose 63% since 2015, ahead of all prices (42%); chicken breast rose 23% and pork chops 9%](docs/images/headline.png)
+![Ground beef rose 62% since 2015, ahead of all prices (42%); chicken breast rose 20% and pork chops 8%](docs/images/headline.png)
 
 ## The verdict: are today's prices justified?
 
@@ -27,12 +27,12 @@ the supply chain.
 
 ## Key findings
 
-*Data through September 2026. "Real" means adjusted for inflation, in September 2026 dollars.*
+*Data through October 2026. "Real" means adjusted for inflation, in October 2026 dollars.*
 
-- **Beef is the outlier.** Ground beef is up **63%** since 2015, while prices in
-  general rose **42%**. That leaves beef **15% more expensive in real terms**.
-- **Pork and chicken got cheaper in real terms.** Pork chops are up only 9%
-  (**23% cheaper** after inflation) and chicken breast 23% (**13% cheaper**).
+- **Beef is the outlier.** Ground beef is up **62%** since 2015, while prices in
+  general rose **42%**. That leaves beef **14% more expensive in real terms**.
+- **Pork and chicken got cheaper in real terms.** Pork chops are up only 8%
+  (**24% cheaper** after inflation) and chicken breast 20% (**16% cheaper**).
   Groceries as a whole rose 33%, less than prices in general.
 - **The cause is a cattle shortage, and drought started it.** Drought across
   cattle country pushed ranchers to sell off cows. The sell-off peaked in **2022**,
@@ -46,8 +46,8 @@ the supply chain.
   choices explain the rest.
 - **Ranchers are getting a bigger share of the money.** Their share of each
   retail beef dollar rose from **43% in 2019 to 54% in 2025**. After inflation,
-  ranchers got $2.08 of the $2.40-a-pound rise since 2019 and stores $1.13, while
-  packers' part *fell* $0.81. Most of the store gain came in 2026.
+  ranchers got $2.03 of the $2.36-a-pound rise since 2019 and stores $1.11, while
+  packers' part *fell* $0.78. Most of the store gain came in 2026.
 
 ![Four stacked charts: drought, then the cow sell-off, then the shrinking herd, then the rising real price of ground beef](docs/images/chain.png)
 

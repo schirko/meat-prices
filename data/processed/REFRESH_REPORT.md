@@ -1,13 +1,13 @@
 # Refresh report
 
-Run: 2026-11-14 18:12
+Run: 2026-11-25 17:19
 
-- Using data\raw\bls_prices_20261026.json
-- Using data\raw\bls_cpi_categories_20261026.json
-- Using data\raw\ers_20261026
-- Using data\raw\nass_20261026
-- Using data\raw\drought_20261026
-- Built master table: 201 months x 55 columns, 2010-01 to 2026-09
+- Using data\raw\bls_prices_20261124.json
+- Using data\raw\bls_cpi_categories_20261124.json
+- Using data\raw\ers_20261124
+- Using data\raw\nass_20261124
+- Using data\raw\drought_20261124
+- Built master table: 202 months x 55 columns, 2010-01 to 2026-10
 
 ## Checks
 
@@ -15,9 +15,9 @@ Run: 2026-11-14 18:12
 
 ## Changes
 
-- Months: 201 before, 201 now (latest month 2026-09 -> 2026-09).
+- Months: 201 before, 202 now (latest month 2026-09 -> 2026-10).
 - Revised past values (>0.5%): none
 
 ## Result
 
-NOT published: dry run.
+Published: data/processed/ and docs/DATA_DICTIONARY.md updated (real prices in October 2026 dollars).

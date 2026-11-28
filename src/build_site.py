@@ -175,7 +175,7 @@ DOLLAR_PARTS = {
              "store": "spread_wholesale_to_retail"},
     "chicken": {"farm + packer (wholesale)": "wholesale", "store": "spread_wholesale_to_retail"},
 }
-# Short notes shown when one year is picked. Written for the data through September 2026.
+# Short notes shown when one year is picked. Written for the data through October 2026 (checked after the November 2026 refresh).
 YEAR_NOTES = {
     "2015": "The beef herd was rebuilding after the 2011–2013 drought, so beef started high and then eased.",
     "2016": "A growing herd and mild drought: real beef prices kept falling.",

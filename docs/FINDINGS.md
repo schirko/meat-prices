@@ -5,7 +5,11 @@ in statistics to follow it. Every term is explained the first time it comes up, 
 there's a glossary near the end. If you want the technical details, they're in
 *For the curious*, and each section names the notebook with the code and full results.
 
-All numbers use data through **September 2026**.
+All numbers use data through **October 2026**.
+
+Prefer slides? The same story is told as a
+[14-slide presentation](https://schirko.com/scott/meat-prices/#presentation), with speaker notes, on the
+project's front page.
 
 ---
 
@@ -14,8 +18,8 @@ All numbers use data through **September 2026**.
 > **Question:** why does meat cost so much now, and are today's prices fair?
 >
 > **Beef is the only meat that really got more expensive.** Since 2015 ground beef went
-> up 63%, while prices in general went up 42%. So even after allowing for inflation,
-> beef costs about 15% more than it did. Pork and chicken went up *less* than everything
+> up 62%, while prices in general went up 42%. So even after allowing for inflation,
+> beef costs about 14% more than it did. Pork and chicken went up *less* than everything
 > else, so in practice they've become cheaper.
 >
 > **The news events people blame mostly didn't matter.** I checked 16 of them, from
@@ -38,8 +42,8 @@ All numbers use data through **September 2026**.
 
 **1. "After inflation" (also called "real" prices).** Almost everything costs more
 than it did ten years ago. To see whether beef *really* got more expensive, we compare it
-with prices in general. If beef rose 63% and everything else rose 42%, beef got more
-expensive *relative to everything else*, by about 15%. That's the "after inflation"
+with prices in general. If beef rose 62% and everything else rose 42%, beef got more
+expensive *relative to everything else*, by about 14%. That's the "after inflation"
 number. The ordinary price on the shelf at the time is the "nominal" price.
 
 **2. "Percent" vs. "percentage points."** If ranchers sell 9% of their cows one year
@@ -74,9 +78,9 @@ shortage passes that test.
 
 | Since 2015 | Price on the shelf | After inflation |
 |---|---|---|
-| Ground beef | up 63% | **up 15%** |
-| Chicken breast | up 23% | down 13% |
-| Pork chops | up 9% | down 23% |
+| Ground beef | up 62% | **up 14%** |
+| Chicken breast | up 20% | down 16% |
+| Pork chops | up 8% | down 24% |
 | Prices in general | up 42% | |
 | Groceries overall | up 33% | |
 
@@ -193,9 +197,9 @@ All amounts are after inflation, in today's dollars.
 
 | Who | Change in their part of a pound of beef, 2019 to 2026 | Share of the increase |
 |---|---|---|
-| Rancher | up $2.08 | 86% |
-| Store | up $1.13 | 47% |
-| Meatpacker | **down** $0.81 | −33% |
+| Rancher | up $2.03 | 86% |
+| Store | up $1.11 | 47% |
+| Meatpacker | **down** $0.78 | −33% |
 
 The shares add up to 100%: the packers' loss offsets part of what ranchers and stores
 gained.
@@ -204,8 +208,8 @@ gained.
 - **Through 2025, almost all of the increase went to ranchers.** That's what a cattle
   shortage looks like: scarce cattle sell for more.
 - **Meatpackers were squeezed, not enriched.** They pay record prices for cattle but
-  can't pass all of it on, so their part fell from $1.11 to $0.30 a pound.
-- **Stores' part jumped in 2026,** by $0.50 a pound in one year.
+  can't pass all of it on, so their part fell from $1.11 to $0.33 a pound.
+- **Stores' part jumped in 2026,** by about $0.48 a pound in one year.
 - **Pork and chicken:** each step is within a few cents of 2019.
 
 **One caution:** a store's part isn't all profit. It also pays for wages, rent,
@@ -228,14 +232,14 @@ plain tests:
 
 | Meat | 1. vs. prices in general | 2. Who got the increase | 3. Explained by the shortage? |
 |---|---|---|---|
-| Ground beef | 15% more expensive | mostly ranchers; packers down; stores up in 2026 | yes through 2025; 2026 runs about 11% above |
-| Pork chops | 23% cheaper | little change | not needed (it got cheaper) |
-| Chicken breast | 13% cheaper | little change | not needed (it got cheaper) |
+| Ground beef | 14% more expensive | mostly ranchers; packers down; stores up in 2026 | yes through 2025; 2026 runs about 11% above |
+| Pork chops | 24% cheaper | little change | not needed (it got cheaper) |
+| Chicken breast | 16% cheaper | little change | not needed (it got cheaper) |
 
 **The 2026 check, in plain terms:**
 1. We used the herd-to-price rule from 2015–2025 to predict what beef "should" cost in
    2026, given how few cattle there are.
-2. The prediction is about **$6.20 a pound**, and anything from $5.59 to $6.87 would be
+2. The prediction is about **$6.20 a pound**, and anything from $5.60 to $6.88 would be
    normal.
 3. The actual 2026 average so far is **$6.90**, just above that range and about 11%
    above the prediction.
@@ -257,7 +261,7 @@ extra shows up in store margins."
 ## How to read the charts
 
 **Lines starting at 100 (front page, explorer "All meats").** Each line is set to 100
-at its 2015 average. A line at 163 means 63% higher than in 2015. Comparing a meat with
+at its 2015 average. A line at 162 means 62% higher than in 2015. Comparing a meat with
 the dashed "All prices" line shows whether it rose faster or slower than inflation.
 
 **Shaded bands and vertical lines (events).** A shaded band is an event that lasted a
@@ -340,7 +344,7 @@ things can be compared on one scale.
 
 **Rebasing and real prices.** Each price is divided by its 2015 average and multiplied
 by 100. Real prices divide each month's price by that month's CPI and multiply by the
-latest month's CPI, so everything is in September 2026 dollars (D27).
+latest month's CPI, so everything is in October 2026 dollars (D27).
 
 **Weighting drought.** Each state's drought share is weighted by its share of U.S. beef
 cows in 2019, giving one "cattle country" figure (D26).
@@ -437,7 +441,7 @@ explains, and the store's part grew. That's worth watching, but the data can't s
 store costs from store profit, so I wouldn't call it gouging.
 
 **"Weren't the big meatpackers to blame?"**
-Not in this data. Their part of each pound of beef fell from $1.11 to $0.30 (in today's
+Not in this data. Their part of each pound of beef fell from $1.11 to $0.33 (in today's
 dollars) between 2019 and 2026.
 
 **"What would you do with more time?"**

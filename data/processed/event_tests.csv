@@ -2,19 +2,19 @@ event_id,meat,start,gap_pct,p_value,verdict,simple_gap_pct,simple_p,simple_verdi
 E02,beef,Aug 2019,1.1,0.812,no clear shift,1.2,0.75,no clear shift,True
 E03,beef,Apr 2020,11.0,0.031,clear shift,10.0,0.031,clear shift,True
 E03,pork,Apr 2020,16.6,0.015,clear shift,14.4,0.015,clear shift,True
-E03,chicken,Apr 2020,12.8,0.018,clear shift,12.5,0.018,clear shift,True
+E03,chicken,Apr 2020,12.8,0.017,clear shift,12.5,0.017,clear shift,True
 E05,beef,May 2021,3.4,0.375,no clear shift,5.0,0.094,possible shift,False
-E05,pork,May 2021,1.0,0.761,no clear shift,2.0,0.507,no clear shift,True
-E06,chicken,Feb 2022,8.4,0.035,clear shift,8.0,0.053,possible shift,False
-E06,pork,Feb 2022,-4.6,0.134,no clear shift,-1.9,0.537,no clear shift,True
+E05,pork,May 2021,1.0,0.779,no clear shift,2.0,0.5,no clear shift,True
+E06,chicken,Feb 2022,8.5,0.034,clear shift,8.0,0.052,possible shift,False
+E06,pork,Feb 2022,-4.6,0.132,no clear shift,-1.9,0.529,no clear shift,True
 E06,beef,Feb 2022,0.3,0.938,no clear shift,1.3,0.75,no clear shift,True
-E07,chicken,Feb 2022,8.4,0.035,clear shift,8.0,0.053,possible shift,False
-E08,chicken,Apr 2022,12.5,0.018,clear shift,12.0,0.018,clear shift,True
+E07,chicken,Feb 2022,8.5,0.034,clear shift,8.0,0.052,possible shift,False
+E08,chicken,Apr 2022,12.5,0.017,clear shift,12.0,0.017,clear shift,True
 E08,beef,Apr 2022,-1.0,0.844,no clear shift,-0.9,0.812,no clear shift,True
-E08,pork,Apr 2022,-4.4,0.134,no clear shift,-2.4,0.388,no clear shift,True
-E09,chicken,Jul 2024,-0.8,0.702,no clear shift,-1.4,0.561,no clear shift,True
+E08,pork,Apr 2022,-4.4,0.132,no clear shift,-2.4,0.382,no clear shift,True
+E09,chicken,Jul 2024,-0.8,0.69,no clear shift,-1.4,0.552,no clear shift,True
 E10,beef,Nov 2024,2.0,0.594,no clear shift,0.2,1.0,no clear shift,True
-E11,chicken,Jan 2025,1.2,0.579,no clear shift,-0.4,0.877,no clear shift,True
+E11,chicken,Jan 2025,1.2,0.603,no clear shift,-0.4,0.862,no clear shift,True
 E12,beef,May 2025,6.4,0.031,clear shift,5.6,0.094,possible shift,False
-E14,beef,Jan 2026,-1.8,0.656,no clear shift,-3.2,0.281,no clear shift,True
-E16,beef,Jun 2026,-1.2,0.781,no clear shift,0.3,1.0,no clear shift,True
+E14,beef,Jan 2026,-1.7,0.656,no clear shift,-3.2,0.281,no clear shift,True
+E16,beef,Jun 2026,-2.1,0.562,no clear shift,-0.5,0.812,no clear shift,True

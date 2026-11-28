@@ -140,6 +140,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SA0,Overall,All items,333.918,140.88356531388047
 2026-08-01,CUUR0000SA0,Overall,All items,334.98,141.33163443972376
 2026-09-01,CUUR0000SA0,Overall,All items,336.94,142.15857934241006
+2026-10-01,CUUR0000SA0,Overall,All items,337.511,142.39949033191715
 2015-01-01,CUUR0000SAF11,Overall,Food at home,243.123,100.36037151702789
 2015-02-01,CUUR0000SAF11,Overall,Food at home,242.906,100.27079463364295
 2015-03-01,CUUR0000SAF11,Overall,Food at home,241.588,99.72672858617132
@@ -281,6 +282,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SAF11,Overall,Food at home,321.643,132.77316821465428
 2026-08-01,CUUR0000SAF11,Overall,Food at home,321.5,132.7141382868937
 2026-09-01,CUUR0000SAF11,Overall,Food at home,321.758,132.82063983488132
+2026-10-01,CUUR0000SAF11,Overall,Food at home,322.876,133.28214654282766
 2015-01-01,CUUR0000SAF111,Grocery category,Cereals and bakery,273.589,99.82974864892067
 2015-02-01,CUUR0000SAF111,Grocery category,Cereals and bakery,273.052,99.63380299677651
 2015-03-01,CUUR0000SAF111,Grocery category,Cereals and bakery,273.812,99.91111900353548
@@ -422,6 +424,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SAF111,Grocery category,Cereals and bakery,369.882,134.96605159476468
 2026-08-01,CUUR0000SAF111,Grocery category,Cereals and bakery,369.171,134.70661517265202
 2026-09-01,CUUR0000SAF111,Grocery category,Cereals and bakery,369.585,134.85767941843915
+2026-10-01,CUUR0000SAF111,Grocery category,Cereals and bakery,369.068,134.6690315559465
 2015-01-01,CUUR0000SAF112,Grocery category,"Meats, poultry, fish and eggs",260.982,100.25937339332236
 2015-02-01,CUUR0000SAF112,Grocery category,"Meats, poultry, fish and eggs",260.863,100.21365811244549
 2015-03-01,CUUR0000SAF112,Grocery category,"Meats, poultry, fish and eggs",260.077,99.91170676144368
@@ -563,6 +566,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SAF112,Grocery category,"Meats, poultry, fish and eggs",350.612,134.69181562015595
 2026-08-01,CUUR0000SAF112,Grocery category,"Meats, poultry, fish and eggs",351.501,135.0333356596478
 2026-09-01,CUUR0000SAF112,Grocery category,"Meats, poultry, fish and eggs",350.696,134.72408523018666
+2026-10-01,CUUR0000SAF112,Grocery category,"Meats, poultry, fish and eggs",351.844,135.16510323393993
 2015-01-01,CUUR0000SAF113,Grocery category,Fruits and vegetables,298.781,101.68146968788588
 2015-02-01,CUUR0000SAF113,Grocery category,Fruits and vegetables,295.686,100.62817597548779
 2015-03-01,CUUR0000SAF113,Grocery category,Fruits and vegetables,289.858,98.64478477811916
@@ -704,6 +708,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SAF113,Grocery category,Fruits and vegetables,369.55,125.76565150782086
 2026-08-01,CUUR0000SAF113,Grocery category,Fruits and vegetables,367.507,125.07037556131706
 2026-09-01,CUUR0000SAF113,Grocery category,Fruits and vegetables,371.317,126.36699883893795
+2026-10-01,CUUR0000SAF113,Grocery category,Fruits and vegetables,373.93,127.25625779547951
 2015-01-01,CUUR0000SAF1131,Grocery category,Fresh fruits and vegetables,345.295,102.2586770345048
 2015-02-01,CUUR0000SAF1131,Grocery category,Fresh fruits and vegetables,339.855,100.64762792267952
 2015-03-01,CUUR0000SAF1131,Grocery category,Fresh fruits and vegetables,332.501,98.46975013437749
@@ -845,6 +850,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SAF1131,Grocery category,Fresh fruits and vegetables,416.052,123.21327299138356
 2026-08-01,CUUR0000SAF1131,Grocery category,Fresh fruits and vegetables,413.359,122.41574445128329
 2026-09-01,CUUR0000SAF1131,Grocery category,Fresh fruits and vegetables,418.065,123.80942039250567
+2026-10-01,CUUR0000SAF1131,Grocery category,Fresh fruits and vegetables,422.604,125.15363949518488
 2015-01-01,CUUR0000SAF114,Grocery category,Nonalcoholic beverages,168.603,100.42134322572511
 2015-02-01,CUUR0000SAF114,Grocery category,Nonalcoholic beverages,168.901,100.59883449385953
 2015-03-01,CUUR0000SAF114,Grocery category,Nonalcoholic beverages,167.706,99.88708259647487
@@ -986,6 +992,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SAF114,Grocery category,Nonalcoholic beverages,237.393,141.39323696722218
 2026-08-01,CUUR0000SAF114,Grocery category,Nonalcoholic beverages,237.834,141.6559002197298
 2026-09-01,CUUR0000SAF114,Grocery category,Nonalcoholic beverages,240.041,142.97040769883264
+2026-10-01,CUUR0000SAF114,Grocery category,Nonalcoholic beverages,239.221,142.48200890732187
 2015-01-01,CUUR0000SAF115,Grocery category,Other food at home (packaged),207.218,98.98909638098576
 2015-02-01,CUUR0000SAF115,Grocery category,Other food at home (packaged),208.954,99.81839244270526
 2015-03-01,CUUR0000SAF115,Grocery category,Other food at home (packaged),208.463,99.58383923630878
@@ -1127,6 +1134,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SAF115,Grocery category,Other food at home (packaged),283.803,135.57414182268383
 2026-08-01,CUUR0000SAF115,Grocery category,Other food at home (packaged),283.37,135.36729551235865
 2026-09-01,CUUR0000SAF115,Grocery category,Other food at home (packaged),282.638,135.01761537573498
+2026-10-01,CUUR0000SAF115,Grocery category,Other food at home (packaged),284.335,135.82828093837207
 2015-01-01,CUUR0000SEFC,Protein detail,Beef and veal,322.162,99.89385155548295
 2015-02-01,CUUR0000SEFC,Protein detail,Beef and veal,324.308,100.5592689710629
 2015-03-01,CUUR0000SEFC,Protein detail,Beef and veal,324.612,100.65353127038085
@@ -1268,6 +1276,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SEFC,Protein detail,Beef and veal,522.219,161.92619634051428
 2026-08-01,CUUR0000SEFC,Protein detail,Beef and veal,519.096,160.95783725903422
 2026-09-01,CUUR0000SEFC,Protein detail,Beef and veal,512.606,158.9454611979374
+2026-10-01,CUUR0000SEFC,Protein detail,Beef and veal,515.603,159.87475103693694
 2015-01-01,CUUR0000SEFD,Protein detail,Pork,227.345,103.94070502318733
 2015-02-01,CUUR0000SEFD,Protein detail,Pork,224.759,102.75840207748823
 2015-03-01,CUUR0000SEFD,Protein detail,Pork,221.037,101.05672707211622
@@ -1409,6 +1418,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SEFD,Protein detail,Pork,274.241,125.38126145841746
 2026-08-01,CUUR0000SEFD,Protein detail,Pork,275.294,125.86268643978681
 2026-09-01,CUUR0000SEFD,Protein detail,Pork,275.371,125.89789035580337
+2026-10-01,CUUR0000SEFD,Protein detail,Pork,274.5,125.49967463047318
 2015-01-01,CUUR0000SEFF,Protein detail,Poultry,238.923,100.70466811894848
 2015-02-01,CUUR0000SEFF,Protein detail,Poultry,239.28,100.85514156235269
 2015-03-01,CUUR0000SEFF,Protein detail,Poultry,240.101,101.20118833275846
@@ -1550,6 +1560,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SEFF,Protein detail,Poultry,313.722,132.23201571892517
 2026-08-01,CUUR0000SEFF,Protein detail,Poultry,315.498,132.98058948779317
 2026-09-01,CUUR0000SEFF,Protein detail,Poultry,316.712,133.49228349421534
+2026-10-01,CUUR0000SEFF,Protein detail,Poultry,317.862,133.97700186932695
 2015-01-01,CUUR0000SEFH,Protein detail,Eggs,256.599,89.64723535664405
 2015-02-01,CUUR0000SEFH,Protein detail,Eggs,259.024,90.49445044999929
 2015-03-01,CUUR0000SEFH,Protein detail,Eggs,256.85,89.73492648589443
@@ -1691,6 +1702,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SEFH,Protein detail,Eggs,267.136,93.3285159499159
 2026-08-01,CUUR0000SEFH,Protein detail,Eggs,276.484,96.59439912215704
 2026-09-01,CUUR0000SEFH,Protein detail,Eggs,279.288,97.57402432700987
+2026-10-01,CUUR0000SEFH,Protein detail,Eggs,279.085,97.50310281610219
 2015-01-01,CUUR0000SEFJ,Grocery category,Dairy,227.8,102.41984493149904
 2015-02-01,CUUR0000SEFJ,Grocery category,Dairy,225.535,101.40149133725038
 2015-03-01,CUUR0000SEFJ,Grocery category,Dairy,224.449,100.91322113709408
@@ -1832,6 +1844,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SEFJ,Grocery category,Dairy,271.337,121.99426454863107
 2026-08-01,CUUR0000SEFJ,Grocery category,Dairy,272.068,122.32292524505304
 2026-09-01,CUUR0000SEFJ,Grocery category,Dairy,269.63,121.22679011799863
+2026-10-01,CUUR0000SEFJ,Grocery category,Dairy,271.311,121.9825748384984
 2015-01-01,CUUR0000SEFM,Grocery category,Processed fruits and vegetables,158.006,99.7123387229943
 2015-02-01,CUUR0000SEFM,Grocery category,Processed fruits and vegetables,159.351,100.5611235513073
 2015-03-01,CUUR0000SEFM,Grocery category,Processed fruits and vegetables,157.261,99.24219396679118
@@ -1973,6 +1986,7 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SEFM,Grocery category,Processed fruits and vegetables,213.387,134.66144844552474
 2026-08-01,CUUR0000SEFM,Grocery category,Processed fruits and vegetables,212.974,134.40081786255575
 2026-09-01,CUUR0000SEFM,Grocery category,Processed fruits and vegetables,214.361,135.27610749591648
+2026-10-01,CUUR0000SEFM,Grocery category,Processed fruits and vegetables,212.755,134.26261423623566
 2015-01-01,CUUR0000SEFV,Overall,Food away from home,253.037,98.80372561831157
 2015-02-01,CUUR0000SEFV,Overall,Food away from home,253.719,99.07002715078188
 2015-03-01,CUUR0000SEFV,Overall,Food away from home,254.108,99.22192054686832
@@ -2114,3 +2128,4 @@ date,series_id,group,category,value,index_2015
 2026-07-01,CUUR0000SEFV,Overall,Food away from home,396.859,154.96211125312706
 2026-08-01,CUUR0000SEFV,Overall,Food away from home,397.868,155.35609695145922
 2026-09-01,CUUR0000SEFV,Overall,Food away from home,398.783,155.71337833299933
+2026-10-01,CUUR0000SEFV,Overall,Food away from home,400.85,156.52048283097017

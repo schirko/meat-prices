@@ -134,6 +134,29 @@ problems before they reach the app (D29, D31).
 
 Newest first. One entry per finished item.
 
+### 2026-11-26: October 2026 data refresh
+- **Done:**
+  - Refreshed the data through October 2026. The first run stopped at the checks
+    because chicken's April 2026 price spreads went missing; fixed in D44 and re-run
+    from the saved downloads. All checks passed; no past values were revised.
+  - Re-ran notebooks 07–13 and updated the numbers in the README, the findings guide,
+    the site's notes and the presentation (new charts from `src/presentation_charts.py`).
+  - Put back the findings guide's link to the presentation, which an older open copy
+    in PyCharm had saved over.
+- **What October changed:** small moves, same story.
+
+  | | Through September | Through October |
+  |---|---|---|
+  | Ground beef since 2015 | +63% | +62% |
+  | Beef after inflation | +15% | +14% |
+  | Pork after inflation | −23% | −24% |
+  | Chicken after inflation | −13% | −16% |
+  | 2026 beef vs. the shortage's prediction | $6.90 vs. $6.20 (+11%) | $6.90 vs. $6.21 (+11%) |
+
+  The event tests, the drought → herd → price chain and the ranchers' share are unchanged.
+- **Next:** re-export the presentation, rebuild the site and retake the portfolio
+  screenshot.
+
 ### 2026-11-20: Presentation live on the site (D43)
 - **Done:**
   - Exported the deck as PDF, PowerPoint and HTML into `presentation/`. The site build

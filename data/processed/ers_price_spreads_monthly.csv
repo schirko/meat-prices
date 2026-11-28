@@ -140,6 +140,7 @@ date,meat,measure,value,units
 2026-07-01,Beef,farmer_share_pct,51.14904167063984,percent of retail value
 2026-08-01,Beef,farmer_share_pct,49.398768208035975,percent of retail value
 2026-09-01,Beef,farmer_share_pct,49.34633950120676,percent of retail value
+2026-10-01,Beef,farmer_share_pct,49.63312895768419,percent of retail value
 2015-01-01,Beef,net_farm,355.6802176,cents per pound of retail equivalent
 2015-02-01,Beef,net_farm,345.8123546,cents per pound of retail equivalent
 2015-03-01,Beef,net_farm,352.3166661,cents per pound of retail equivalent
@@ -281,6 +282,7 @@ date,meat,measure,value,units
 2026-07-01,Beef,net_farm,536.4,cents per pound of retail equivalent
 2026-08-01,Beef,net_farm,505.3,cents per pound of retail equivalent
 2026-09-01,Beef,net_farm,490.7,cents per pound of retail equivalent
+2026-10-01,Beef,net_farm,493.8,cents per pound of retail equivalent
 2015-01-01,Beef,packer_share_pct,5.22254832491503,percent of retail value
 2015-02-01,Beef,packer_share_pct,3.6868357559310887,percent of retail value
 2015-03-01,Beef,packer_share_pct,4.137279162674572,percent of retail value
@@ -422,6 +424,7 @@ date,meat,measure,value,units
 2026-07-01,Beef,packer_share_pct,2.0215504910842035,percent of retail value
 2026-08-01,Beef,packer_share_pct,5.5723922182031425,percent of retail value
 2026-09-01,Beef,packer_share_pct,7.129927594529368,percent of retail value
+2026-10-01,Beef,packer_share_pct,6.131269474319021,percent of retail value
 2015-01-01,Beef,retail,633.3023448,cents per pound of retail equivalent
 2015-02-01,Beef,retail,626.9850959,cents per pound of retail equivalent
 2015-03-01,Beef,retail,630.8759954,cents per pound of retail equivalent
@@ -563,6 +566,7 @@ date,meat,measure,value,units
 2026-07-01,Beef,retail,1048.7,cents per pound of retail equivalent
 2026-08-01,Beef,retail,1022.9,cents per pound of retail equivalent
 2026-09-01,Beef,retail,994.4,cents per pound of retail equivalent
+2026-10-01,Beef,retail,994.9,cents per pound of retail equivalent
 2015-01-01,Beef,spread_farm_to_wholesale,33.074521000000004,cents per pound of retail equivalent
 2015-02-01,Beef,spread_farm_to_wholesale,23.11591070000003,cents per pound of retail equivalent
 2015-03-01,Beef,spread_farm_to_wholesale,26.101101099999994,cents per pound of retail equivalent
@@ -704,6 +708,7 @@ date,meat,measure,value,units
 2026-07-01,Beef,spread_farm_to_wholesale,21.200000000000045,cents per pound of retail equivalent
 2026-08-01,Beef,spread_farm_to_wholesale,56.99999999999994,cents per pound of retail equivalent
 2026-09-01,Beef,spread_farm_to_wholesale,70.90000000000003,cents per pound of retail equivalent
+2026-10-01,Beef,spread_farm_to_wholesale,60.99999999999994,cents per pound of retail equivalent
 2015-01-01,Beef,spread_wholesale_to_retail,244.54760620000002,cents per pound of retail equivalent
 2015-02-01,Beef,spread_wholesale_to_retail,258.0568306,cents per pound of retail equivalent
 2015-03-01,Beef,spread_wholesale_to_retail,252.45822819999995,cents per pound of retail equivalent
@@ -845,6 +850,7 @@ date,meat,measure,value,units
 2026-07-01,Beef,spread_wholesale_to_retail,491.1,cents per pound of retail equivalent
 2026-08-01,Beef,spread_wholesale_to_retail,460.6,cents per pound of retail equivalent
 2026-09-01,Beef,spread_wholesale_to_retail,432.79999999999995,cents per pound of retail equivalent
+2026-10-01,Beef,spread_wholesale_to_retail,440.1,cents per pound of retail equivalent
 2015-01-01,Beef,store_share_pct,38.61466931363239,percent of retail value
 2015-02-01,Beef,store_share_pct,41.158367605146125,percent of retail value
 2015-03-01,Beef,store_share_pct,40.01709211331327,percent of retail value
@@ -986,6 +992,7 @@ date,meat,measure,value,units
 2026-07-01,Beef,store_share_pct,46.82940783827596,percent of retail value
 2026-08-01,Beef,store_share_pct,45.028839573760884,percent of retail value
 2026-09-01,Beef,store_share_pct,43.52373290426387,percent of retail value
+2026-10-01,Beef,store_share_pct,44.23560156799679,percent of retail value
 2015-01-01,Beef,wholesale,388.7547386,cents per pound of retail equivalent
 2015-02-01,Beef,wholesale,368.9282653,cents per pound of retail equivalent
 2015-03-01,Beef,wholesale,378.4177672,cents per pound of retail equivalent
@@ -1127,6 +1134,7 @@ date,meat,measure,value,units
 2026-07-01,Beef,wholesale,557.6,cents per pound of retail equivalent
 2026-08-01,Beef,wholesale,562.3,cents per pound of retail equivalent
 2026-09-01,Beef,wholesale,561.6,cents per pound of retail equivalent
+2026-10-01,Beef,wholesale,554.8,cents per pound of retail equivalent
 2015-01-01,Chicken,retail,197.842342,cents per pound of retail equivalent
 2015-02-01,Chicken,retail,197.7962226,cents per pound of retail equivalent
 2015-03-01,Chicken,retail,198.7291368,cents per pound of retail equivalent
@@ -1265,6 +1273,7 @@ date,meat,measure,value,units
 2026-07-01,Chicken,retail,238.7,cents per pound of retail equivalent
 2026-08-01,Chicken,retail,237.0,cents per pound of retail equivalent
 2026-09-01,Chicken,retail,241.3,cents per pound of retail equivalent
+2026-10-01,Chicken,retail,241.8,cents per pound of retail equivalent
 2015-01-01,Chicken,spread_wholesale_to_retail,109.892742,cents per pound of retail equivalent
 2015-02-01,Chicken,spread_wholesale_to_retail,111.6116706,cents per pound of retail equivalent
 2015-03-01,Chicken,spread_wholesale_to_retail,112.94735279999999,cents per pound of retail equivalent
@@ -1403,6 +1412,7 @@ date,meat,measure,value,units
 2026-07-01,Chicken,spread_wholesale_to_retail,137.2,cents per pound of retail equivalent
 2026-08-01,Chicken,spread_wholesale_to_retail,139.9,cents per pound of retail equivalent
 2026-09-01,Chicken,spread_wholesale_to_retail,150.1,cents per pound of retail equivalent
+2026-10-01,Chicken,spread_wholesale_to_retail,149.7,cents per pound of retail equivalent
 2015-01-01,Chicken,store_share_pct,55.54561318324871,percent of retail value
 2015-02-01,Chicken,store_share_pct,56.42760469986852,percent of retail value
 2015-03-01,Chicken,store_share_pct,56.83482282402789,percent of retail value
@@ -1541,6 +1551,7 @@ date,meat,measure,value,units
 2026-07-01,Chicken,store_share_pct,57.47800586510263,percent of retail value
 2026-08-01,Chicken,store_share_pct,59.02953586497891,percent of retail value
 2026-09-01,Chicken,store_share_pct,62.20472440944881,percent of retail value
+2026-10-01,Chicken,store_share_pct,61.910669975186096,percent of retail value
 2015-01-01,Chicken,wholesale,87.9496,cents per pound of retail equivalent
 2015-02-01,Chicken,wholesale,86.184552,cents per pound of retail equivalent
 2015-03-01,Chicken,wholesale,85.781784,cents per pound of retail equivalent
@@ -1679,6 +1690,7 @@ date,meat,measure,value,units
 2026-07-01,Chicken,wholesale,101.5,cents per pound of retail equivalent
 2026-08-01,Chicken,wholesale,97.1,cents per pound of retail equivalent
 2026-09-01,Chicken,wholesale,91.20000000000002,cents per pound of retail equivalent
+2026-10-01,Chicken,wholesale,92.10000000000002,cents per pound of retail equivalent
 2015-01-01,Pork,farmer_share_pct,23.418990913889512,percent of retail value
 2015-02-01,Pork,farmer_share_pct,20.07213444371223,percent of retail value
 2015-03-01,Pork,farmer_share_pct,20.390424440668514,percent of retail value
@@ -1820,6 +1832,7 @@ date,meat,measure,value,units
 2026-07-01,Pork,farmer_share_pct,24.713584288052374,percent of retail value
 2026-08-01,Pork,farmer_share_pct,24.268467362390016,percent of retail value
 2026-09-01,Pork,farmer_share_pct,21.660576532683717,percent of retail value
+2026-10-01,Pork,farmer_share_pct,19.073120494335736,percent of retail value
 2015-01-01,Pork,net_farm,93.42857759,cents per pound of retail equivalent
 2015-02-01,Pork,net_farm,79.10746996,cents per pound of retail equivalent
 2015-03-01,Pork,net_farm,78.99802705,cents per pound of retail equivalent
@@ -1961,6 +1974,7 @@ date,meat,measure,value,units
 2026-07-01,Pork,net_farm,120.8,cents per pound of retail equivalent
 2026-08-01,Pork,net_farm,118.6,cents per pound of retail equivalent
 2026-09-01,Pork,net_farm,106.7,cents per pound of retail equivalent
+2026-10-01,Pork,net_farm,92.6,cents per pound of retail equivalent
 2015-01-01,Pork,packer_share_pct,13.989961074500307,percent of retail value
 2015-02-01,Pork,packer_share_pct,15.419228890539872,percent of retail value
 2015-03-01,Pork,packer_share_pct,13.928988892470178,percent of retail value
@@ -2102,6 +2116,7 @@ date,meat,measure,value,units
 2026-07-01,Pork,packer_share_pct,10.49509001636661,percent of retail value
 2026-08-01,Pork,packer_share_pct,13.09596889707387,percent of retail value
 2026-09-01,Pork,packer_share_pct,9.784815265935851,percent of retail value
+2026-10-01,Pork,packer_share_pct,8.094747682801238,percent of retail value
 2015-01-01,Pork,retail,398.9436519,cents per pound of retail equivalent
 2015-02-01,Pork,retail,394.1158833,cents per pound of retail equivalent
 2015-03-01,Pork,retail,387.4270851,cents per pound of retail equivalent
@@ -2243,6 +2258,7 @@ date,meat,measure,value,units
 2026-07-01,Pork,retail,488.8,cents per pound of retail equivalent
 2026-08-01,Pork,retail,488.7,cents per pound of retail equivalent
 2026-09-01,Pork,retail,492.6,cents per pound of retail equivalent
+2026-10-01,Pork,retail,485.5,cents per pound of retail equivalent
 2015-01-01,Pork,spread_farm_to_wholesale,55.81206161,cents per pound of retail equivalent
 2015-02-01,Pork,spread_farm_to_wholesale,60.769630140000004,cents per pound of retail equivalent
 2015-03-01,Pork,spread_farm_to_wholesale,53.96467564999999,cents per pound of retail equivalent
@@ -2384,6 +2400,7 @@ date,meat,measure,value,units
 2026-07-01,Pork,spread_farm_to_wholesale,51.3,cents per pound of retail equivalent
 2026-08-01,Pork,spread_farm_to_wholesale,64.0,cents per pound of retail equivalent
 2026-09-01,Pork,spread_farm_to_wholesale,48.2,cents per pound of retail equivalent
+2026-10-01,Pork,spread_farm_to_wholesale,39.30000000000001,cents per pound of retail equivalent
 2015-01-01,Pork,spread_wholesale_to_retail,249.70301270000002,cents per pound of retail equivalent
 2015-02-01,Pork,spread_wholesale_to_retail,254.2387832,cents per pound of retail equivalent
 2015-03-01,Pork,spread_wholesale_to_retail,254.4643824,cents per pound of retail equivalent
@@ -2525,6 +2542,7 @@ date,meat,measure,value,units
 2026-07-01,Pork,spread_wholesale_to_retail,316.70000000000005,cents per pound of retail equivalent
 2026-08-01,Pork,spread_wholesale_to_retail,306.1,cents per pound of retail equivalent
 2026-09-01,Pork,spread_wholesale_to_retail,337.70000000000005,cents per pound of retail equivalent
+2026-10-01,Pork,spread_wholesale_to_retail,353.6,cents per pound of retail equivalent
 2015-01-01,Pork,store_share_pct,62.591048011610184,percent of retail value
 2015-02-01,Pork,store_share_pct,64.5086366657479,percent of retail value
 2015-03-01,Pork,store_share_pct,65.6805866668613,percent of retail value
@@ -2666,6 +2684,7 @@ date,meat,measure,value,units
 2026-07-01,Pork,store_share_pct,64.79132569558102,percent of retail value
 2026-08-01,Pork,store_share_pct,62.63556374053613,percent of retail value
 2026-09-01,Pork,store_share_pct,68.55460820138045,percent of retail value
+2026-10-01,Pork,store_share_pct,72.83213182286303,percent of retail value
 2015-01-01,Pork,wholesale,149.2406392,cents per pound of retail equivalent
 2015-02-01,Pork,wholesale,139.8771001,cents per pound of retail equivalent
 2015-03-01,Pork,wholesale,132.9627027,cents per pound of retail equivalent
@@ -2807,3 +2826,4 @@ date,meat,measure,value,units
 2026-07-01,Pork,wholesale,172.1,cents per pound of retail equivalent
 2026-08-01,Pork,wholesale,182.6,cents per pound of retail equivalent
 2026-09-01,Pork,wholesale,154.9,cents per pound of retail equivalent
+2026-10-01,Pork,wholesale,131.9,cents per pound of retail equivalent
